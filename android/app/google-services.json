@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "901465759311",
+    "project_id": "sertinary",
+    "storage_bucket": "sertinary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901465759311:android:11fd768d0dda7a4f4d543a",
+        "android_client_info": {
+          "package_name": "com.example.sertinary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901465759311-86ga291dcrl48plfd97l38917rctuqjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGOiUL2sv5tBV_XYbda7ZIEf_YLTpd3jI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "901465759311-86ga291dcrl48plfd97l38917rctuqjg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
