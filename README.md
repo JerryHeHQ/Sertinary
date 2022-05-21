@@ -1,4 +1,4 @@
-# sertinary
+# Sertinary
 
 A new Flutter project.
 
