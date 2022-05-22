@@ -18,76 +18,101 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  Color _emailLabelColor = ColorConstants.black;
+  Color _passwordLabelColor = ColorConstants.black;
+
   @override
   Widget build(BuildContext context) {
     //email form field
-    final emailField = TextFormField(
-      autofocus: false,
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      //validator:(value) { },
-      onSaved: (value) {
-        emailController.text = value!;
+    final emailField = Focus(
+      onFocusChange: (hasFocus) {
+        setState(() => _emailLabelColor =
+            hasFocus ? ColorConstants.accent50 : ColorConstants.black);
       },
-      textInputAction: TextInputAction.next,
-      cursorColor: ColorConstants.accent50,
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          Icons.mail,
-          color: ColorConstants.accent50,
+      child: TextFormField(
+        autofocus: false,
+        controller: emailController,
+        keyboardType: TextInputType.emailAddress,
+        //validator:(value) { },
+        onSaved: (value) {
+          emailController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        cursorColor: ColorConstants.accent50,
+        style: TextStyle(
+          fontSize: 15,
+          color: ColorConstants.black,
+          fontWeight: FontWeight.w500,
         ),
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Email",
-        labelStyle: GoogleFonts.montserrat(
-          textStyle: TextStyle(
-            fontSize: 15,
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            Icons.mail,
             color: ColorConstants.accent50,
-            fontWeight: FontWeight.w500,
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.black, width: 2.1),
-          borderRadius: BorderRadius.circular(9),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.accent50, width: 3.0),
-          borderRadius: BorderRadius.circular(9),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          labelText: "Email",
+          labelStyle: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 15,
+              color: _emailLabelColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.black, width: 2.1),
+            borderRadius: BorderRadius.circular(9),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.accent50, width: 3.0),
+            borderRadius: BorderRadius.circular(9),
+          ),
         ),
       ),
     );
 
     //password form field
-    final passwordField = TextFormField(
-      autofocus: false,
-      controller: passwordController,
-      obscureText: true,
-      //validator:(value) { },
-      onSaved: (value) {
-        passwordController.text = value!;
+    final passwordField = Focus(
+      onFocusChange: (hasFocus) {
+        setState(() => _passwordLabelColor =
+            hasFocus ? ColorConstants.accent50 : ColorConstants.black);
       },
-      textInputAction: TextInputAction.done,
-      cursorColor: ColorConstants.accent50,
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          Icons.vpn_key,
-          color: ColorConstants.accent50,
+      child: TextFormField(
+        autofocus: false,
+        controller: passwordController,
+        obscureText: true,
+        //validator:(value) { },
+        onSaved: (value) {
+          passwordController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        cursorColor: ColorConstants.accent50,
+        style: TextStyle(
+          fontSize: 15,
+          color: ColorConstants.black,
+          fontWeight: FontWeight.w500,
         ),
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Password",
-        hintStyle: GoogleFonts.montserrat(
-          textStyle: TextStyle(
-            fontSize: 15,
-            color: ColorConstants.black,
-            fontWeight: FontWeight.w500,
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            Icons.vpn_key,
+            color: ColorConstants.accent50,
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.black, width: 2.1),
-          borderRadius: BorderRadius.circular(9),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.accent50, width: 3.0),
-          borderRadius: BorderRadius.circular(9),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          labelText: "Password",
+          labelStyle: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 15,
+              color: _passwordLabelColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.black, width: 2.1),
+            borderRadius: BorderRadius.circular(9),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.accent50, width: 3.0),
+            borderRadius: BorderRadius.circular(9),
+          ),
         ),
       ),
     );
