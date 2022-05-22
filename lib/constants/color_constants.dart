@@ -11,14 +11,37 @@ Color hexToColor(String hex) {
 }
 
 class ColorConstants {
-  static Color themeHighlightColor = hexToColor('#FFBE00');
-  static Color themeMidtoneColor = hexToColor('#D9A300');
-  static Color themeShadowColor = hexToColor('#B38600');
+  static Color black = hexToColor('#000000');
 
-  static Color baseHighlightColor = hexToColor('#1A1A1A');
-  static Color baseMidtoneColor = hexToColor('#333333');
-  static Color baseShadowColor = hexToColor('#4D4D4D');
+  static Color mono05 = hexToColor('#0D0D0D');
+  static Color mono10 = hexToColor('#1A1A1A');
+  static Color mono15 = hexToColor('#262626');
+  static Color mono20 = hexToColor('#333333');
+  static Color mono25 = hexToColor('#404040');
+  static Color mono30 = hexToColor('#4D4D4D');
+  static Color mono35 = hexToColor('#595959');
+  static Color mono40 = hexToColor('#666666');
+  static Color mono45 = hexToColor('#737373');
+  static Color mono50 = hexToColor('#808080');
+  static Color mono55 = hexToColor('#8C8C8C');
+  static Color mono60 = hexToColor('#999999');
+  static Color mono65 = hexToColor('#a6a6a6');
+  static Color mono70 = hexToColor('#B3B3B3');
+  static Color mono75 = hexToColor('#BFBFBF');
+  static Color mono80 = hexToColor('#CCCCCC');
+  static Color mono85 = hexToColor('#D9D9D9');
+  static Color mono90 = hexToColor('#E6E6E6');
+  static Color mono95 = hexToColor('#F2F2F2');
 
-  static Color fontHighlight = hexToColor('#FFFFFF');
-  static Color fontShadow = hexToColor('#000000');
+  static Color white = hexToColor('#FFFFFF');
+
+  static Color accent10 = hexToColor('#332600');
+  static Color accent20 = hexToColor('#664C00');
+  static Color accent30 = hexToColor('#997200');
+  static Color accent40 = hexToColor('#CC9800');
+  static Color accent50 = hexToColor('#FFBE00');
+  static Color accent60 = hexToColor('#FFCB33');
+  static Color accent70 = hexToColor('#FFD866');
+  static Color accent80 = hexToColor('#FFE599');
+  static Color accent90 = hexToColor('#FFF2CC');
 }
