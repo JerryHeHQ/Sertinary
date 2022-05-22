@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, depend_on_referenced_packages
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
