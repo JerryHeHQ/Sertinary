@@ -1,7 +1,15 @@
 // ignore_for_file: unused_import
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import "package:google_fonts/google_fonts.dart";
+
+bool _passwordVisible = false;
+
+void initState() {
+  _passwordVisible = false;
+}
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,22 +23,23 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   //text editing controllers
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     //email form field
     final emailField = TextFormField(
       autofocus: false,
-      controller: emailController,
+      controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       //validator:(value) { },
       onSaved: (value) {
-        emailController.text = value!;
+        _emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
       cursorColor: ColorConstants.accent50,
+      cursorHeight: 18,
       style: TextStyle(
         fontSize: 15,
         color: ColorConstants.white,
@@ -40,6 +49,19 @@ class _LoginScreenState extends State<LoginScreen> {
         prefixIcon: Icon(
           Icons.mail,
           color: ColorConstants.accent50,
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            Icons.clear_rounded,
+            color: ColorConstants.accent50,
+          ),
+          onPressed: () {
+            setState(
+              () {
+                _emailController.clear();
+              },
+            );
+          },
         ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         labelText: "Email",
@@ -64,14 +86,15 @@ class _LoginScreenState extends State<LoginScreen> {
     //password form field
     final passwordField = TextFormField(
       autofocus: false,
-      controller: passwordController,
-      obscureText: true,
+      controller: _passwordController,
+      obscureText: !_passwordVisible,
       //validator:(value) { },
       onSaved: (value) {
-        passwordController.text = value!;
+        _passwordController.text = value!;
       },
       textInputAction: TextInputAction.done,
       cursorColor: ColorConstants.accent50,
+      cursorHeight: 18,
       style: TextStyle(
         fontSize: 15,
         color: ColorConstants.white,
@@ -81,6 +104,19 @@ class _LoginScreenState extends State<LoginScreen> {
         prefixIcon: Icon(
           Icons.vpn_key,
           color: ColorConstants.accent50,
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _passwordVisible ? Icons.visibility_off : Icons.visibility,
+            color: ColorConstants.accent50,
+          ),
+          onPressed: () {
+            setState(
+              () {
+                _passwordVisible = !_passwordVisible;
+              },
+            );
+          },
         ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         labelText: "Password",
@@ -147,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 60),
                     emailField,
-                    const SizedBox(height: 9),
+                    const SizedBox(height: 15),
                     passwordField,
                     const SizedBox(height: 30),
                     loginButton,
