@@ -11,8 +11,7 @@ Color hexToColor(String hex) {
 }
 
 class ColorConstants {
-  static Color black = hexToColor('#000000');
-
+  static Color mono00 = hexToColor('#000000');
   static Color mono05 = hexToColor('#0D0D0D');
   static Color mono10 = hexToColor('#1A1A1A');
   static Color mono15 = hexToColor('#262626');
@@ -32,8 +31,7 @@ class ColorConstants {
   static Color mono85 = hexToColor('#D9D9D9');
   static Color mono90 = hexToColor('#E6E6E6');
   static Color mono95 = hexToColor('#F2F2F2');
-
-  static Color white = hexToColor('#FFFFFF');
+  static Color monoAA = hexToColor('#FFFFFF');
 
   static Color accent10 = hexToColor('#332600');
   static Color accent20 = hexToColor('#664C00');

@@ -1,9 +1,10 @@
 // ignore_for_file: unused_import, depend_on_referenced_packages
-import 'dart:ffi';
 
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import "package:google_fonts/google_fonts.dart";
+import 'package:sertinary/user_authentication/registration/register_username_screen.dart';
 
 bool _passwordVisible = false;
 
@@ -165,8 +166,8 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
             stops: const [0.0, 0.5, 1.0],
             colors: [
               ColorConstants.accent30,
@@ -174,7 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ColorConstants.accent30,
             ],
           ),
-          color: Colors.deepPurple.shade300,
           borderRadius: BorderRadius.circular(18),
         ),
         child: MaterialButton(
@@ -210,6 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    //Sertinary Logo
                     SizedBox(
                       height: 200,
                       child: Image.asset(
@@ -218,10 +219,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 60),
+                    //Email TextFormField
                     emailField,
                     const SizedBox(height: 15),
+                    //Password TextFormField
                     passwordField,
                     const SizedBox(height: 3),
+                    //Forgot Password Button
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
@@ -240,8 +244,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     const SizedBox(height: 30),
+                    //Login Button
                     loginButton,
                     const SizedBox(height: 12),
+                    //Sign Up Button
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -256,7 +262,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const RegisterUsernameScreen(),
+                              ),
+                            );
+                          },
                           child: Text(
                             "Sign Up",
                             style: GoogleFonts.montserrat(
