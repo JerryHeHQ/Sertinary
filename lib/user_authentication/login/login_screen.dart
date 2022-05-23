@@ -42,10 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
       cursorHeight: 18,
       style: TextStyle(
         fontSize: 15,
-        color: ColorConstants.white,
+        color: ColorConstants.mono85,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
+        fillColor: ColorConstants.mono10,
+        filled: true,
         prefixIcon: Icon(
           Icons.mail,
           color: ColorConstants.accent50,
@@ -63,22 +65,22 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
         ),
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(21, 21, 21, 21),
         labelText: "Email",
         labelStyle: GoogleFonts.montserrat(
           textStyle: TextStyle(
-            fontSize: 15,
+            fontSize: 18,
             color: ColorConstants.accent50,
             fontWeight: FontWeight.w500,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.black, width: 2.1),
-          borderRadius: BorderRadius.circular(9),
+          borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
+          borderRadius: BorderRadius.circular(18),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.accent50, width: 3.0),
-          borderRadius: BorderRadius.circular(9),
+          borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
+          borderRadius: BorderRadius.circular(18),
         ),
       ),
     );
@@ -97,10 +99,12 @@ class _LoginScreenState extends State<LoginScreen> {
       cursorHeight: 18,
       style: TextStyle(
         fontSize: 15,
-        color: ColorConstants.white,
+        color: ColorConstants.mono85,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
+        fillColor: ColorConstants.mono10,
+        filled: true,
         prefixIcon: Icon(
           Icons.vpn_key,
           color: ColorConstants.accent50,
@@ -118,42 +122,58 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
         ),
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(21, 21, 21, 21),
         labelText: "Password",
         labelStyle: GoogleFonts.montserrat(
           textStyle: TextStyle(
-            fontSize: 15,
+            fontSize: 18,
             color: ColorConstants.accent50,
             fontWeight: FontWeight.w500,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.black, width: 2.1),
-          borderRadius: BorderRadius.circular(9),
+          borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
+          borderRadius: BorderRadius.circular(18),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.accent50, width: 3.0),
-          borderRadius: BorderRadius.circular(9),
+          borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
+          borderRadius: BorderRadius.circular(18),
         ),
       ),
     );
 
     //login button
     final loginButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(9),
-      color: ColorConstants.accent50,
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {},
-        child: Text(
-          "Login",
-          textAlign: TextAlign.center,
-          style: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              fontSize: 21,
-              color: ColorConstants.black,
-              fontWeight: FontWeight.bold,
+      elevation: 6,
+      borderRadius: BorderRadius.circular(18),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.bottomRight,
+            stops: const [0.0, 0.5, 1.0],
+            colors: [
+              ColorConstants.accent30,
+              ColorConstants.accent50,
+              ColorConstants.accent30,
+            ],
+          ),
+          color: Colors.deepPurple.shade300,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: MaterialButton(
+          height: 54,
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: () {},
+          child: Text(
+            "Login",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 21,
+                color: ColorConstants.mono05,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -161,13 +181,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     return Scaffold(
-      backgroundColor: ColorConstants.mono10,
+      backgroundColor: ColorConstants.mono05,
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            color: ColorConstants.mono10,
+            color: ColorConstants.mono05,
             child: Padding(
-              padding: const EdgeInsets.all(36.0),
+              padding: const EdgeInsets.all(21),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -185,9 +205,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     emailField,
                     const SizedBox(height: 15),
                     passwordField,
+                    const SizedBox(height: 3),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          "Forgot Password?",
+                          style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              fontSize: 13,
+                              color: ColorConstants.mono60,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                      ],
+                    ),
                     const SizedBox(height: 30),
                     loginButton,
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -195,9 +232,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Don't have an account? ",
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
-                              fontSize: 12,
-                              color: ColorConstants.white,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              color: ColorConstants.mono60,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
@@ -207,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             "Sign Up",
                             style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
-                                fontSize: 12,
+                                fontSize: 13,
                                 color: ColorConstants.accent50,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
@@ -217,6 +254,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 30),
                   ],
                 ),
               ),
