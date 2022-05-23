@@ -27,8 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   //Dynamically Changes TextFormField Label Color
-  Color _emailLabelColor = ColorConstants.black;
-  Color _passwordLabelColor = ColorConstants.black;
+  Color _emailLabelColor = ColorConstants.mono75;
+  Color _passwordLabelColor = ColorConstants.mono75;
 
   @override
   Widget build(BuildContext context) {
@@ -232,6 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontSize: 13,
                               color: ColorConstants.mono60,
                               fontWeight: FontWeight.normal,
+                              decoration: TextDecoration.underline,
                             ),
                           ),
                         ),
