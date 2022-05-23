@@ -3,47 +3,47 @@
 import 'package:flutter/material.dart';
 import '../../constants/color_constants.dart';
 import "package:google_fonts/google_fonts.dart";
-import 'register_repassword_screen.dart';
 
-bool _passwordVisible = false;
+bool _repasswordVisible = false;
 
 void initState() {
-  _passwordVisible = false;
+  _repasswordVisible = false;
 }
 
-class RegisterPasswordScreen extends StatefulWidget {
-  const RegisterPasswordScreen({Key? key}) : super(key: key);
+class RegisterRepasswordScreen extends StatefulWidget {
+  const RegisterRepasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterPasswordScreen> createState() => _RegisterPasswordScreenState();
+  State<RegisterRepasswordScreen> createState() =>
+      _RegisterRepasswordScreenState();
 }
 
-class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
+class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
   //form key
   final _formKey = GlobalKey<FormState>();
 
   //text editing controller
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _repasswordController = TextEditingController();
 
   //Dynamically Changes TextFormField Label Color
-  Color _passwordLabelColor = ColorConstants.mono75;
+  Color _repasswordLabelColor = ColorConstants.mono75;
 
   @override
   Widget build(BuildContext context) {
-    //password form field
-    final passwordField = Focus(
+    //repassword form field
+    final repasswordField = Focus(
       onFocusChange: (hasFocus) {
-        setState(() => _passwordLabelColor =
+        setState(() => _repasswordLabelColor =
             hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
       },
       child: TextFormField(
         autofocus: false,
-        controller: _passwordController,
-        obscureText: !_passwordVisible,
+        controller: _repasswordController,
+        obscureText: !_repasswordVisible,
         keyboardType: TextInputType.name,
         //validator:(value) { },
         onSaved: (value) {
-          _passwordController.text = value!;
+          _repasswordController.text = value!;
         },
         textInputAction: TextInputAction.next,
         cursorColor: ColorConstants.accent50,
@@ -62,23 +62,23 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
           ),
           suffixIcon: IconButton(
             icon: Icon(
-              _passwordVisible ? Icons.visibility_off : Icons.visibility,
+              _repasswordVisible ? Icons.visibility_off : Icons.visibility,
               color: ColorConstants.accent50,
             ),
             onPressed: () {
               setState(
                 () {
-                  _passwordVisible = !_passwordVisible;
+                  _repasswordVisible = !_repasswordVisible;
                 },
               );
             },
           ),
           contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Password",
+          labelText: "Confirm Password",
           labelStyle: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 16,
-              color: _passwordLabelColor,
+              color: _repasswordLabelColor,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -114,14 +114,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
         ),
         child: MaterialButton(
           height: 54,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RegisterRepasswordScreen(),
-              ),
-            );
-          },
+          onPressed: () {},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -196,7 +189,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "\nSecurity Time!",
+                          "\nAlmost there!",
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               fontSize: 33,
@@ -234,7 +227,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                "Please enter the password\nyou would like to use.",
+                                "Please repeat your\npassword below.",
                                 style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                     fontSize: 21,
@@ -247,7 +240,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                           ),
                           const SizedBox(height: 30),
                           //Email TextFormField
-                          passwordField,
+                          repasswordField,
                           const SizedBox(height: 30),
                           //Next Button
                           Container(
