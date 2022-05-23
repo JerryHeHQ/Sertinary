@@ -26,118 +26,134 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  //Dynamically Changes TextFormField Label Color
+  Color _emailLabelColor = ColorConstants.black;
+  Color _passwordLabelColor = ColorConstants.black;
+
   @override
   Widget build(BuildContext context) {
     //email form field
-    final emailField = TextFormField(
-      autofocus: false,
-      controller: _emailController,
-      keyboardType: TextInputType.emailAddress,
-      //validator:(value) { },
-      onSaved: (value) {
-        _emailController.text = value!;
+    final emailField = Focus(
+      onFocusChange: (hasFocus) {
+        setState(() => _emailLabelColor =
+            hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
       },
-      textInputAction: TextInputAction.next,
-      cursorColor: ColorConstants.accent50,
-      cursorHeight: 18,
-      style: TextStyle(
-        fontSize: 15,
-        color: ColorConstants.mono85,
-        fontWeight: FontWeight.w500,
-      ),
-      decoration: InputDecoration(
-        fillColor: ColorConstants.mono10,
-        filled: true,
-        prefixIcon: Icon(
-          Icons.mail,
-          color: ColorConstants.accent50,
+      child: TextFormField(
+        autofocus: false,
+        controller: _emailController,
+        keyboardType: TextInputType.emailAddress,
+        //validator:(value) { },
+        onSaved: (value) {
+          _emailController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        cursorColor: ColorConstants.accent50,
+        cursorHeight: 18,
+        style: TextStyle(
+          fontSize: 16,
+          color: ColorConstants.mono95,
+          fontWeight: FontWeight.w400,
         ),
-        suffixIcon: IconButton(
-          icon: Icon(
-            Icons.clear_rounded,
+        decoration: InputDecoration(
+          fillColor: ColorConstants.mono10,
+          filled: true,
+          prefixIcon: Icon(
+            Icons.mail,
             color: ColorConstants.accent50,
           ),
-          onPressed: () {
-            setState(
-              () {
-                _emailController.clear();
-              },
-            );
-          },
-        ),
-        contentPadding: const EdgeInsets.fromLTRB(21, 21, 21, 21),
-        labelText: "Email",
-        labelStyle: GoogleFonts.montserrat(
-          textStyle: TextStyle(
-            fontSize: 18,
-            color: ColorConstants.accent50,
-            fontWeight: FontWeight.w500,
+          suffixIcon: IconButton(
+            icon: Icon(
+              Icons.clear_rounded,
+              color: ColorConstants.accent50,
+            ),
+            onPressed: () {
+              setState(
+                () {
+                  _emailController.clear();
+                },
+              );
+            },
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
-          borderRadius: BorderRadius.circular(18),
+          contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
+          labelText: "Email",
+          labelStyle: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 16,
+              color: _emailLabelColor,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
         ),
       ),
     );
 
     //password form field
-    final passwordField = TextFormField(
-      autofocus: false,
-      controller: _passwordController,
-      obscureText: !_passwordVisible,
-      //validator:(value) { },
-      onSaved: (value) {
-        _passwordController.text = value!;
+    final passwordField = Focus(
+      onFocusChange: (hasFocus) {
+        setState(() => _passwordLabelColor =
+            hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
       },
-      textInputAction: TextInputAction.done,
-      cursorColor: ColorConstants.accent50,
-      cursorHeight: 18,
-      style: TextStyle(
-        fontSize: 15,
-        color: ColorConstants.mono85,
-        fontWeight: FontWeight.w500,
-      ),
-      decoration: InputDecoration(
-        fillColor: ColorConstants.mono10,
-        filled: true,
-        prefixIcon: Icon(
-          Icons.vpn_key,
-          color: ColorConstants.accent50,
+      child: TextFormField(
+        autofocus: false,
+        controller: _passwordController,
+        obscureText: !_passwordVisible,
+        //validator:(value) { },
+        onSaved: (value) {
+          _passwordController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        cursorColor: ColorConstants.accent50,
+        cursorHeight: 18,
+        style: TextStyle(
+          fontSize: 16,
+          color: ColorConstants.mono95,
+          fontWeight: FontWeight.w400,
         ),
-        suffixIcon: IconButton(
-          icon: Icon(
-            _passwordVisible ? Icons.visibility_off : Icons.visibility,
+        decoration: InputDecoration(
+          fillColor: ColorConstants.mono10,
+          filled: true,
+          prefixIcon: Icon(
+            Icons.vpn_key,
             color: ColorConstants.accent50,
           ),
-          onPressed: () {
-            setState(
-              () {
-                _passwordVisible = !_passwordVisible;
-              },
-            );
-          },
-        ),
-        contentPadding: const EdgeInsets.fromLTRB(21, 21, 21, 21),
-        labelText: "Password",
-        labelStyle: GoogleFonts.montserrat(
-          textStyle: TextStyle(
-            fontSize: 18,
-            color: ColorConstants.accent50,
-            fontWeight: FontWeight.w500,
+          suffixIcon: IconButton(
+            icon: Icon(
+              _passwordVisible ? Icons.visibility_off : Icons.visibility,
+              color: ColorConstants.accent50,
+            ),
+            onPressed: () {
+              setState(
+                () {
+                  _passwordVisible = !_passwordVisible;
+                },
+              );
+            },
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
-          borderRadius: BorderRadius.circular(18),
+          contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
+          labelText: "Password",
+          labelStyle: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 16,
+              color: _passwordLabelColor,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
         ),
       ),
     );
