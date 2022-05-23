@@ -3,40 +3,40 @@
 import 'package:flutter/material.dart';
 import '../../constants/color_constants.dart';
 import "package:google_fonts/google_fonts.dart";
-import 'register_email_screen.dart';
+import 'register_password_screen.dart';
 
-class RegisterUsernameScreen extends StatefulWidget {
-  const RegisterUsernameScreen({Key? key}) : super(key: key);
+class RegisterEmailScreen extends StatefulWidget {
+  const RegisterEmailScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterUsernameScreen> createState() => _RegisterUsernameScreenState();
+  State<RegisterEmailScreen> createState() => _RegisterEmailScreenState();
 }
 
-class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
+class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
   //form key
   final _formKey = GlobalKey<FormState>();
 
   //text editing controller
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   //Dynamically Changes TextFormField Label Color
-  Color _usernameLabelColor = ColorConstants.mono75;
+  Color _emailLabelColor = ColorConstants.mono75;
 
   @override
   Widget build(BuildContext context) {
-    //username form field
-    final usernameField = Focus(
+    //email form field
+    final emailField = Focus(
       onFocusChange: (hasFocus) {
-        setState(() => _usernameLabelColor =
+        setState(() => _emailLabelColor =
             hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
       },
       child: TextFormField(
         autofocus: false,
-        controller: _usernameController,
-        keyboardType: TextInputType.name,
+        controller: _emailController,
+        keyboardType: TextInputType.emailAddress,
         //validator:(value) { },
         onSaved: (value) {
-          _usernameController.text = value!;
+          _emailController.text = value!;
         },
         textInputAction: TextInputAction.next,
         cursorColor: ColorConstants.accent50,
@@ -50,7 +50,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           fillColor: ColorConstants.mono10,
           filled: true,
           prefixIcon: Icon(
-            Icons.person,
+            Icons.mail,
             color: ColorConstants.accent50,
           ),
           suffixIcon: IconButton(
@@ -61,17 +61,17 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             onPressed: () {
               setState(
                 () {
-                  _usernameController.clear();
+                  _emailController.clear();
                 },
               );
             },
           ),
           contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Username",
+          labelText: "Email",
           labelStyle: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 16,
-              color: _usernameLabelColor,
+              color: _emailLabelColor,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -111,7 +111,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const RegisterEmailScreen(),
+                builder: (context) => const RegisterPasswordScreen(),
               ),
             );
           },
@@ -189,7 +189,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Hey there!\nLet's get you started!",
+                          "Nice to meet you\n[Username]!",
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               fontSize: 33,
@@ -227,7 +227,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                "What would you like us\nto call you?",
+                                "Enter your email to start\ncreating your account.",
                                 style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                     fontSize: 21,
@@ -240,7 +240,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                           ),
                           const SizedBox(height: 30),
                           //Email TextFormField
-                          usernameField,
+                          emailField,
                           const SizedBox(height: 30),
                           //Next Button
                           Container(
