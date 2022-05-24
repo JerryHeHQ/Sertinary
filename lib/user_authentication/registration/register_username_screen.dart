@@ -285,12 +285,10 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       children: <Widget>[
                         instructions,
                         const SizedBox(height: 30),
-                        //Username TextFormField
                         usernameField,
                         const SizedBox(height: 30),
                         nextButton,
                         const SizedBox(height: 66),
-                        //Dot Progress Bar
                         dotProgressBar,
                         const SizedBox(height: 72),
                       ],

@@ -257,6 +257,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                   const SizedBox(height: 90),
                   titleMessage,
                   const SizedBox(height: 36),
+                  //Bottom Section
                   Container(
                     height: 450.0,
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),

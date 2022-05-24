@@ -288,13 +288,10 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                       children: <Widget>[
                         instructions,
                         const SizedBox(height: 30),
-                        //Repassword TextFormField
                         repasswordField,
                         const SizedBox(height: 30),
-                        //Create Account Button
                         createAccountButton,
                         const SizedBox(height: 66),
-                        //Dot Progress Bar
                         dotProgressBar,
                         const SizedBox(height: 72),
                       ],

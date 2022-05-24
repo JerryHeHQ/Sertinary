@@ -169,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     //Forgot Password Button
-    final forgotPasswordBUtton = Row(
+    final forgotPasswordButton = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         GestureDetector(
@@ -285,7 +285,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 15),
                     passwordField,
                     const SizedBox(height: 3),
-                    forgotPasswordBUtton,
+                    forgotPasswordButton,
                     const SizedBox(height: 30),
                     loginButton,
                     const SizedBox(height: 12),
