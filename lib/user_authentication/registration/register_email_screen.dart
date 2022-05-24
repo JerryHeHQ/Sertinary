@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import '../../constants/color_constants.dart';
-import "package:google_fonts/google_fonts.dart";
+import 'package:google_fonts/google_fonts.dart';
 import 'register_password_screen.dart';
 
 class RegisterEmailScreen extends StatefulWidget {

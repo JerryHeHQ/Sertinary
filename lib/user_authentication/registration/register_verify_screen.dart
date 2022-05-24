@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:sertinary/user_authentication/login/login_screen.dart';
 import '../../constants/color_constants.dart';
-import "package:google_fonts/google_fonts.dart";
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterVerifyScreen extends StatefulWidget {
   const RegisterVerifyScreen({Key? key}) : super(key: key);

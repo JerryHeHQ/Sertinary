@@ -3,7 +3,7 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
-import "package:google_fonts/google_fonts.dart";
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/user_authentication/registration/register_username_screen.dart';
 
 bool _passwordVisible = false;
@@ -20,6 +20,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  //Firebase
+
   //Form Key
   final _formKey = GlobalKey<FormState>();
 

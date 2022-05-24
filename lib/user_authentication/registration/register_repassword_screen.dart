@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:sertinary/user_authentication/registration/register_verify_screen.dart';
 import '../../constants/color_constants.dart';
-import "package:google_fonts/google_fonts.dart";
+import 'package:google_fonts/google_fonts.dart';
 
 bool _repasswordVisible = false;
 
