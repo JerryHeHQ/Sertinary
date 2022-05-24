@@ -1,10 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:sertinary/user_authentication/registration/register_verify_screen.dart';
 import '../../constants/color_constants.dart';
 import "package:google_fonts/google_fonts.dart";
-
-import 'register_verify_screen.dart';
 
 bool _repasswordVisible = false;
 
@@ -117,11 +116,11 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
         child: MaterialButton(
           height: 54,
           onPressed: () {
-            Navigator.push(
-              context,
+            Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                 builder: (context) => const RegisterVerifyScreen(),
               ),
+              (Route<dynamic> route) => false,
             );
           },
           child: Row(

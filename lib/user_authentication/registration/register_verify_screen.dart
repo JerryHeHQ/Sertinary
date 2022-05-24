@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:sertinary/user_authentication/login/login_screen.dart';
 import '../../constants/color_constants.dart';
 import "package:google_fonts/google_fonts.dart";
 
@@ -72,7 +73,14 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
         ),
         child: MaterialButton(
           height: 54,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const LoginScreen(),
+              ),
+              (Route<dynamic> route) => false,
+            );
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
