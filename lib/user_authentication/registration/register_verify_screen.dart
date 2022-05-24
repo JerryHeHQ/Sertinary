@@ -4,94 +4,50 @@ import 'package:flutter/material.dart';
 import '../../constants/color_constants.dart';
 import "package:google_fonts/google_fonts.dart";
 
-import 'register_verify_screen.dart';
-
-bool _repasswordVisible = false;
-
-void initState() {
-  _repasswordVisible = false;
-}
-
-class RegisterRepasswordScreen extends StatefulWidget {
-  const RegisterRepasswordScreen({Key? key}) : super(key: key);
+class RegisterVerifyScreen extends StatefulWidget {
+  const RegisterVerifyScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterRepasswordScreen> createState() =>
-      _RegisterRepasswordScreenState();
+  State<RegisterVerifyScreen> createState() => _RegisterVerifyScreenState();
 }
 
-class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
+class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
   //form key
   final _formKey = GlobalKey<FormState>();
 
   //text editing controller
-  final TextEditingController _repasswordController = TextEditingController();
-
-  //Dynamically Changes TextFormField Label Color
-  Color _repasswordLabelColor = ColorConstants.mono75;
+  final TextEditingController _verifyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    //repassword form field
-    final repasswordField = Focus(
-      onFocusChange: (hasFocus) {
-        setState(() => _repasswordLabelColor =
-            hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
+    //verify form field
+    final verifyField = TextFormField(
+      autofocus: false,
+      controller: _verifyController,
+      keyboardType: TextInputType.number,
+      //validator:(value) { },
+      onSaved: (value) {
+        _verifyController.text = value!;
       },
-      child: TextFormField(
-        autofocus: false,
-        controller: _repasswordController,
-        obscureText: !_repasswordVisible,
-        keyboardType: TextInputType.name,
-        //validator:(value) { },
-        onSaved: (value) {
-          _repasswordController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        cursorColor: ColorConstants.accent50,
-        cursorHeight: 18,
-        style: TextStyle(
-          fontSize: 16,
-          color: ColorConstants.mono95,
-          fontWeight: FontWeight.w400,
+      textInputAction: TextInputAction.next,
+      cursorColor: ColorConstants.accent50,
+      cursorHeight: 18,
+      style: TextStyle(
+        fontSize: 16,
+        color: ColorConstants.mono95,
+        fontWeight: FontWeight.w400,
+      ),
+      decoration: InputDecoration(
+        fillColor: ColorConstants.mono10,
+        filled: true,
+        contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
+          borderRadius: BorderRadius.circular(18),
         ),
-        decoration: InputDecoration(
-          fillColor: ColorConstants.mono10,
-          filled: true,
-          prefixIcon: Icon(
-            Icons.vpn_key,
-            color: ColorConstants.accent50,
-          ),
-          suffixIcon: IconButton(
-            icon: Icon(
-              _repasswordVisible ? Icons.visibility_off : Icons.visibility,
-              color: ColorConstants.accent50,
-            ),
-            onPressed: () {
-              setState(
-                () {
-                  _repasswordVisible = !_repasswordVisible;
-                },
-              );
-            },
-          ),
-          contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Confirm Password",
-          labelStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              fontSize: 16,
-              color: _repasswordLabelColor,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
-          ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
+          borderRadius: BorderRadius.circular(18),
         ),
       ),
     );
@@ -116,21 +72,14 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
         ),
         child: MaterialButton(
           height: 54,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RegisterVerifyScreen(),
-              ),
-            );
-          },
+          onPressed: () {},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               const SizedBox(width: 15),
               Text(
-                "Create Account",
+                "Login Screen",
                 style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
                     fontSize: 18,
@@ -176,20 +125,7 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                 children: <Widget>[
                   const SizedBox(height: 50),
                   //Back To Login Screen Button
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_rounded,
-                        size: 45,
-                      ),
-                      color: ColorConstants.mono05,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
+
                   const SizedBox(height: 90),
                   //Title Message
                   Padding(
@@ -198,7 +134,7 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "\nAlmost there!",
+                          "\nJust one last step!",
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               fontSize: 33,
@@ -236,7 +172,7 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                "Please repeat your\npassword below.",
+                                "Your account has been created!",
                                 style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                     fontSize: 21,
@@ -247,9 +183,22 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 30),
-                          //Email TextFormField
-                          repasswordField,
+                          const SizedBox(height: 52),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Please check your email\nfor a verification link\nand we'll get you started.",
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                    fontSize: 18,
+                                    color: ColorConstants.mono95,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           const SizedBox(height: 30),
                           //Next Button
                           Container(
