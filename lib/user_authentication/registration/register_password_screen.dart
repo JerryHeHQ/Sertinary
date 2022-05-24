@@ -19,10 +19,10 @@ class RegisterPasswordScreen extends StatefulWidget {
 }
 
 class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
-  //form key
+  //Form Key
   final _formKey = GlobalKey<FormState>();
 
-  //text editing controller
+  //Text Editing Controller
   final TextEditingController _passwordController = TextEditingController();
 
   //Dynamically Changes TextFormField Label Color
@@ -30,7 +30,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //password form field
+    //Password Form Field
     final passwordField = Focus(
       onFocusChange: (hasFocus) {
         setState(() => _passwordLabelColor =
@@ -94,7 +94,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
       ),
     );
 
-    //login button
+    //Next Button
     final nextButton = Material(
       elevation: 6,
       borderRadius: BorderRadius.circular(18),
@@ -148,6 +148,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
       ),
     );
 
+    //Dot Progress Bar
     final dotProgressBar = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,7 +204,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 50),
-                  //Back To Login Screen Button
+                  //Back Button
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
@@ -239,6 +240,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                     ),
                   ),
                   const SizedBox(height: 36),
+                  //Bottom Section
                   Container(
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                     height: 450.0,
@@ -276,7 +278,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                             ],
                           ),
                           const SizedBox(height: 30),
-                          //Email TextFormField
+                          //Password TextFormField
                           passwordField,
                           const SizedBox(height: 30),
                           //Next Button

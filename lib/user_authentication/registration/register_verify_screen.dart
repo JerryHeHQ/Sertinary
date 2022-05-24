@@ -13,13 +13,13 @@ class RegisterVerifyScreen extends StatefulWidget {
 }
 
 class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
-  //form key
+  //Form Key
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    //login button
-    final nextButton = Material(
+    //Back To Login Screen Button
+    final toLoginScreenButton = Material(
       elevation: 6,
       borderRadius: BorderRadius.circular(18),
       child: Container(
@@ -96,10 +96,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const SizedBox(height: 50),
-                  //Back To Login Screen Button
-
-                  const SizedBox(height: 90),
+                  const SizedBox(height: 140),
                   //Title Message
                   Padding(
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
@@ -120,6 +117,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                     ),
                   ),
                   const SizedBox(height: 36),
+                  //Bottom Section
                   Container(
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                     height: 450.0,
@@ -173,10 +171,10 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                             ],
                           ),
                           const SizedBox(height: 43),
-                          //Next Button
+                          //Back To Login Screen Button
                           Container(
                             alignment: Alignment.centerRight,
-                            child: nextButton,
+                            child: toLoginScreenButton,
                           ),
                           const SizedBox(height: 150),
                         ]),

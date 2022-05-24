@@ -20,10 +20,10 @@ class RegisterRepasswordScreen extends StatefulWidget {
 }
 
 class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
-  //form key
+  //Form Key
   final _formKey = GlobalKey<FormState>();
 
-  //text editing controller
+  //Text Editing Controller
   final TextEditingController _repasswordController = TextEditingController();
 
   //Dynamically Changes TextFormField Label Color
@@ -31,7 +31,7 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //repassword form field
+    //Repassword Form Field
     final repasswordField = Focus(
       onFocusChange: (hasFocus) {
         setState(() => _repasswordLabelColor =
@@ -95,8 +95,8 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
       ),
     );
 
-    //login button
-    final nextButton = Material(
+    //Create Account Button
+    final createAccountButton = Material(
       elevation: 6,
       borderRadius: BorderRadius.circular(18),
       child: Container(
@@ -149,6 +149,7 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
       ),
     );
 
+    //Dot Progress Bar
     final dotProgressBar = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -204,7 +205,7 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 50),
-                  //Back To Login Screen Button
+                  //Back Button
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
@@ -240,6 +241,7 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                     ),
                   ),
                   const SizedBox(height: 36),
+                  //Bottom Section
                   Container(
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                     height: 450.0,
@@ -277,13 +279,13 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                             ],
                           ),
                           const SizedBox(height: 30),
-                          //Email TextFormField
+                          //Repassword TextFormField
                           repasswordField,
                           const SizedBox(height: 30),
-                          //Next Button
+                          //Create Account Button
                           Container(
                             alignment: Alignment.centerRight,
-                            child: nextButton,
+                            child: createAccountButton,
                           ),
                           const SizedBox(height: 66),
                           //Dot Progress Bar

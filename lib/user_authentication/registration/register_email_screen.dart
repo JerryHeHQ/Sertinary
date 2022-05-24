@@ -13,10 +13,10 @@ class RegisterEmailScreen extends StatefulWidget {
 }
 
 class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
-  //form key
+  //Form Key
   final _formKey = GlobalKey<FormState>();
 
-  //text editing controller
+  //Text Editing Controller
   final TextEditingController _emailController = TextEditingController();
 
   //Dynamically Changes TextFormField Label Color
@@ -24,7 +24,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //email form field
+    //Email Form Field
     final emailField = Focus(
       onFocusChange: (hasFocus) {
         setState(() => _emailLabelColor =
@@ -87,7 +87,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
       ),
     );
 
-    //login button
+    //Next Button
     final nextButton = Material(
       elevation: 6,
       borderRadius: BorderRadius.circular(18),
@@ -141,6 +141,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
       ),
     );
 
+    //Dot Progress Bar
     final dotProgressBar = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -196,7 +197,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 50),
-                  //Back To Login Screen Button
+                  //Back Button
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
@@ -232,6 +233,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                     ),
                   ),
                   const SizedBox(height: 36),
+                  //Bottom Section
                   Container(
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                     height: 450.0,

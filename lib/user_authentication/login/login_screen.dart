@@ -20,10 +20,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //form key
+  //Form Key
   final _formKey = GlobalKey<FormState>();
 
-  //text editing controllers
+  //Text Editing Controllers
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //email form field
+    //Email Form Field
     final emailField = Focus(
       onFocusChange: (hasFocus) {
         setState(() => _emailLabelColor =
@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
-    //password form field
+    //Password Form Field
     final passwordField = Focus(
       onFocusChange: (hasFocus) {
         setState(() => _passwordLabelColor =
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
-    //login button
+    //Login Button
     final loginButton = Material(
       elevation: 6,
       borderRadius: BorderRadius.circular(18),
@@ -229,14 +229,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        Text(
-                          "Forgot Password?",
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 13,
-                              color: ColorConstants.mono60,
-                              fontWeight: FontWeight.normal,
-                              decoration: TextDecoration.underline,
+                        GestureDetector(
+                          onTap: () {},
+                          child: Text(
+                            "Forgot Password?",
+                            style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                fontSize: 13,
+                                color: ColorConstants.mono60,
+                                fontWeight: FontWeight.normal,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
                         ),
