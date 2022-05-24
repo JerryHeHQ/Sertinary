@@ -31,6 +31,59 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //Back Button
+    final backButton = Container(
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
+      child: IconButton(
+        icon: const Icon(
+          Icons.arrow_back_rounded,
+          size: 45,
+        ),
+        color: ColorConstants.mono05,
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+
+    //Title Message
+    final titleMessage = Padding(
+      padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            "\nAlmost there!",
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 33,
+                color: ColorConstants.mono05,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    //Instructions
+    final instructions = Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Repeat your\npassword below.",
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 21,
+              color: ColorConstants.accent50,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+
     //Repassword Form Field
     final repasswordField = Focus(
       onFocusChange: (hasFocus) {
@@ -96,54 +149,57 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
     );
 
     //Create Account Button
-    final createAccountButton = Material(
-      elevation: 6,
-      borderRadius: BorderRadius.circular(18),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.0, 0.5, 1.0],
-            colors: [
-              ColorConstants.accent30,
-              ColorConstants.accent50,
-              ColorConstants.accent30,
-            ],
+    final createAccountButton = Container(
+      alignment: Alignment.centerRight,
+      child: Material(
+        elevation: 6,
+        borderRadius: BorderRadius.circular(18),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: const [0.0, 0.5, 1.0],
+              colors: [
+                ColorConstants.accent30,
+                ColorConstants.accent50,
+                ColorConstants.accent30,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(18),
           ),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        child: MaterialButton(
-          height: 54,
-          onPressed: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => const RegisterVerifyScreen(),
-              ),
-              (Route<dynamic> route) => false,
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(width: 15),
-              Text(
-                "Create Account",
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                    fontSize: 18,
-                    color: ColorConstants.mono05,
-                    fontWeight: FontWeight.w500,
+          child: MaterialButton(
+            height: 54,
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const RegisterVerifyScreen(),
+                ),
+                (Route<dynamic> route) => false,
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(width: 15),
+                Text(
+                  "Create Account",
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                      color: ColorConstants.mono05,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              Icon(
-                Icons.double_arrow_rounded,
-                color: ColorConstants.mono05,
-              ),
-              const SizedBox(width: 15),
-            ],
+                Icon(
+                  Icons.double_arrow_rounded,
+                  color: ColorConstants.mono05,
+                ),
+                const SizedBox(width: 15),
+              ],
+            ),
           ),
         ),
       ),
@@ -205,41 +261,9 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 50),
-                  //Back Button
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_rounded,
-                        size: 45,
-                      ),
-                      color: ColorConstants.mono05,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
+                  backButton,
                   const SizedBox(height: 90),
-                  //Title Message
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "\nAlmost there!",
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 33,
-                              color: ColorConstants.mono05,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  titleMessage,
                   const SizedBox(height: 36),
                   //Bottom Section
                   Container(
@@ -259,39 +283,22 @@ class _RegisterRepasswordScreenState extends State<RegisterRepasswordScreen> {
                       ],
                     ),
                     child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          //Intructions
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "Repeat your\npassword below.",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    fontSize: 21,
-                                    color: ColorConstants.accent50,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          //Repassword TextFormField
-                          repasswordField,
-                          const SizedBox(height: 30),
-                          //Create Account Button
-                          Container(
-                            alignment: Alignment.centerRight,
-                            child: createAccountButton,
-                          ),
-                          const SizedBox(height: 66),
-                          //Dot Progress Bar
-                          dotProgressBar,
-                          const SizedBox(height: 72),
-                        ]),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        instructions,
+                        const SizedBox(height: 30),
+                        //Repassword TextFormField
+                        repasswordField,
+                        const SizedBox(height: 30),
+                        //Create Account Button
+                        createAccountButton,
+                        const SizedBox(height: 66),
+                        //Dot Progress Bar
+                        dotProgressBar,
+                        const SizedBox(height: 72),
+                      ],
+                    ),
                   ),
                 ],
               ),

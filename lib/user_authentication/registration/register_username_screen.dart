@@ -24,64 +24,121 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //Username Form Field
-    final usernameField = Focus(
-      onFocusChange: (hasFocus) {
-        setState(() => _usernameLabelColor =
-            hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
-      },
-      child: TextFormField(
-        autofocus: false,
-        controller: _usernameController,
-        keyboardType: TextInputType.name,
-        //validator:(value) { },
-        onSaved: (value) {
-          _usernameController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        cursorColor: ColorConstants.accent50,
-        cursorHeight: 18,
-        style: TextStyle(
-          fontSize: 16,
-          color: ColorConstants.mono95,
-          fontWeight: FontWeight.w400,
+    //Back Button
+    final backButton = Container(
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
+      child: IconButton(
+        icon: const Icon(
+          Icons.arrow_back_rounded,
+          size: 45,
         ),
-        decoration: InputDecoration(
-          fillColor: ColorConstants.mono10,
-          filled: true,
-          prefixIcon: Icon(
-            Icons.person,
-            color: ColorConstants.accent50,
+        color: ColorConstants.mono05,
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+
+    //Title Message
+    final titleMessage = Padding(
+      padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            "Hey there!\nLet's get you started!",
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 33,
+                color: ColorConstants.mono05,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
           ),
-          suffixIcon: IconButton(
-            icon: Icon(
-              Icons.clear_rounded,
+        ],
+      ),
+    );
+
+    //Instructions
+    final instructions = Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "What would you like us\nto call you?",
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 21,
+              color: ColorConstants.accent50,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+
+    //Username Form Field
+    final usernameField = Container(
+      alignment: Alignment.centerRight,
+      child: Focus(
+        onFocusChange: (hasFocus) {
+          setState(() => _usernameLabelColor =
+              hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
+        },
+        child: TextFormField(
+          autofocus: false,
+          controller: _usernameController,
+          keyboardType: TextInputType.name,
+          //validator:(value) { },
+          onSaved: (value) {
+            _usernameController.text = value!;
+          },
+          textInputAction: TextInputAction.next,
+          cursorColor: ColorConstants.accent50,
+          cursorHeight: 18,
+          style: TextStyle(
+            fontSize: 16,
+            color: ColorConstants.mono95,
+            fontWeight: FontWeight.w400,
+          ),
+          decoration: InputDecoration(
+            fillColor: ColorConstants.mono10,
+            filled: true,
+            prefixIcon: Icon(
+              Icons.person,
               color: ColorConstants.accent50,
             ),
-            onPressed: () {
-              setState(
-                () {
-                  _usernameController.clear();
-                },
-              );
-            },
-          ),
-          contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Username",
-          labelStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              fontSize: 16,
-              color: _usernameLabelColor,
-              fontWeight: FontWeight.w400,
+            suffixIcon: IconButton(
+              icon: Icon(
+                Icons.clear_rounded,
+                color: ColorConstants.accent50,
+              ),
+              onPressed: () {
+                setState(
+                  () {
+                    _usernameController.clear();
+                  },
+                );
+              },
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
+            contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
+            labelText: "Username",
+            labelStyle: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 16,
+                color: _usernameLabelColor,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: ColorConstants.accent50, width: 2.1),
+              borderRadius: BorderRadius.circular(18),
+            ),
           ),
         ),
       ),
@@ -197,41 +254,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 50),
-                  //Back Button
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_rounded,
-                        size: 45,
-                      ),
-                      color: ColorConstants.mono05,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
+                  backButton,
                   const SizedBox(height: 90),
-                  //Title Message
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Hey there!\nLet's get you started!",
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 33,
-                              color: ColorConstants.mono05,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  titleMessage,
                   const SizedBox(height: 36),
                   //Bottom Section
                   Container(
@@ -251,39 +276,21 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       ],
                     ),
                     child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          //Intructions
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "What would you like us\nto call you?",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    fontSize: 21,
-                                    color: ColorConstants.accent50,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          //Username TextFormField
-                          usernameField,
-                          const SizedBox(height: 30),
-                          //Next Button
-                          Container(
-                            alignment: Alignment.centerRight,
-                            child: nextButton,
-                          ),
-                          const SizedBox(height: 66),
-                          //Dot Progress Bar
-                          dotProgressBar,
-                          const SizedBox(height: 72),
-                        ]),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        instructions,
+                        const SizedBox(height: 30),
+                        //Username TextFormField
+                        usernameField,
+                        const SizedBox(height: 30),
+                        nextButton,
+                        const SizedBox(height: 66),
+                        //Dot Progress Bar
+                        dotProgressBar,
+                        const SizedBox(height: 72),
+                      ],
+                    ),
                   ),
                 ],
               ),

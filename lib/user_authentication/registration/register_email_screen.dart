@@ -24,6 +24,59 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //Back Button
+    final backButton = Container(
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
+      child: IconButton(
+        icon: const Icon(
+          Icons.arrow_back_rounded,
+          size: 45,
+        ),
+        color: ColorConstants.mono05,
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+
+    //Title Message
+    final titleMessage = Padding(
+      padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            "Nice to meet you\n[Username]!",
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 33,
+                color: ColorConstants.mono05,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    //Instructions
+    final instructions = Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Enter your email to start\ncreating your account.",
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 21,
+              color: ColorConstants.accent50,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+
     //Email Form Field
     final emailField = Focus(
       onFocusChange: (hasFocus) {
@@ -88,54 +141,57 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
     );
 
     //Next Button
-    final nextButton = Material(
-      elevation: 6,
-      borderRadius: BorderRadius.circular(18),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.0, 0.5, 1.0],
-            colors: [
-              ColorConstants.accent30,
-              ColorConstants.accent50,
-              ColorConstants.accent30,
-            ],
+    final nextButton = Container(
+      alignment: Alignment.centerRight,
+      child: Material(
+        elevation: 6,
+        borderRadius: BorderRadius.circular(18),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: const [0.0, 0.5, 1.0],
+              colors: [
+                ColorConstants.accent30,
+                ColorConstants.accent50,
+                ColorConstants.accent30,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(18),
           ),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        child: MaterialButton(
-          height: 54,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RegisterPasswordScreen(),
-              ),
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(width: 15),
-              Text(
-                "Next",
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                    fontSize: 18,
-                    color: ColorConstants.mono05,
-                    fontWeight: FontWeight.w500,
+          child: MaterialButton(
+            height: 54,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RegisterPasswordScreen(),
+                ),
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(width: 15),
+                Text(
+                  "Next",
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                      color: ColorConstants.mono05,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              Icon(
-                Icons.double_arrow_rounded,
-                color: ColorConstants.mono05,
-              ),
-              const SizedBox(width: 15),
-            ],
+                Icon(
+                  Icons.double_arrow_rounded,
+                  color: ColorConstants.mono05,
+                ),
+                const SizedBox(width: 15),
+              ],
+            ),
           ),
         ),
       ),
@@ -197,46 +253,13 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 50),
-                  //Back Button
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_rounded,
-                        size: 45,
-                      ),
-                      color: ColorConstants.mono05,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
+                  backButton,
                   const SizedBox(height: 90),
-                  //Title Message
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Nice to meet you\n[Username]!",
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 33,
-                              color: ColorConstants.mono05,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  titleMessage,
                   const SizedBox(height: 36),
-                  //Bottom Section
                   Container(
-                    padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                     height: 450.0,
+                    padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                     margin: const EdgeInsets.only(top: 6.0),
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.vertical(
@@ -251,39 +274,19 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                       ],
                     ),
                     child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          //Intructions
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "Enter your email to start\ncreating your account.",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    fontSize: 21,
-                                    color: ColorConstants.accent50,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          //Email TextFormField
-                          emailField,
-                          const SizedBox(height: 30),
-                          //Next Button
-                          Container(
-                            alignment: Alignment.centerRight,
-                            child: nextButton,
-                          ),
-                          const SizedBox(height: 66),
-                          //Dot Progress Bar
-                          dotProgressBar,
-                          const SizedBox(height: 72),
-                        ]),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        instructions,
+                        const SizedBox(height: 30),
+                        emailField,
+                        const SizedBox(height: 30),
+                        nextButton,
+                        const SizedBox(height: 66),
+                        dotProgressBar,
+                        const SizedBox(height: 72),
+                      ],
+                    ),
                   ),
                 ],
               ),

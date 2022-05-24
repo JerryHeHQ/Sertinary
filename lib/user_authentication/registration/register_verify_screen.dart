@@ -18,55 +18,112 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //Back To Login Screen Button
-    final toLoginScreenButton = Material(
-      elevation: 6,
-      borderRadius: BorderRadius.circular(18),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.0, 0.5, 1.0],
-            colors: [
-              ColorConstants.accent30,
-              ColorConstants.accent50,
-              ColorConstants.accent30,
-            ],
-          ),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        child: MaterialButton(
-          height: 54,
-          onPressed: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => const LoginScreen(),
+    //Title Message
+    final titleMessage = Padding(
+      padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            "\nJust one last step!",
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 33,
+                color: ColorConstants.mono05,
+                fontWeight: FontWeight.w700,
               ),
-              (Route<dynamic> route) => false,
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(width: 15),
-              Text(
-                "Login Screen",
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                    fontSize: 18,
-                    color: ColorConstants.mono05,
-                    fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    //Account Creation Message
+    final accountCreationMessage = Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Your account has been created!",
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 21,
+              color: ColorConstants.accent50,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+
+    //Instructions
+    final instructions = Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Please check your email\nfor a verification link\nand we'll get you started.",
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 18,
+              color: ColorConstants.mono95,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ],
+    );
+
+    //Back To Login Screen Button
+    final toLoginScreenButton = Container(
+      alignment: Alignment.centerRight,
+      child: Material(
+        elevation: 6,
+        borderRadius: BorderRadius.circular(18),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: const [0.0, 0.5, 1.0],
+              colors: [
+                ColorConstants.accent30,
+                ColorConstants.accent50,
+                ColorConstants.accent30,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: MaterialButton(
+            height: 54,
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const LoginScreen(),
+                ),
+                (Route<dynamic> route) => false,
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(width: 15),
+                Text(
+                  "Login Screen",
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                      color: ColorConstants.mono05,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              Icon(
-                Icons.double_arrow_rounded,
-                color: ColorConstants.mono05,
-              ),
-              const SizedBox(width: 15),
-            ],
+                Icon(
+                  Icons.double_arrow_rounded,
+                  color: ColorConstants.mono05,
+                ),
+                const SizedBox(width: 15),
+              ],
+            ),
           ),
         ),
       ),
@@ -97,25 +154,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 140),
-                  //Title Message
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "\nJust one last step!",
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 33,
-                              color: ColorConstants.mono05,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  titleMessage,
                   const SizedBox(height: 36),
                   //Bottom Section
                   Container(
@@ -135,49 +174,17 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                       ],
                     ),
                     child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          //Intructions
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "Your account has been created!",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    fontSize: 21,
-                                    color: ColorConstants.accent50,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 39),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "Please check your email\nfor a verification link\nand we'll get you started.",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    fontSize: 18,
-                                    color: ColorConstants.mono95,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 43),
-                          //Back To Login Screen Button
-                          Container(
-                            alignment: Alignment.centerRight,
-                            child: toLoginScreenButton,
-                          ),
-                          const SizedBox(height: 150),
-                        ]),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        accountCreationMessage,
+                        const SizedBox(height: 39),
+                        instructions,
+                        const SizedBox(height: 43),
+                        toLoginScreenButton,
+                        const SizedBox(height: 150),
+                      ],
+                    ),
                   ),
                 ],
               ),
