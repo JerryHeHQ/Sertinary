@@ -148,6 +148,36 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
       ),
     );
 
+    final dotProgressBar = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          Icons.circle,
+          color: ColorConstants.mono50,
+          size: 12,
+        ),
+        const SizedBox(width: 6),
+        Icon(
+          Icons.circle,
+          color: ColorConstants.mono50,
+          size: 12,
+        ),
+        const SizedBox(width: 6),
+        Icon(
+          Icons.circle,
+          color: ColorConstants.accent50,
+          size: 12,
+        ),
+        const SizedBox(width: 6),
+        Icon(
+          Icons.circle,
+          color: ColorConstants.mono50,
+          size: 12,
+        ),
+      ],
+    );
+
     return Scaffold(
       backgroundColor: ColorConstants.mono05,
       body: Container(
@@ -234,7 +264,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                "Please enter the password\nyou would like to use.",
+                                "Enter the password\nyou would like to use.",
                                 style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                     fontSize: 21,
@@ -254,7 +284,10 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                             alignment: Alignment.centerRight,
                             child: nextButton,
                           ),
-                          const SizedBox(height: 150),
+                          const SizedBox(height: 66),
+                          //Dot Progress Bar
+                          dotProgressBar,
+                          const SizedBox(height: 72),
                         ]),
                   ),
                 ],

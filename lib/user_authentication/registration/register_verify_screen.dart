@@ -16,43 +16,8 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
   //form key
   final _formKey = GlobalKey<FormState>();
 
-  //text editing controller
-  final TextEditingController _verifyController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    //verify form field
-    final verifyField = TextFormField(
-      autofocus: false,
-      controller: _verifyController,
-      keyboardType: TextInputType.number,
-      //validator:(value) { },
-      onSaved: (value) {
-        _verifyController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      cursorColor: ColorConstants.accent50,
-      cursorHeight: 18,
-      style: TextStyle(
-        fontSize: 16,
-        color: ColorConstants.mono95,
-        fontWeight: FontWeight.w400,
-      ),
-      decoration: InputDecoration(
-        fillColor: ColorConstants.mono10,
-        filled: true,
-        contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
-          borderRadius: BorderRadius.circular(18),
-        ),
-      ),
-    );
-
     //login button
     final nextButton = Material(
       elevation: 6,
@@ -191,7 +156,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 52),
+                          const SizedBox(height: 39),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
@@ -207,7 +172,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 43),
                           //Next Button
                           Container(
                             alignment: Alignment.centerRight,

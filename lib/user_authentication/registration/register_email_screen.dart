@@ -141,6 +141,36 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
       ),
     );
 
+    final dotProgressBar = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          Icons.circle,
+          color: ColorConstants.mono50,
+          size: 12,
+        ),
+        const SizedBox(width: 6),
+        Icon(
+          Icons.circle,
+          color: ColorConstants.accent50,
+          size: 12,
+        ),
+        const SizedBox(width: 6),
+        Icon(
+          Icons.circle,
+          color: ColorConstants.mono50,
+          size: 12,
+        ),
+        const SizedBox(width: 6),
+        Icon(
+          Icons.circle,
+          color: ColorConstants.mono50,
+          size: 12,
+        ),
+      ],
+    );
+
     return Scaffold(
       backgroundColor: ColorConstants.mono05,
       body: Container(
@@ -247,7 +277,10 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                             alignment: Alignment.centerRight,
                             child: nextButton,
                           ),
-                          const SizedBox(height: 150),
+                          const SizedBox(height: 66),
+                          //Dot Progress Bar
+                          dotProgressBar,
+                          const SizedBox(height: 72),
                         ]),
                   ),
                 ],
