@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../constants/color_constants.dart';
 import "package:google_fonts/google_fonts.dart";
+
 import 'register_email_screen.dart';
 
 class RegisterUsernameScreen extends StatefulWidget {
@@ -145,54 +146,57 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
     );
 
     //Next Button
-    final nextButton = Material(
-      elevation: 6,
-      borderRadius: BorderRadius.circular(18),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.0, 0.5, 1.0],
-            colors: [
-              ColorConstants.accent30,
-              ColorConstants.accent50,
-              ColorConstants.accent30,
-            ],
+    final nextButton = Container(
+      alignment: Alignment.centerRight,
+      child: Material(
+        elevation: 6,
+        borderRadius: BorderRadius.circular(18),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: const [0.0, 0.5, 1.0],
+              colors: [
+                ColorConstants.accent30,
+                ColorConstants.accent50,
+                ColorConstants.accent30,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(18),
           ),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        child: MaterialButton(
-          height: 54,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RegisterEmailScreen(),
-              ),
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(width: 15),
-              Text(
-                "Next",
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                    fontSize: 18,
-                    color: ColorConstants.mono05,
-                    fontWeight: FontWeight.w500,
+          child: MaterialButton(
+            height: 54,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RegisterEmailScreen(),
+                ),
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(width: 15),
+                Text(
+                  "Next",
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                      color: ColorConstants.mono05,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              Icon(
-                Icons.double_arrow_rounded,
-                color: ColorConstants.mono05,
-              ),
-              const SizedBox(width: 15),
-            ],
+                Icon(
+                  Icons.double_arrow_rounded,
+                  color: ColorConstants.mono05,
+                ),
+                const SizedBox(width: 15),
+              ],
+            ),
           ),
         ),
       ),
