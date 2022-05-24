@@ -33,6 +33,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //Sertinary Logo
+    final sertinaryLogo = SizedBox(
+      height: 200,
+      child: Image.asset(
+        "assets/images/SertinaryLogo.png",
+        fit: BoxFit.contain,
+      ),
+    );
+
     //Email Form Field
     final emailField = Focus(
       onFocusChange: (hasFocus) {
@@ -159,6 +168,28 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
+    //Forgot Password Button
+    final forgotPasswordBUtton = Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        GestureDetector(
+          onTap: () {},
+          child: Text(
+            "Forgot Password?",
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 13,
+                color: ColorConstants.mono60,
+                fontWeight: FontWeight.normal,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 15),
+      ],
+    );
+
     //Login Button
     final loginButton = Material(
       elevation: 6,
@@ -196,6 +227,44 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
+    //Sign Up Button
+    final signUpButton = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          "Don't have an account? ",
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 13,
+              color: ColorConstants.mono60,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RegisterUsernameScreen(),
+              ),
+            );
+          },
+          child: Text(
+            "Sign Up",
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 13,
+                color: ColorConstants.accent50,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+
     return Scaffold(
       backgroundColor: ColorConstants.mono05,
       body: Center(
@@ -210,84 +279,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    //Sertinary Logo
-                    SizedBox(
-                      height: 200,
-                      child: Image.asset(
-                        "assets/images/SertinaryLogo.png",
-                        fit: BoxFit.contain,
-                      ),
-                    ),
+                    sertinaryLogo,
                     const SizedBox(height: 60),
-                    //Email TextFormField
                     emailField,
                     const SizedBox(height: 15),
-                    //Password TextFormField
                     passwordField,
                     const SizedBox(height: 3),
-                    //Forgot Password Button
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            "Forgot Password?",
-                            style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                color: ColorConstants.mono60,
-                                fontWeight: FontWeight.normal,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 15),
-                      ],
-                    ),
+                    forgotPasswordBUtton,
                     const SizedBox(height: 30),
-                    //Login Button
                     loginButton,
                     const SizedBox(height: 12),
-                    //Sign Up Button
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Don't have an account? ",
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 13,
-                              color: ColorConstants.mono60,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const RegisterUsernameScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Sign Up",
-                            style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                color: ColorConstants.accent50,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    signUpButton,
                     const SizedBox(height: 30),
                   ],
                 ),
