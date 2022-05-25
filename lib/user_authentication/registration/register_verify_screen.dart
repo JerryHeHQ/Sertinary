@@ -18,6 +18,34 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: ColorConstants.mono10,
+          behavior: SnackBarBehavior.floating,
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.person,
+                color: ColorConstants.success,
+              ),
+              Text(
+                " Account Creation Success!",
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 13,
+                    color: ColorConstants.success,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
     //Title Message
     final titleMessage = Padding(
       padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),

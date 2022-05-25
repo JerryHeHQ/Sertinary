@@ -8,7 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'register_password_screen.dart';
 
 class RegisterEmailScreen extends StatefulWidget {
-  const RegisterEmailScreen({Key? key}) : super(key: key);
+  final String username;
+  const RegisterEmailScreen({Key? key, required this.username})
+      : super(key: key);
 
   @override
   State<RegisterEmailScreen> createState() => _RegisterEmailScreenState();
@@ -55,7 +57,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Nice to meet you\n[Username]!",
+            "Nice to meet you\n${widget.username}",
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 33,
@@ -345,7 +347,10 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const RegisterPasswordScreen(),
+          builder: (context) => RegisterPasswordScreen(
+            username: widget.username,
+            email: _emailController.text,
+          ),
         ),
       );
     } else {

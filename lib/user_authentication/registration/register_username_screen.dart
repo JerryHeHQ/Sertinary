@@ -207,7 +207,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                 ? () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RegisterEmailScreen(),
+                        builder: (context) => RegisterEmailScreen(
+                          username: _usernameController.text,
+                        ),
                       ),
                     )
                 : null,

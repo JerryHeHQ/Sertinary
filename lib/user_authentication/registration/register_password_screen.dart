@@ -1,8 +1,11 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:sertinary/user_authentication/registration/user_template.dart';
 import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'register_verify_screen.dart';
 
 bool _passwordVisible = false;
@@ -12,13 +15,20 @@ void initState() {
 }
 
 class RegisterPasswordScreen extends StatefulWidget {
-  const RegisterPasswordScreen({Key? key}) : super(key: key);
+  final String username;
+  final String email;
+  const RegisterPasswordScreen(
+      {Key? key, required this.username, required this.email})
+      : super(key: key);
 
   @override
   State<RegisterPasswordScreen> createState() => _RegisterPasswordScreenState();
 }
 
 class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
+  //Firebase
+  final _auth = FirebaseAuth.instance;
+
   //Form Key
   final _formKey = GlobalKey<FormState>();
 
@@ -205,12 +215,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
           child: MaterialButton(
             height: 54,
             onPressed: _enableCreateAccountButton
-                ? () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RegisterVerifyScreen(),
-                      ),
-                    )
+                ? () => createAccount(_passwordController.text)
                 : null,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -334,6 +339,69 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Future<void> createAccount(String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .createUserWithEmailAndPassword(
+              email: widget.email, password: password)
+          .then((value) => {sendInfoToFirestore()})
+          .catchError((error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: ColorConstants.mono10,
+            behavior: SnackBarBehavior.floating,
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_outline_rounded,
+                  color: ColorConstants.fail,
+                ),
+                Text(
+                  "An Unknown Error Occured. Please Try Again.",
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 13,
+                      color: ColorConstants.fail,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+    }
+  }
+
+  sendInfoToFirestore() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    UserTemplate userTemplate = UserTemplate();
+
+    userTemplate.uid = user!.uid;
+    userTemplate.username = widget.username;
+    userTemplate.email = user.email;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userTemplate.toMap());
+
+    goToRegisterVerifyScreen();
+  }
+
+  void goToRegisterVerifyScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const RegisterVerifyScreen(),
       ),
     );
   }
