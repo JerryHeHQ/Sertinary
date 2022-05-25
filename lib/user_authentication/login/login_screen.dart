@@ -40,6 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Color _emailLabelColor = ColorConstants.mono75;
   Color _passwordLabelColor = ColorConstants.mono75;
 
+  //Changes LoginButton State Based On TextFormField Inputs
   bool _enableLoginButton = false;
 
   @override
@@ -371,8 +372,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  String errorMessage = "";
-
   //Login Function
   void _login(String email, String password) async {
     if (_formKey.currentState!.validate()) {
@@ -389,6 +388,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             );
       } on FirebaseAuthException catch (error) {
+        String errorMessage = "";
         switch (error.code) {
           case "invalid-email":
             errorMessage = "The email address entered is invalid.";

@@ -1,8 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:core';
 import 'package:flutter/material.dart';
 import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'register_password_screen.dart';
 
 class RegisterEmailScreen extends StatefulWidget {
@@ -13,6 +15,9 @@ class RegisterEmailScreen extends StatefulWidget {
 }
 
 class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
+  //Firebase
+  final _auth = FirebaseAuth.instance;
+
   //Form Key
   final _formKey = GlobalKey<FormState>();
 
@@ -21,6 +26,9 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
 
   //Dynamically Changes TextFormField Label Color
   Color _emailLabelColor = ColorConstants.mono75;
+
+  //Changes NextButton State Based On TextFormField Inputs
+  bool _enableNextButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +95,18 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
         autofocus: false,
         controller: _emailController,
         keyboardType: TextInputType.emailAddress,
-        //validator:(value) { },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your Email");
+          }
+          //RegExp To Check If Email Is Valid
+          if (!RegExp(
+                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+              .hasMatch(value)) {
+            return ("Please Enter A Valid Email");
+          }
+          return null;
+        },
         onSaved: (value) {
           _emailController.text = value!;
         },
@@ -136,8 +155,40 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
             borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
             borderRadius: BorderRadius.circular(18),
           ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
         ),
       ),
+    );
+
+    //Button Enabled Linear Gradient
+    final enabledGradient = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: const [0.0, 0.5, 1.0],
+      colors: [
+        ColorConstants.accent30,
+        ColorConstants.accent50,
+        ColorConstants.accent30,
+      ],
+    );
+
+    //Button Disabled Linear Gradient
+    final disabledGradient = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: const [0.0, 0.5, 1.0],
+      colors: [
+        ColorConstants.mono30,
+        ColorConstants.mono50,
+        ColorConstants.mono30,
+      ],
     );
 
     //Next Button
@@ -148,28 +199,14 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
         borderRadius: BorderRadius.circular(18),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              stops: const [0.0, 0.5, 1.0],
-              colors: [
-                ColorConstants.accent30,
-                ColorConstants.accent50,
-                ColorConstants.accent30,
-              ],
-            ),
+            gradient: _enableNextButton ? enabledGradient : disabledGradient,
             borderRadius: BorderRadius.circular(18),
           ),
           child: MaterialButton(
             height: 54,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const RegisterPasswordScreen(),
-                ),
-              );
-            },
+            onPressed: _enableNextButton
+                ? () => _emailExistsCheck(_emailController.text)
+                : null,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -219,12 +256,6 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
           color: ColorConstants.mono50,
           size: 12,
         ),
-        const SizedBox(width: 6),
-        Icon(
-          Icons.circle,
-          color: ColorConstants.mono50,
-          size: 12,
-        ),
       ],
     );
 
@@ -248,6 +279,9 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
             padding: const EdgeInsets.all(0),
             child: Form(
               key: _formKey,
+              onChanged: () => setState(
+                () => _enableNextButton = _formKey.currentState!.validate(),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -296,5 +330,50 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _emailExistsCheck(String email) async {
+    void getLength(List<String> emailList) {
+      buttonPressResult(emailList.length);
+    }
+
+    _auth.fetchSignInMethodsForEmail(email).then((value) => getLength(value));
+  }
+
+  void buttonPressResult(int length) {
+    if (length == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const RegisterPasswordScreen(),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: ColorConstants.mono10,
+          behavior: SnackBarBehavior.floating,
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.error_outline_rounded,
+                color: ColorConstants.fail,
+              ),
+              Text(
+                " Email Already Exists",
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 13,
+                    color: ColorConstants.fail,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

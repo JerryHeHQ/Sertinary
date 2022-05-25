@@ -22,6 +22,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
   //Dynamically Changes TextFormField Label Color
   Color _usernameLabelColor = ColorConstants.mono75;
 
+  //Changes NextButton State Based On TextFormField Inputs
+  bool _enableNextButton = false;
+
   @override
   Widget build(BuildContext context) {
     //Back Button
@@ -89,7 +92,18 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           autofocus: false,
           controller: _usernameController,
           keyboardType: TextInputType.name,
-          //validator:(value) { },
+          validator: (value) {
+            if (value!.isEmpty) {
+              return ("Please Enter Your Preferred Username");
+            }
+            if (!RegExp(r'^[A-Za-z]').hasMatch(value)) {
+              return ("The First Character Must Be A Letter");
+            }
+            if (!RegExp(r'^.{3,}$').hasMatch(value)) {
+              return ("Your Username Must Be At Least 3 Characters Long");
+            }
+            return null;
+          },
           onSaved: (value) {
             _usernameController.text = value!;
           },
@@ -139,9 +153,41 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                   BorderSide(color: ColorConstants.accent50, width: 2.1),
               borderRadius: BorderRadius.circular(18),
             ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+              borderRadius: BorderRadius.circular(18),
+            ),
           ),
         ),
       ),
+    );
+
+    //Button Enabled Linear Gradient
+    final enabledGradient = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: const [0.0, 0.5, 1.0],
+      colors: [
+        ColorConstants.accent30,
+        ColorConstants.accent50,
+        ColorConstants.accent30,
+      ],
+    );
+
+    //Button Disabled Linear Gradient
+    final disabledGradient = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: const [0.0, 0.5, 1.0],
+      colors: [
+        ColorConstants.mono30,
+        ColorConstants.mono50,
+        ColorConstants.mono30,
+      ],
     );
 
     //Next Button
@@ -152,28 +198,19 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
         borderRadius: BorderRadius.circular(18),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              stops: const [0.0, 0.5, 1.0],
-              colors: [
-                ColorConstants.accent30,
-                ColorConstants.accent50,
-                ColorConstants.accent30,
-              ],
-            ),
+            gradient: _enableNextButton ? enabledGradient : disabledGradient,
             borderRadius: BorderRadius.circular(18),
           ),
           child: MaterialButton(
             height: 54,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const RegisterEmailScreen(),
-                ),
-              );
-            },
+            onPressed: _enableNextButton
+                ? () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterEmailScreen(),
+                      ),
+                    )
+                : null,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -223,12 +260,6 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           color: ColorConstants.mono50,
           size: 12,
         ),
-        const SizedBox(width: 6),
-        Icon(
-          Icons.circle,
-          color: ColorConstants.mono50,
-          size: 12,
-        ),
       ],
     );
 
@@ -252,6 +283,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             padding: const EdgeInsets.all(0),
             child: Form(
               key: _formKey,
+              onChanged: () => setState(
+                () => _enableNextButton = _formKey.currentState!.validate(),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

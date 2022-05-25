@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'register_repassword_screen.dart';
+import 'register_verify_screen.dart';
 
 bool _passwordVisible = false;
 
@@ -27,6 +27,9 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
 
   //Dynamically Changes TextFormField Label Color
   Color _passwordLabelColor = ColorConstants.mono75;
+
+  //Changes CreateAccountButton State Based On TextFormField Inputs
+  bool _enableCreateAccountButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +97,15 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
         controller: _passwordController,
         obscureText: !_passwordVisible,
         keyboardType: TextInputType.name,
-        //validator:(value) { },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter A Password");
+          }
+          if (!RegExp(r'^.{6,}$').hasMatch(value)) {
+            return ("Your Password Must Be At Least 6 Characters Long");
+          }
+          return null;
+        },
         onSaved: (value) {
           _passwordController.text = value!;
         },
@@ -143,47 +154,71 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
             borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
             borderRadius: BorderRadius.circular(18),
           ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
         ),
       ),
     );
 
-    //Next Button
-    final nextButton = Container(
+    //Button Enabled Linear Gradient
+    final enabledGradient = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: const [0.0, 0.5, 1.0],
+      colors: [
+        ColorConstants.accent30,
+        ColorConstants.accent50,
+        ColorConstants.accent30,
+      ],
+    );
+
+    //Button Disabled Linear Gradient
+    final disabledGradient = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: const [0.0, 0.5, 1.0],
+      colors: [
+        ColorConstants.mono30,
+        ColorConstants.mono50,
+        ColorConstants.mono30,
+      ],
+    );
+
+    //CreateAccount Button
+    final createAccountButton = Container(
       alignment: Alignment.centerRight,
       child: Material(
         elevation: 6,
         borderRadius: BorderRadius.circular(18),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              stops: const [0.0, 0.5, 1.0],
-              colors: [
-                ColorConstants.accent30,
-                ColorConstants.accent50,
-                ColorConstants.accent30,
-              ],
-            ),
+            gradient:
+                _enableCreateAccountButton ? enabledGradient : disabledGradient,
             borderRadius: BorderRadius.circular(18),
           ),
           child: MaterialButton(
             height: 54,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const RegisterRepasswordScreen(),
-                ),
-              );
-            },
+            onPressed: _enableCreateAccountButton
+                ? () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterVerifyScreen(),
+                      ),
+                    )
+                : null,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 const SizedBox(width: 15),
                 Text(
-                  "Next",
+                  "Create Account",
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 18,
@@ -226,12 +261,6 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
           color: ColorConstants.accent50,
           size: 12,
         ),
-        const SizedBox(width: 6),
-        Icon(
-          Icons.circle,
-          color: ColorConstants.mono50,
-          size: 12,
-        ),
       ],
     );
 
@@ -255,6 +284,10 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
             padding: const EdgeInsets.all(0),
             child: Form(
               key: _formKey,
+              onChanged: () => setState(
+                () => _enableCreateAccountButton =
+                    _formKey.currentState!.validate(),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -289,7 +322,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                         const SizedBox(height: 30),
                         passwordField,
                         const SizedBox(height: 30),
-                        nextButton,
+                        createAccountButton,
                         const SizedBox(height: 66),
                         dotProgressBar,
                         const SizedBox(height: 72),
