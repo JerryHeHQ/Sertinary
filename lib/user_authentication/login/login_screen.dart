@@ -4,6 +4,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/user_authentication/forgot_password/forgot_password_screen.dart';
 import 'package:sertinary/user_authentication/registration/register_username_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -219,6 +220,12 @@ class _LoginScreenState extends State<LoginScreen> {
         GestureDetector(
           onTap: () {
             _passwordController.clear();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ForgotPasswordScreen(),
+              ),
+            );
           },
           child: Text(
             "Forgot Password?",

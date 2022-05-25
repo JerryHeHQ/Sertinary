@@ -5,18 +5,15 @@ import 'package:flutter/material.dart';
 import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'register_password_screen.dart';
 
-class RegisterEmailScreen extends StatefulWidget {
-  final String username;
-  const RegisterEmailScreen({Key? key, required this.username})
-      : super(key: key);
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterEmailScreen> createState() => _RegisterEmailScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   //Firebase
   final _auth = FirebaseAuth.instance;
 
@@ -57,7 +54,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Nice to meet you\n${widget.username}!",
+            "No worries.\nWe got you covered.",
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 33,
@@ -75,7 +72,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Enter your email to start\ncreating your account.",
+          "Enter your email to begin\nresetting your password.",
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 21,
@@ -236,31 +233,6 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
       ),
     );
 
-    //Dot Progress Bar
-    final dotProgressBar = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Icon(
-          Icons.circle,
-          color: ColorConstants.mono50,
-          size: 12,
-        ),
-        const SizedBox(width: 6),
-        Icon(
-          Icons.circle,
-          color: ColorConstants.accent50,
-          size: 12,
-        ),
-        const SizedBox(width: 6),
-        Icon(
-          Icons.circle,
-          color: ColorConstants.mono50,
-          size: 12,
-        ),
-      ],
-    );
-
     return Scaffold(
       backgroundColor: ColorConstants.mono05,
       body: Container(
@@ -319,9 +291,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                         emailField,
                         const SizedBox(height: 30),
                         nextButton,
-                        const SizedBox(height: 66),
-                        dotProgressBar,
-                        const SizedBox(height: 72),
+                        const SizedBox(height: 150),
                       ],
                     ),
                   ),
@@ -336,49 +306,105 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
 
   Future<void> _emailExistsCheck(String email) async {
     void getLength(List<String> emailList) {
-      buttonPressResult(emailList.length);
+      resetPassword(emailList.length, email);
     }
 
     _auth.fetchSignInMethodsForEmail(email).then((value) => getLength(value));
   }
 
-  void buttonPressResult(int length) {
-    if (length == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RegisterPasswordScreen(
-            username: widget.username,
-            email: _emailController.text,
-          ),
-        ),
-      );
+  void resetPassword(int length, String email) {
+    if (length > 0) {
+      //If A User With This Email Exists
+      try {
+        _auth.sendPasswordResetEmail(email: email);
+      } on FirebaseAuthException catch (error) {
+        String errorMessage = "";
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "The email address entered is invalid.";
+            break;
+          case "wrong-password":
+            errorMessage = "The password entered is incorrect.";
+            break;
+          case "user-not-found":
+            errorMessage = "A user with this email was not found.";
+            break;
+          case "user-disabled":
+            errorMessage = "The user with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "ERROR: Too many requests.";
+            break;
+          case "operation-not-allowed":
+            errorMessage =
+                "ERROR: Signing in with email and password is disabled.";
+            break;
+          default:
+            errorMessage = "ERROR: Unknown";
+        }
+        failSnackBar(errorMessage); //Send Fail Message
+        return; //Get Out Of Method
+      }
+      successSnackBar(); //Send Success Message
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: ColorConstants.mono10,
-          behavior: SnackBarBehavior.floating,
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.error_outline_rounded,
-                color: ColorConstants.fail,
-              ),
-              Text(
-                " Email Already Exists",
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                    fontSize: 13,
-                    color: ColorConstants.fail,
-                    fontWeight: FontWeight.w500,
-                  ),
+      String errorMessage = "User Does Not Exist";
+      failSnackBar(errorMessage); //Send User Does Not Exist Message
+    }
+  }
+
+  void failSnackBar(String errorMessage) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorConstants.mono10,
+        behavior: SnackBarBehavior.floating,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline_rounded,
+              color: ColorConstants.fail,
+            ),
+            Text(
+              " $errorMessage",
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  fontSize: 13,
+                  color: ColorConstants.fail,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
+  }
+
+  void successSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorConstants.mono10,
+        behavior: SnackBarBehavior.floating,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.send,
+              color: ColorConstants.success,
+            ),
+            Text(
+              " A Password Reset Link Has Been Sent",
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  fontSize: 13,
+                  color: ColorConstants.success,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
