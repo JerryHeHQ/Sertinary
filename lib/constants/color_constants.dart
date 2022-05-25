@@ -42,4 +42,7 @@ class ColorConstants {
   static Color accent70 = hexToColor('#FFD866');
   static Color accent80 = hexToColor('#FFE599');
   static Color accent90 = hexToColor('#FFF2CC');
+
+  static Color fail = hexToColor('#B00020');
+  static Color success = hexToColor('#00B020');
 }

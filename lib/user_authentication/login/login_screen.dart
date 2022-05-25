@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/user_authentication/registration/register_username_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import '../../screens/home_screen.dart';
 
 bool _passwordVisible = false;
 
@@ -21,9 +24,13 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   //Firebase
+  final _auth = FirebaseAuth.instance;
 
   //Form Key
   final _formKey = GlobalKey<FormState>();
+
+  //Scaffold Key
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   //Text Editing Controllers
   final TextEditingController _emailController = TextEditingController();
@@ -32,6 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
   //Dynamically Changes TextFormField Label Color
   Color _emailLabelColor = ColorConstants.mono75;
   Color _passwordLabelColor = ColorConstants.mono75;
+
+  bool _enableLoginButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +63,18 @@ class _LoginScreenState extends State<LoginScreen> {
         autofocus: false,
         controller: _emailController,
         keyboardType: TextInputType.emailAddress,
-        //validator:(value) { },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your Email");
+          }
+          //RegExp To Check If Email Is Valid
+          if (!RegExp(
+                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+              .hasMatch(value)) {
+            return ("Please Enter A Valid Email");
+          }
+          return null;
+        },
         onSaved: (value) {
           _emailController.text = value!;
         },
@@ -103,6 +123,14 @@ class _LoginScreenState extends State<LoginScreen> {
             borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
             borderRadius: BorderRadius.circular(18),
           ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
         ),
       ),
     );
@@ -117,7 +145,12 @@ class _LoginScreenState extends State<LoginScreen> {
         autofocus: false,
         controller: _passwordController,
         obscureText: !_passwordVisible,
-        //validator:(value) { },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter A Valid Password");
+          }
+          return null;
+        },
         onSaved: (value) {
           _passwordController.text = value!;
         },
@@ -166,6 +199,14 @@ class _LoginScreenState extends State<LoginScreen> {
             borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
             borderRadius: BorderRadius.circular(18),
           ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+            borderRadius: BorderRadius.circular(18),
+          ),
         ),
       ),
     );
@@ -175,7 +216,9 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            _passwordController.clear();
+          },
           child: Text(
             "Forgot Password?",
             style: GoogleFonts.montserrat(
@@ -192,28 +235,48 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
 
+    //Button Enabled Linear Gradient
+    final enabledGradient = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: const [0.0, 0.5, 1.0],
+      colors: [
+        ColorConstants.accent30,
+        ColorConstants.accent50,
+        ColorConstants.accent30,
+      ],
+    );
+
+    //Button Disabled Linear Gradient
+    final disabledGradient = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: const [0.0, 0.5, 1.0],
+      colors: [
+        ColorConstants.mono30,
+        ColorConstants.mono50,
+        ColorConstants.mono30,
+      ],
+    );
+
     //Login Button
     final loginButton = Material(
       elevation: 6,
       borderRadius: BorderRadius.circular(18),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.0, 0.5, 1.0],
-            colors: [
-              ColorConstants.accent30,
-              ColorConstants.accent50,
-              ColorConstants.accent30,
-            ],
-          ),
+          gradient: _enableLoginButton ? enabledGradient : disabledGradient,
           borderRadius: BorderRadius.circular(18),
         ),
         child: MaterialButton(
           height: 54,
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {},
+          onPressed: _enableLoginButton
+              ? () => _login(
+                    _emailController.text,
+                    _passwordController.text,
+                  )
+              : null,
           child: Text(
             "Login",
             textAlign: TextAlign.center,
@@ -245,6 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         GestureDetector(
           onTap: () {
+            _passwordController.clear();
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -268,6 +332,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: ColorConstants.mono05,
       body: Center(
         child: SingleChildScrollView(
@@ -277,6 +342,9 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.all(21),
               child: Form(
                 key: _formKey,
+                onChanged: () => setState(
+                  () => _enableLoginButton = _formKey.currentState!.validate(),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -301,5 +369,75 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  String errorMessage = "";
+
+  //Login Function
+  void _login(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then(
+              (uid) => {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ),
+                ),
+              },
+            );
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "The email address entered is invalid.";
+            break;
+          case "wrong-password":
+            errorMessage = "The password entered is incorrect.";
+            break;
+          case "user-not-found":
+            errorMessage = "A user with this email was not found.";
+            break;
+          case "user-disabled":
+            errorMessage = "The user with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "ERROR: Too many requests.";
+            break;
+          case "operation-not-allowed":
+            errorMessage =
+                "ERROR: Signing in with email and password is disabled.";
+            break;
+          default:
+            errorMessage = "ERROR: Unknown";
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: ColorConstants.mono10,
+            behavior: SnackBarBehavior.floating,
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_outline_rounded,
+                  color: ColorConstants.fail,
+                ),
+                Text(
+                  " $errorMessage",
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 13,
+                      color: ColorConstants.fail,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    }
   }
 }
