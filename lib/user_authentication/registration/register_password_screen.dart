@@ -345,11 +345,36 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
 
   Future<void> createAccount(String password) async {
     if (_formKey.currentState!.validate()) {
-      await _auth
-          .createUserWithEmailAndPassword(
-              email: widget.email, password: password)
-          .then((value) => {sendInfoToFirestore()})
-          .catchError((error) {
+      try {
+        await _auth
+            .createUserWithEmailAndPassword(
+                email: widget.email, password: password)
+            .then((value) => {sendInfoToFirestore()});
+      } on FirebaseAuthException catch (error) {
+        String errorMessage = "";
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "The email address entered is invalid.";
+            break;
+          case "wrong-password":
+            errorMessage = "The password entered is incorrect.";
+            break;
+          case "user-not-found":
+            errorMessage = "A user with this email was not found.";
+            break;
+          case "user-disabled":
+            errorMessage = "The user with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "ERROR: Too many requests.";
+            break;
+          case "operation-not-allowed":
+            errorMessage =
+                "ERROR: Signing in with email and password is disabled.";
+            break;
+          default:
+            errorMessage = "ERROR: Unknown";
+        }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: ColorConstants.mono10,
@@ -362,7 +387,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                   color: ColorConstants.fail,
                 ),
                 Text(
-                  "An Unknown Error Occured. Please Try Again.",
+                  " $errorMessage",
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 13,
@@ -375,7 +400,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
             ),
           ),
         );
-      });
+      }
     }
   }
 
