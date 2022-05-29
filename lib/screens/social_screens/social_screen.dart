@@ -5,21 +5,21 @@ import 'package:sertinary/constants/color_constants.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 
-class TrackerScreen extends StatefulWidget {
+class SocialScreen extends StatefulWidget {
   final String text;
 
-  buttonOneCalled() => _TrackerScreenState().buttonOneCalled();
-  buttonTwoCalled() => _TrackerScreenState().buttonTwoCalled();
-  buttonThreeCalled() => _TrackerScreenState().buttonThreeCalled();
+  buttonOneCalled() => _SocialScreenState().buttonOneCalled();
+  buttonTwoCalled() => _SocialScreenState().buttonTwoCalled();
+  buttonThreeCalled() => _SocialScreenState().buttonThreeCalled();
 
-  const TrackerScreen({Key? key, required this.text}) : super(key: key);
+  const SocialScreen({Key? key, required this.text}) : super(key: key);
 
   @override
-  State<TrackerScreen> createState() => _TrackerScreenState();
+  State<SocialScreen> createState() => _SocialScreenState();
 }
 
-class _TrackerScreenState extends State<TrackerScreen>
-    with AutomaticKeepAliveClientMixin<TrackerScreen> {
+class _SocialScreenState extends State<SocialScreen>
+    with AutomaticKeepAliveClientMixin<SocialScreen> {
   @override
   bool get wantKeepAlive => true;
 
@@ -46,14 +46,14 @@ class _TrackerScreenState extends State<TrackerScreen>
   }
 
   void buttonOneCalled() {
-    log("Button One Method For TrackerScreen Was Called");
+    log("Button One Method For SocialScreen Was Called");
   }
 
   void buttonTwoCalled() {
-    log("Button Two Method For TrackerScreen Was Called");
+    log("Button Two Method For SocialScreen Was Called");
   }
 
   void buttonThreeCalled() {
-    log("Button Three Method For TrackerScreen Was Called");
+    log("Button Three Method For SocialScreen Was Called");
   }
 }
