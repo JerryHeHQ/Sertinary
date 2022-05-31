@@ -19,15 +19,9 @@ class AlarmsScreen extends StatefulWidget {
   State<AlarmsScreen> createState() => _AlarmsScreenState();
 }
 
-class _AlarmsScreenState extends State<AlarmsScreen>
-    with AutomaticKeepAliveClientMixin<AlarmsScreen> {
-  @override
-  bool get wantKeepAlive => true;
-
+class _AlarmsScreenState extends State<AlarmsScreen> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     List<AlarmTemplate> alarmsList = [
       AlarmTemplate(
         TimeOfDay.now(),

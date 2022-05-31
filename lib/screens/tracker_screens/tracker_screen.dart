@@ -18,14 +18,9 @@ class TrackerScreen extends StatefulWidget {
   State<TrackerScreen> createState() => _TrackerScreenState();
 }
 
-class _TrackerScreenState extends State<TrackerScreen>
-    with AutomaticKeepAliveClientMixin<TrackerScreen> {
-  @override
-  bool get wantKeepAlive => true;
-
+class _TrackerScreenState extends State<TrackerScreen> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       body: Container(
         color: ColorConstants.mono10,

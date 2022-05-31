@@ -18,14 +18,9 @@ class SocialScreen extends StatefulWidget {
   State<SocialScreen> createState() => _SocialScreenState();
 }
 
-class _SocialScreenState extends State<SocialScreen>
-    with AutomaticKeepAliveClientMixin<SocialScreen> {
-  @override
-  bool get wantKeepAlive => true;
-
+class _SocialScreenState extends State<SocialScreen> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       body: Container(
         color: ColorConstants.mono10,

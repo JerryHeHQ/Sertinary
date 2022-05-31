@@ -18,14 +18,9 @@ class PlannerScreen extends StatefulWidget {
   State<PlannerScreen> createState() => _PlannerScreenState();
 }
 
-class _PlannerScreenState extends State<PlannerScreen>
-    with AutomaticKeepAliveClientMixin<PlannerScreen> {
-  @override
-  bool get wantKeepAlive => true;
-
+class _PlannerScreenState extends State<PlannerScreen> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       body: Container(
         color: ColorConstants.mono10,

@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen>
     Icons.add_alarm_outlined,
     color: ColorConstants.monoAA,
   );
-  //---Alarms Change Background
+  //---Alarms Change Theme
   final alarmsSubButtonThreeIcon = Icon(
     Icons.add_photo_alternate_outlined,
     color: ColorConstants.monoAA,
