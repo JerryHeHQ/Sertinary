@@ -1,11 +1,12 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:core';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:sertinary/routes/router.gr.dart';
 import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'register_password_screen.dart';
 
 class RegisterEmailScreen extends StatefulWidget {
   final String username;
@@ -45,7 +46,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
         ),
         color: ColorConstants.mono05,
         onPressed: () {
-          Navigator.of(context).pop();
+          AutoRouter.of(context).pop();
         },
       ),
     );
@@ -344,14 +345,9 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
 
   void buttonPressResult(int length) {
     if (length == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RegisterPasswordScreen(
-            username: widget.username,
-            email: _emailController.text,
-          ),
-        ),
+      AutoRouter.of(context).push(
+        RegisterPasswordRoute(
+            username: widget.username, email: _emailController.text),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

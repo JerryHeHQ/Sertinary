@@ -1,6 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:sertinary/routes/router.gr.dart';
 import 'package:sertinary/user_authentication/registration/user_template.dart';
 import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,7 +56,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
         ),
         color: ColorConstants.mono05,
         onPressed: () {
-          Navigator.of(context).pop();
+          AutoRouter.of(context).pop();
         },
       ),
     );
@@ -423,11 +425,6 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
   }
 
   void goToRegisterVerifyScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const RegisterVerifyScreen(),
-      ),
-    );
+    AutoRouter.of(context).push(const RegisterVerifyRoute());
   }
 }

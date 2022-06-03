@@ -1,9 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:sertinary/routes/router.gr.dart';
 import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'register_email_screen.dart';
 
 class RegisterUsernameScreen extends StatefulWidget {
   const RegisterUsernameScreen({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
         ),
         color: ColorConstants.mono05,
         onPressed: () {
-          Navigator.of(context).pop();
+          AutoRouter.of(context).pop();
         },
       ),
     );
@@ -204,13 +205,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           child: MaterialButton(
             height: 54,
             onPressed: _enableNextButton
-                ? () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RegisterEmailScreen(
-                          username: _usernameController.text,
-                        ),
-                      ),
+                ? () => AutoRouter.of(context).push(
+                      RegisterEmailRoute(username: _usernameController.text),
                     )
                 : null,
             child: Row(

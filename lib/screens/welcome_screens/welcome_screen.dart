@@ -26,18 +26,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: Container(
-        color: ColorConstants.mono10,
-        child: Center(
-          child: Text(
-            widget.text,
-            style: GoogleFonts.montserrat(
-              textStyle: TextStyle(
-                color: ColorConstants.mono90,
-                fontSize: 60,
-                fontWeight: FontWeight.w600,
-              ),
+    return Container(
+      color: ColorConstants.mono10,
+      child: Center(
+        child: Text(
+          widget.text,
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              color: ColorConstants.mono90,
+              fontSize: 60,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

@@ -1,6 +1,8 @@
 // ignore_for_file: unused_import, depend_on_referenced_packages
 
+import 'dart:developer';
 import 'dart:ffi';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +11,7 @@ import 'package:sertinary/user_authentication/registration/register_username_scr
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../../screens/home_screen.dart';
+import 'package:sertinary/routes/router.gr.dart';
 
 bool _passwordVisible = false;
 
@@ -220,12 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
         GestureDetector(
           onTap: () {
             _passwordController.clear();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ForgotPasswordScreen(),
-              ),
-            );
+            AutoRouter.of(context).push(const ForgotPasswordRoute());
           },
           child: Text(
             "Forgot Password?",
@@ -317,11 +315,8 @@ class _LoginScreenState extends State<LoginScreen> {
         GestureDetector(
           onTap: () {
             _passwordController.clear();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RegisterUsernameScreen(),
-              ),
+            AutoRouter.of(context).push(
+              const RegisterRoute(),
             );
           },
           child: Text(
@@ -387,10 +382,8 @@ class _LoginScreenState extends State<LoginScreen> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then(
               (uid) => {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
-                  ),
+                AutoRouter.of(context).push(
+                  const HomeRoute(),
                 ),
               },
             );

@@ -37,119 +37,116 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
       ),
     ];
 
-    return Scaffold(
-      body: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/TempBackground.png'),
-                fit: BoxFit.cover,
-              ),
+    return Stack(
+      alignment: Alignment.topCenter,
+      children: <Widget>[
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/TempBackground.png'),
+              fit: BoxFit.cover,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(12, 15, 12, 0),
-            child: ListView.separated(
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  height: 15,
-                );
-              },
-              physics: const AlwaysScrollableScrollPhysics(
-                parent: BouncingScrollPhysics(),
-              ),
-              itemCount: alarmsList.length,
-              itemBuilder: (context, index) {
-                return GlassBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 150,
-                  blur: 3,
-                  borderRadius: 18,
-                  borderColor: Colors.black.withOpacity(0.09),
-                  borderWidth: 1.5,
-                  gradientColors: [
-                    Colors.black.withOpacity(0.42),
-                    Colors.black.withOpacity(0.27),
-                  ],
-                  gradientBegin: Alignment.topRight,
-                  gradientEnd: Alignment.bottomLeft,
-                  padding: const EdgeInsets.fromLTRB(12, 0, 6, 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.label,
+        ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(12, 15, 12, 0),
+          child: ListView.separated(
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(
+                height: 15,
+              );
+            },
+            physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics(),
+            ),
+            itemCount: alarmsList.length,
+            itemBuilder: (context, index) {
+              return GlassBox(
+                width: MediaQuery.of(context).size.width,
+                height: 150,
+                blur: 3,
+                borderRadius: 18,
+                borderColor: Colors.black.withOpacity(0.09),
+                borderWidth: 1.5,
+                gradientColors: [
+                  Colors.black.withOpacity(0.42),
+                  Colors.black.withOpacity(0.27),
+                ],
+                gradientBegin: Alignment.topRight,
+                gradientEnd: Alignment.bottomLeft,
+                padding: const EdgeInsets.fromLTRB(12, 0, 6, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.label,
+                              color: ColorConstants.accent50,
+                              size: 24,
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            Text(
+                              alarmsList[index].description,
+                              style: GoogleFonts.montserrat(
                                 color: ColorConstants.accent50,
-                                size: 24,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 21,
                               ),
-                              const SizedBox(
-                                width: 6,
-                              ),
-                              Text(
-                                alarmsList[index].description,
-                                style: GoogleFonts.montserrat(
-                                  color: ColorConstants.accent50,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 21,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Switch(
-                            onChanged: (bool value) {
-                              setState(() {});
-                            },
-                            value: alarmsList[index].isActive,
-                            activeColor: ColorConstants.accent50,
-                            inactiveThumbColor: ColorConstants.accent50,
-                          ),
-                        ],
-                      ),
-                      Text(
-                        alarmsList[index].alarmTimeOfDay.format(context),
-                        style: GoogleFonts.montserrat(
-                          color: ColorConstants.accent50,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 24,
+                            ),
+                          ],
                         ),
+                        Switch(
+                          onChanged: (bool value) {
+                            setState(() {});
+                          },
+                          value: alarmsList[index].isActive,
+                          activeColor: ColorConstants.accent50,
+                          inactiveThumbColor: ColorConstants.accent50,
+                        ),
+                      ],
+                    ),
+                    Text(
+                      alarmsList[index].alarmTimeOfDay.format(context),
+                      style: GoogleFonts.montserrat(
+                        color: ColorConstants.accent50,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            formatDaysOfTheWeek(
-                                alarmsList[index].daysOfTheWeek),
-                            style: GoogleFonts.montserrat(
-                              color: ColorConstants.accent50,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 18,
-                            ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          formatDaysOfTheWeek(alarmsList[index].daysOfTheWeek),
+                          style: GoogleFonts.montserrat(
+                            color: ColorConstants.accent50,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 18,
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.settings,
-                              color: ColorConstants.accent50,
-                            ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.settings,
+                            color: ColorConstants.accent50,
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

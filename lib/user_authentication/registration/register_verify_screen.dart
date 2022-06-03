@@ -1,7 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:sertinary/user_authentication/login/login_screen.dart';
+import 'package:sertinary/routes/router.gr.dart';
 import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -123,11 +124,10 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
           child: MaterialButton(
             height: 54,
             onPressed: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ),
-                (Route<dynamic> route) => false,
+              AutoRouter.of(context).replaceAll(
+                [
+                  const LoginRoute(),
+                ],
               );
             },
             child: Row(
