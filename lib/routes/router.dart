@@ -16,6 +16,7 @@ import 'package:sertinary/screens/tracker_screens/tracker_add.dart';
 import 'package:sertinary/screens/tracker_screens/tracker_change_date.dart';
 import 'package:sertinary/screens/tracker_screens/tracker_overview.dart';
 import 'package:sertinary/screens/tracker_screens/tracker_screen.dart';
+import 'package:sertinary/screens/welcome_screens/welcome_screen.dart';
 import 'package:sertinary/user_authentication/forgot_password/forgot_password_screen.dart';
 import 'package:sertinary/user_authentication/login/login_screen.dart';
 import 'package:sertinary/user_authentication/registration/register_email_screen.dart';
@@ -74,6 +75,12 @@ import 'package:sertinary/user_authentication/registration/register_verify_scree
       name: 'HomeRoute',
       page: HomeScreen,
       children: [
+        //Welcome
+        AutoRoute(
+          path: 'welcome',
+          name: 'WelcomeRouter',
+          page: WelcomeScreen,
+        ),
         //Alarms
         AutoRoute(
           path: 'alarms',

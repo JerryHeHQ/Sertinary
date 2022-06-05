@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sertinary/routes/router.gr.dart';
 
+//Global Variable So All Home Page Screens Can Properly React To Sub Button Presses
+ValueNotifier<bool> subButtonsActive = ValueNotifier<bool>(false);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

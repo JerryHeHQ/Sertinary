@@ -6,13 +6,11 @@ import 'package:sertinary/constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  final String text;
-
   buttonOneCalled() => _WelcomeScreenState().buttonOneCalled();
   buttonTwoCalled() => _WelcomeScreenState().buttonTwoCalled();
   buttonThreeCalled() => _WelcomeScreenState().buttonThreeCalled();
 
-  const WelcomeScreen({Key? key, required this.text}) : super(key: key);
+  const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -30,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       color: ColorConstants.mono10,
       child: Center(
         child: Text(
-          widget.text,
+          'Welcome',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               color: ColorConstants.mono90,

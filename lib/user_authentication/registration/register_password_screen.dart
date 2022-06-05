@@ -8,7 +8,6 @@ import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'register_verify_screen.dart';
 
 bool _passwordVisible = false;
 

@@ -1,18 +1,13 @@
-import 'dart:developer';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/routes/router.gr.dart';
+import 'package:sertinary/widgets/bottom_navigation_bar/sub_buttons.dart';
 
 class PlannerScreen extends StatefulWidget {
-  final String text;
-
-  buttonOneCalled() => _PlannerScreenState().buttonOneCalled();
-  buttonTwoCalled() => _PlannerScreenState().buttonTwoCalled();
-  buttonThreeCalled() => _PlannerScreenState().buttonThreeCalled();
-
-  const PlannerScreen({Key? key, required this.text}) : super(key: key);
+  const PlannerScreen({Key? key}) : super(key: key);
 
   @override
   State<PlannerScreen> createState() => _PlannerScreenState();
@@ -21,32 +16,41 @@ class PlannerScreen extends StatefulWidget {
 class _PlannerScreenState extends State<PlannerScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: ColorConstants.mono10,
-      child: Center(
-        child: Text(
-          widget.text,
-          style: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              color: ColorConstants.mono90,
-              fontSize: 60,
-              fontWeight: FontWeight.w600,
+    return Stack(
+      clipBehavior: Clip.none,
+      alignment: Alignment.topCenter,
+      children: <Widget>[
+        Container(
+          color: ColorConstants.mono10,
+          child: Center(
+            child: Text(
+              'Planner',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  color: ColorConstants.mono90,
+                  fontSize: 60,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        SubButtonLeft(onPressed: () => leftSubButton()),
+        SubButtonCenter(onPressed: () => centerSubButton()),
+        SubButtonRight(onPressed: () => rightSubButton()),
+      ],
     );
   }
 
-  void buttonOneCalled() {
-    log("Button One Method For PlannerScreen Was Called");
+  void leftSubButton() {
+    AutoRouter.of(context).push(const PlannerWorkRythmnRouter());
   }
 
-  void buttonTwoCalled() {
-    log("Button Two Method For PlannerScreen Was Called");
+  void centerSubButton() {
+    AutoRouter.of(context).push(const PlannerAddRouter());
   }
 
-  void buttonThreeCalled() {
-    log("Button Three Method For PlannerScreen Was Called");
+  void rightSubButton() {
+    AutoRouter.of(context).push(const PlannerChangeDateRouter());
   }
 }

@@ -1,25 +1,24 @@
 // ignore_for_file: depend_on_referenced_packages
+import 'package:auto_route/auto_route.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/routes/router.gr.dart';
+import 'package:sertinary/widgets/bottom_navigation_bar/sub_buttons.dart';
 import 'package:sertinary/widgets/glass_box.dart';
 import 'alarm_template.dart';
+import 'package:sertinary/common_functions.dart';
 
 class AlarmsScreen extends StatefulWidget {
-  final String text;
-
-  buttonOneCalled() => _AlarmsScreenState().buttonOneCalled();
-  buttonTwoCalled() => _AlarmsScreenState().buttonTwoCalled();
-  buttonThreeCalled() => _AlarmsScreenState().buttonThreeCalled();
-
-  const AlarmsScreen({Key? key, required this.text}) : super(key: key);
+  const AlarmsScreen({Key? key}) : super(key: key);
 
   @override
   State<AlarmsScreen> createState() => _AlarmsScreenState();
 }
 
 class _AlarmsScreenState extends State<AlarmsScreen> {
+  CommonFunctions commonFunctions = CommonFunctions();
+
   @override
   Widget build(BuildContext context) {
     List<AlarmTemplate> alarmsList = [
@@ -38,6 +37,7 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
     ];
 
     return Stack(
+      clipBehavior: Clip.none,
       alignment: Alignment.topCenter,
       children: <Widget>[
         Container(
@@ -146,20 +146,23 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
             },
           ),
         ),
+        SubButtonLeft(onPressed: () => leftSubButton()),
+        SubButtonCenter(onPressed: () => centerSubButton()),
+        SubButtonRight(onPressed: () => rightSubButton()),
       ],
     );
   }
 
-  void buttonOneCalled() {
-    log("Button One Method For AlarmsScreen Was Called");
+  void leftSubButton() {
+    AutoRouter.of(context).push(const AlarmsCalculatorRouter());
   }
 
-  void buttonTwoCalled() {
-    log("Button Two Method For AlarmsScreen Was Called");
+  void centerSubButton() {
+    AutoRouter.of(context).push(const AlarmsAddRouter());
   }
 
-  void buttonThreeCalled() {
-    log("Button Three Method For AlarmsScreen Was Called");
+  void rightSubButton() {
+    AutoRouter.of(context).push(const AlarmsChangeThemeRouter());
   }
 
   List<String> daysOfTheWeekString = [

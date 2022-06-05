@@ -1,18 +1,13 @@
-import 'dart:developer';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sertinary/constants/color_constants.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/routes/router.gr.dart';
+import 'package:sertinary/widgets/bottom_navigation_bar/sub_buttons.dart';
 
 class SocialScreen extends StatefulWidget {
-  final String text;
-
-  buttonOneCalled() => _SocialScreenState().buttonOneCalled();
-  buttonTwoCalled() => _SocialScreenState().buttonTwoCalled();
-  buttonThreeCalled() => _SocialScreenState().buttonThreeCalled();
-
-  const SocialScreen({Key? key, required this.text}) : super(key: key);
+  const SocialScreen({Key? key}) : super(key: key);
 
   @override
   State<SocialScreen> createState() => _SocialScreenState();
@@ -21,32 +16,41 @@ class SocialScreen extends StatefulWidget {
 class _SocialScreenState extends State<SocialScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: ColorConstants.mono10,
-      child: Center(
-        child: Text(
-          widget.text,
-          style: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              color: ColorConstants.mono90,
-              fontSize: 60,
-              fontWeight: FontWeight.w600,
+    return Stack(
+      clipBehavior: Clip.none,
+      alignment: Alignment.topCenter,
+      children: <Widget>[
+        Container(
+          color: ColorConstants.mono10,
+          child: Center(
+            child: Text(
+              'Social',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  color: ColorConstants.mono90,
+                  fontSize: 60,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        SubButtonLeft(onPressed: () => leftSubButton()),
+        SubButtonCenter(onPressed: () => centerSubButton()),
+        SubButtonRight(onPressed: () => rightSubButton()),
+      ],
     );
   }
 
-  void buttonOneCalled() {
-    log("Button One Method For SocialScreen Was Called");
+  void leftSubButton() {
+    AutoRouter.of(context).push(const SocialSavedRouter());
   }
 
-  void buttonTwoCalled() {
-    log("Button Two Method For SocialScreen Was Called");
+  void centerSubButton() {
+    AutoRouter.of(context).push(const SocialAddRouter());
   }
 
-  void buttonThreeCalled() {
-    log("Button Three Method For SocialScreen Was Called");
+  void rightSubButton() {
+    AutoRouter.of(context).push(const SocialProfileRouter());
   }
 }
