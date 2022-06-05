@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
-import 'gnav.dart';
 
 import 'button.dart';
+import 'gnav.dart';
 
 class GButton extends StatefulWidget {
   final bool? active;

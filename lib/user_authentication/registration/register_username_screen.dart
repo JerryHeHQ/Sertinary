@@ -1,10 +1,8 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:sertinary/routes/router.gr.dart';
-import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/routes/router.gr.dart';
 
 class RegisterUsernameScreen extends StatefulWidget {
   const RegisterUsernameScreen({Key? key}) : super(key: key);
@@ -51,7 +49,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Hey there!\nLet's get you started!",
+            'Hey there!\nLet\'s get you started!',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 33,
@@ -69,7 +67,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(
-          "What would you like us\nto call you?",
+          'What would you like us\nto call you?',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 21,
@@ -95,13 +93,13 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           keyboardType: TextInputType.name,
           validator: (value) {
             if (value!.isEmpty) {
-              return ("Please Enter Your Preferred Username");
+              return ('Please Enter Your Preferred Username');
             }
             if (!RegExp(r'^[A-Za-z]').hasMatch(value)) {
-              return ("The First Character Must Be A Letter");
+              return ('The First Character Must Be A Letter');
             }
             if (!RegExp(r'^.{3,}$').hasMatch(value)) {
-              return ("Your Username Must Be At Least 3 Characters Long");
+              return ('Your Username Must Be At Least 3 Characters Long');
             }
             return null;
           },
@@ -137,7 +135,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
               },
             ),
             contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-            labelText: "Username",
+            labelText: 'Username',
             labelStyle: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 16,
@@ -215,7 +213,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
               children: <Widget>[
                 const SizedBox(width: 15),
                 Text(
-                  "Next",
+                  'Next',
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 18,

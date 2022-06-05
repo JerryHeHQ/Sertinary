@@ -1,12 +1,11 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'dart:core';
+
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:sertinary/routes/router.gr.dart';
-import '../../constants/color_constants.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/routes/router.gr.dart';
 
 class RegisterEmailScreen extends StatefulWidget {
   final String username;
@@ -58,7 +57,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Nice to meet you\n${widget.username}!",
+            'Nice to meet you\n${widget.username}!',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 33,
@@ -76,7 +75,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Enter your email to start\ncreating your account.",
+          'Enter your email to start\ncreating your account.',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 21,
@@ -100,13 +99,13 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
           if (value!.isEmpty) {
-            return ("Please Enter Your Email");
+            return ('Please Enter Your Email');
           }
           //RegExp To Check If Email Is Valid
           if (!RegExp(
                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
               .hasMatch(value)) {
-            return ("Please Enter A Valid Email");
+            return ('Please Enter A Valid Email');
           }
           return null;
         },
@@ -142,7 +141,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
             },
           ),
           contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Email",
+          labelText: 'Email',
           labelStyle: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 16,
@@ -216,7 +215,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
               children: <Widget>[
                 const SizedBox(width: 15),
                 Text(
-                  "Next",
+                  'Next',
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 18,
@@ -362,7 +361,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                 color: ColorConstants.fail,
               ),
               Text(
-                " Email Already Exists",
+                ' Email Already Exists',
                 style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
                     fontSize: 13,

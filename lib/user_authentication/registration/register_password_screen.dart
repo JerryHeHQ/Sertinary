@@ -1,13 +1,11 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/constants/color_constants.dart';
 import 'package:sertinary/routes/router.gr.dart';
 import 'package:sertinary/user_authentication/registration/user_template.dart';
-import '../../constants/color_constants.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 bool _passwordVisible = false;
 
@@ -67,7 +65,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            "\nSecurity Time!",
+            '\nSecurity Time!',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 33,
@@ -85,7 +83,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Enter the password\nyou would like to use.",
+          'Enter the password\nyou would like to use.',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 21,
@@ -110,10 +108,10 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
         keyboardType: TextInputType.name,
         validator: (value) {
           if (value!.isEmpty) {
-            return ("Please Enter A Password");
+            return ('Please Enter A Password');
           }
           if (!RegExp(r'^.{6,}$').hasMatch(value)) {
-            return ("Your Password Must Be At Least 6 Characters Long");
+            return ('Your Password Must Be At Least 6 Characters Long');
           }
           return null;
         },
@@ -149,7 +147,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
             },
           ),
           contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Password",
+          labelText: 'Password',
           labelStyle: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 16,
@@ -224,7 +222,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
               children: <Widget>[
                 const SizedBox(width: 15),
                 Text(
-                  "Create Account",
+                  'Create Account',
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 18,
@@ -352,29 +350,29 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                 email: widget.email, password: password)
             .then((value) => {sendInfoToFirestore()});
       } on FirebaseAuthException catch (error) {
-        String errorMessage = "";
+        String errorMessage = '';
         switch (error.code) {
-          case "invalid-email":
-            errorMessage = "The email address entered is invalid.";
+          case 'invalid-email':
+            errorMessage = 'The email address entered is invalid.';
             break;
-          case "wrong-password":
-            errorMessage = "The password entered is incorrect.";
+          case 'wrong-password':
+            errorMessage = 'The password entered is incorrect.';
             break;
-          case "user-not-found":
-            errorMessage = "A user with this email was not found.";
+          case 'user-not-found':
+            errorMessage = 'A user with this email was not found.';
             break;
-          case "user-disabled":
-            errorMessage = "The user with this email has been disabled.";
+          case 'user-disabled':
+            errorMessage = 'The user with this email has been disabled.';
             break;
-          case "too-many-requests":
-            errorMessage = "ERROR: Too many requests.";
+          case 'too-many-requests':
+            errorMessage = 'ERROR: Too many requests.';
             break;
-          case "operation-not-allowed":
+          case 'operation-not-allowed':
             errorMessage =
-                "ERROR: Signing in with email and password is disabled.";
+                'ERROR: Signing in with email and password is disabled.';
             break;
           default:
-            errorMessage = "ERROR: Unknown";
+            errorMessage = 'ERROR: Unknown';
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -388,7 +386,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
                   color: ColorConstants.fail,
                 ),
                 Text(
-                  " $errorMessage",
+                  ' $errorMessage',
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 13,
@@ -416,7 +414,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
     userTemplate.email = user.email;
 
     await firebaseFirestore
-        .collection("users")
+        .collection('users')
         .doc(user.uid)
         .set(userTemplate.toMap());
 

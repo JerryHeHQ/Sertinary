@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:sertinary/constants/color_constants.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/constants/color_constants.dart';
 
 class AlarmsCalculator extends StatefulWidget {
   const AlarmsCalculator({Key? key}) : super(key: key);

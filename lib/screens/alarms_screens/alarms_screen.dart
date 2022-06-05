@@ -1,13 +1,13 @@
-// ignore_for_file: depend_on_referenced_packages
 import 'package:auto_route/auto_route.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/common_functions.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import 'package:sertinary/routes/router.gr.dart';
 import 'package:sertinary/widgets/bottom_navigation_bar/sub_buttons.dart';
 import 'package:sertinary/widgets/glass_box.dart';
+
 import 'alarm_template.dart';
-import 'package:sertinary/common_functions.dart';
 
 class AlarmsScreen extends StatefulWidget {
   const AlarmsScreen({Key? key}) : super(key: key);
@@ -24,13 +24,13 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
     List<AlarmTemplate> alarmsList = [
       AlarmTemplate(
         TimeOfDay.now(),
-        description: "Wake Up",
+        description: 'Wake Up',
         isActive: true,
         daysOfTheWeek: [true, true, true, true, true, true, true],
       ),
       AlarmTemplate(
         TimeOfDay.now(),
-        description: "Get Ready",
+        description: 'Get Ready',
         isActive: true,
         daysOfTheWeek: [true, true, true, true, true, true, true],
       ),
@@ -166,18 +166,18 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
   }
 
   List<String> daysOfTheWeekString = [
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-    "Sun",
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+    'Sun',
   ];
 
   String formatDaysOfTheWeek(List<bool> days) {
     if (days.length != 7) {
-      return "Error: Incorrect Number Of Days";
+      return 'Error: Incorrect Number Of Days';
     }
 
     if (days[0] == true &&
@@ -187,7 +187,7 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
         days[4] == true &&
         days[5] == true &&
         days[6] == true) {
-      return "Everyday";
+      return 'Everyday';
     }
 
     if (days[0] == true &&
@@ -197,7 +197,7 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
         days[4] == true &&
         days[5] == false &&
         days[6] == false) {
-      return "Weekdays";
+      return 'Weekdays';
     }
 
     if (days[0] == false &&
@@ -207,7 +207,7 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
         days[4] == false &&
         days[5] == true &&
         days[6] == true) {
-      return "Weekends";
+      return 'Weekends';
     }
 
     if (days[0] == false &&
@@ -217,18 +217,18 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
         days[4] == false &&
         days[5] == false &&
         days[6] == false) {
-      return "No Days";
+      return 'No Days';
     }
 
     bool isFirst = true;
-    String holder = "";
+    String holder = '';
     for (int day = 0; day < 7; day++) {
       if (days[day] == true) {
         if (isFirst) {
           holder += daysOfTheWeekString[day];
           isFirst = false;
         } else {
-          holder += ", ${daysOfTheWeekString[day]}";
+          holder += ', ${daysOfTheWeekString[day]}';
         }
       }
     }

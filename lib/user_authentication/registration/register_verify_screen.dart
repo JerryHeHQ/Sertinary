@@ -1,10 +1,8 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:sertinary/routes/router.gr.dart';
-import '../../constants/color_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/routes/router.gr.dart';
 
 class RegisterVerifyScreen extends StatefulWidget {
   const RegisterVerifyScreen({Key? key}) : super(key: key);
@@ -32,7 +30,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                 color: ColorConstants.success,
               ),
               Text(
-                " Account Creation Success!",
+                ' Account Creation Success!',
                 style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
                     fontSize: 13,
@@ -54,7 +52,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            "\nJust one last step!",
+            '\nJust one last step!',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 33,
@@ -72,7 +70,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Your account has been created!",
+          'Your account has been created!',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 21,
@@ -89,7 +87,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Please check your email\nfor a verification link\nand we'll get you started.",
+          'Please check your email\nfor a verification link\nand we\'ll get you started.',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 18,
@@ -136,7 +134,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
               children: <Widget>[
                 const SizedBox(width: 15),
                 Text(
-                  "Login Screen",
+                  'Login Screen',
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 18,

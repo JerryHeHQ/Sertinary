@@ -1,17 +1,15 @@
-// ignore: unused_import
-import 'dart:developer';
+import 'dart:async';
+
+import 'package:animate_icons/animate_icons.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/common_functions.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import 'package:sertinary/main.dart';
 import 'package:sertinary/routes/router.gr.dart';
-import 'package:sertinary/common_functions.dart';
-import 'package:sertinary/widgets/bottom_navigation_bar/gnav.dart';
 import 'package:sertinary/widgets/bottom_navigation_bar/gbutton.dart';
-// ignore: depend_on_referenced_packages
-import 'package:google_fonts/google_fonts.dart';
-import 'package:animate_icons/animate_icons.dart';
-import 'dart:async';
+import 'package:sertinary/widgets/bottom_navigation_bar/gnav.dart';
 import 'package:sertinary/widgets/floating_action_button/circular_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -185,10 +183,8 @@ class _HomeScreenState extends State<HomeScreen>
         if (subButtonAnimationController.isCompleted &&
             fabIconAnimationController.isEnd()) {
           subButtonsActive.value = true;
-          log('true');
         } else {
           subButtonsActive.value = false;
-          log('false');
         }
       },
     );
@@ -224,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen>
             children: <Widget>[
               //Screens
               child,
-              //"Floating Action Button" (Same Function But Not Same Widget) & SubButtons
+              //'Floating Action Button' (Same Function But Not Same Widget) & SubButtons
               Positioned(
                 bottom: 27,
                 child: Stack(

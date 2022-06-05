@@ -1,11 +1,10 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'dart:core';
+
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import '../../constants/color_constants.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/constants/color_constants.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -55,7 +54,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            "No worries.\nWe got you covered.",
+            'No worries.\nWe got you covered.',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 33,
@@ -73,7 +72,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Enter your email to begin\nresetting your password.",
+          'Enter your email to begin\nresetting your password.',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 21,
@@ -97,13 +96,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
           if (value!.isEmpty) {
-            return ("Please Enter Your Email");
+            return ('Please Enter Your Email');
           }
           //RegExp To Check If Email Is Valid
           if (!RegExp(
                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
               .hasMatch(value)) {
-            return ("Please Enter A Valid Email");
+            return ('Please Enter A Valid Email');
           }
           return null;
         },
@@ -139,7 +138,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             },
           ),
           contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Email",
+          labelText: 'Email',
           labelStyle: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 16,
@@ -213,7 +212,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               children: <Widget>[
                 const SizedBox(width: 15),
                 Text(
-                  "Next",
+                  'Next',
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 18,
@@ -319,36 +318,36 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       try {
         _auth.sendPasswordResetEmail(email: email);
       } on FirebaseAuthException catch (error) {
-        String errorMessage = "";
+        String errorMessage = '';
         switch (error.code) {
-          case "invalid-email":
-            errorMessage = "The email address entered is invalid.";
+          case 'invalid-email':
+            errorMessage = 'The email address entered is invalid.';
             break;
-          case "wrong-password":
-            errorMessage = "The password entered is incorrect.";
+          case 'wrong-password':
+            errorMessage = 'The password entered is incorrect.';
             break;
-          case "user-not-found":
-            errorMessage = "A user with this email was not found.";
+          case 'user-not-found':
+            errorMessage = 'A user with this email was not found.';
             break;
-          case "user-disabled":
-            errorMessage = "The user with this email has been disabled.";
+          case 'user-disabled':
+            errorMessage = 'The user with this email has been disabled.';
             break;
-          case "too-many-requests":
-            errorMessage = "ERROR: Too many requests.";
+          case 'too-many-requests':
+            errorMessage = 'ERROR: Too many requests.';
             break;
-          case "operation-not-allowed":
+          case 'operation-not-allowed':
             errorMessage =
-                "ERROR: Signing in with email and password is disabled.";
+                'ERROR: Signing in with email and password is disabled.';
             break;
           default:
-            errorMessage = "ERROR: Unknown";
+            errorMessage = 'ERROR: Unknown';
         }
         failSnackBar(errorMessage); //Send Fail Message
         return; //Get Out Of Method
       }
       successSnackBar(); //Send Success Message
     } else {
-      String errorMessage = "User Does Not Exist";
+      String errorMessage = 'User Does Not Exist';
       failSnackBar(errorMessage); //Send User Does Not Exist Message
     }
   }
@@ -366,7 +365,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               color: ColorConstants.fail,
             ),
             Text(
-              " $errorMessage",
+              ' $errorMessage',
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(
                   fontSize: 13,
@@ -394,7 +393,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               color: ColorConstants.success,
             ),
             Text(
-              " A Password Reset Link Has Been Sent",
+              ' A Password Reset Link Has Been Sent',
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(
                   fontSize: 13,

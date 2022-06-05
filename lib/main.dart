@@ -1,7 +1,5 @@
-// ignore_for_file: depend_on_referenced_packages
-
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:sertinary/routes/router.gr.dart';
 
 //Global Variable So All Home Page Screens Can Properly React To Sub Button Presses

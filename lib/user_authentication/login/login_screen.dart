@@ -1,16 +1,8 @@
-// ignore_for_file: unused_import, depend_on_referenced_packages
-
-import 'dart:developer';
-import 'dart:ffi';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:sertinary/constants/color_constants.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sertinary/user_authentication/forgot_password/forgot_password_screen.dart';
-import 'package:sertinary/user_authentication/registration/register_username_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import '../../screens/home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sertinary/constants/color_constants.dart';
 import 'package:sertinary/routes/router.gr.dart';
 
 bool _passwordVisible = false;
@@ -53,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final sertinaryLogo = SizedBox(
       height: 200,
       child: Image.asset(
-        "assets/images/SertinaryLogo.png",
+        'assets/images/SertinaryLogo.png',
         fit: BoxFit.contain,
       ),
     );
@@ -70,13 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
           if (value!.isEmpty) {
-            return ("Please Enter Your Email");
+            return ('Please Enter Your Email');
           }
           //RegExp To Check If Email Is Valid
           if (!RegExp(
                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
               .hasMatch(value)) {
-            return ("Please Enter A Valid Email");
+            return ('Please Enter A Valid Email');
           }
           return null;
         },
@@ -112,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Email",
+          labelText: 'Email',
           labelStyle: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 16,
@@ -152,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
         obscureText: !_passwordVisible,
         validator: (value) {
           if (value!.isEmpty) {
-            return ("Please Enter A Valid Password");
+            return ('Please Enter A Valid Password');
           }
           return null;
         },
@@ -188,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: "Password",
+          labelText: 'Password',
           labelStyle: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 16,
@@ -226,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
             AutoRouter.of(context).push(const ForgotPasswordRoute());
           },
           child: Text(
-            "Forgot Password?",
+            'Forgot Password?',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 13,
@@ -284,7 +276,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
               : null,
           child: Text(
-            "Login",
+            'Login',
             textAlign: TextAlign.center,
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
@@ -303,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          "Don't have an account? ",
+          'Don\'t have an account? ',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(
               fontSize: 13,
@@ -320,7 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
           child: Text(
-            "Sign Up",
+            'Sign Up',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                 fontSize: 13,
@@ -388,29 +380,29 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             );
       } on FirebaseAuthException catch (error) {
-        String errorMessage = "";
+        String errorMessage = '';
         switch (error.code) {
-          case "invalid-email":
-            errorMessage = "The email address entered is invalid.";
+          case 'invalid-email':
+            errorMessage = 'The email address entered is invalid.';
             break;
-          case "wrong-password":
-            errorMessage = "The password entered is incorrect.";
+          case 'wrong-password':
+            errorMessage = 'The password entered is incorrect.';
             break;
-          case "user-not-found":
-            errorMessage = "A user with this email was not found.";
+          case 'user-not-found':
+            errorMessage = 'A user with this email was not found.';
             break;
-          case "user-disabled":
-            errorMessage = "The user with this email has been disabled.";
+          case 'user-disabled':
+            errorMessage = 'The user with this email has been disabled.';
             break;
-          case "too-many-requests":
-            errorMessage = "ERROR: Too many requests.";
+          case 'too-many-requests':
+            errorMessage = 'ERROR: Too many requests.';
             break;
-          case "operation-not-allowed":
+          case 'operation-not-allowed':
             errorMessage =
-                "ERROR: Signing in with email and password is disabled.";
+                'ERROR: Signing in with email and password is disabled.';
             break;
           default:
-            errorMessage = "ERROR: Unknown";
+            errorMessage = 'ERROR: Unknown';
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -424,7 +416,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: ColorConstants.fail,
                 ),
                 Text(
-                  " $errorMessage",
+                  ' $errorMessage',
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 13,
