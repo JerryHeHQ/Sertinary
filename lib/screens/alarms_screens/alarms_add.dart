@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,9 +42,15 @@ class _AlarmsAddState extends State<AlarmsAdd> {
   late FixedExtentScrollController _minuteController;
   late FixedExtentScrollController _ampmController;
 
+  late FirebaseFirestore firebaseFirestore;
+  User? user;
+
   @override
   void initState() {
     super.initState();
+
+    firebaseFirestore = FirebaseFirestore.instance;
+    user = FirebaseAuth.instance.currentUser;
 
     _hourController = FixedExtentScrollController();
     _minuteController = FixedExtentScrollController();
@@ -486,12 +494,21 @@ class _AlarmsAddState extends State<AlarmsAdd> {
     );
   }
 
-  addAlarm() async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = FirebaseAuth.instance.currentUser;
+  getData() async {
+    final docRef =
+        firebaseFirestore.collection('users').doc(user?.uid.toString());
+    docRef.get().then(
+      (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        return data['nextAlarmID'];
+      },
+      onError: (e) => log('Error getting document: $e'),
+    );
+  }
 
-    int hour = _hourController.selectedItem % 12 + 1;
-    int min = _minuteController.selectedItem % 60;
+  addAlarm() async {
+    double hour = _hourController.selectedItem % 12 + 1;
+    double min = _minuteController.selectedItem % 60;
     bool am = _ampmController.selectedItem == 0;
 
     if (!am) {
@@ -500,7 +517,10 @@ class _AlarmsAddState extends State<AlarmsAdd> {
 
     List<bool> daysOfTheWeek = [mon, tue, wed, thu, fri, sat, sun];
 
+    double nextAlarmID = await getData();
+
     AlarmTemplate alarm = AlarmTemplate(
+      id: nextAlarmID,
       hour: hour,
       min: min,
       description: _descriptionController.text,
@@ -511,8 +531,15 @@ class _AlarmsAddState extends State<AlarmsAdd> {
     bool errorOccurred = false;
 
     firebaseFirestore.collection('users').doc(user!.uid.toString()).update({
-      "alarms": FieldValue.arrayUnion([alarm.toMap()])
+      'alarms': FieldValue.arrayUnion([alarm.toMap()])
     }).onError((error, stackTrace) => errorOccurred = true);
+
+    if (!errorOccurred) {
+      firebaseFirestore
+          .collection('users')
+          .doc(user?.uid.toString())
+          .update({'nextAlarmID': FieldValue.increment(1)});
+    }
 
     showResult(errorOccurred);
   }

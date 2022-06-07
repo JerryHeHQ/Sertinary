@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/common_functions.dart';
@@ -6,8 +10,6 @@ import 'package:sertinary/constants/color_constants.dart';
 import 'package:sertinary/routes/router.gr.dart';
 import 'package:sertinary/widgets/bottom_navigation_bar/sub_buttons.dart';
 import 'package:sertinary/widgets/glass_box.dart';
-
-import 'alarm_template.dart';
 
 class AlarmsScreen extends StatefulWidget {
   const AlarmsScreen({Key? key}) : super(key: key);
@@ -19,25 +21,23 @@ class AlarmsScreen extends StatefulWidget {
 class _AlarmsScreenState extends State<AlarmsScreen> {
   CommonFunctions commonFunctions = CommonFunctions();
 
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  User? user = FirebaseAuth.instance.currentUser;
+
+  late var docRef;
+
+  @override
+  void initState() {
+    super.initState();
+    docRef = firebaseFirestore.collection('users').doc(user?.uid.toString());
+  }
+
+  void reload() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<AlarmTemplate> alarmsList = [
-      AlarmTemplate(
-        hour: 15,
-        min: 39,
-        description: 'Wake Up',
-        isActive: true,
-        daysOfTheWeek: [true, true, true, true, true, true, true],
-      ),
-      AlarmTemplate(
-        hour: 15,
-        min: 39,
-        description: 'Get Ready',
-        isActive: true,
-        daysOfTheWeek: [true, true, true, true, true, true, true],
-      ),
-    ];
-
     return Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.topCenter,
@@ -50,106 +50,125 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
             ),
           ),
         ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(12, 15, 12, 0),
-          child: ListView.separated(
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                height: 15,
-              );
-            },
-            physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics(),
-            ),
-            itemCount: alarmsList.length,
-            itemBuilder: (context, index) {
-              return GlassBox(
-                width: MediaQuery.of(context).size.width,
-                height: 150,
-                blur: 3,
-                borderRadius: 18,
-                borderColor: Colors.black.withOpacity(0.09),
-                borderWidth: 1.5,
-                gradientColors: [
-                  Colors.black.withOpacity(0.42),
-                  Colors.black.withOpacity(0.27),
-                ],
-                gradientBegin: Alignment.topRight,
-                gradientEnd: Alignment.bottomLeft,
-                padding: const EdgeInsets.fromLTRB(12, 0, 6, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        FutureBuilder<dynamic>(
+          future: docRef.get().then((DocumentSnapshot doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            return data['alarms'];
+          }),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              log('hi 1');
+              return Container();
+            }
+            if (!snapshot.hasData) {
+              log('hi 2');
+              return Container();
+            }
+            final alarmsList = snapshot.data;
+            log('hi 3');
+            return Container(
+              padding: const EdgeInsets.fromLTRB(12, 15, 12, 0),
+              child: ListView.separated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    height: 15,
+                  );
+                },
+                physics: const AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics(),
+                ),
+                itemCount: alarmsList.length,
+                itemBuilder: (context, index) {
+                  return GlassBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 150,
+                    blur: 3,
+                    borderRadius: 18,
+                    borderColor: Colors.black.withOpacity(0.09),
+                    borderWidth: 1.5,
+                    gradientColors: [
+                      Colors.black.withOpacity(0.42),
+                      Colors.black.withOpacity(0.27),
+                    ],
+                    gradientBegin: Alignment.topRight,
+                    gradientEnd: Alignment.bottomLeft,
+                    padding: const EdgeInsets.fromLTRB(12, 0, 6, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Icon(
-                              Icons.label,
-                              color: ColorConstants.accent50,
-                              size: 24,
+                            Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.label,
+                                  color: ColorConstants.accent50,
+                                  size: 24,
+                                ),
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                Text(
+                                  alarmsList[index]['description'],
+                                  style: GoogleFonts.montserrat(
+                                    color: ColorConstants.accent50,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 21,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              width: 6,
+                            Switch(
+                              onChanged: (bool value) {
+                                setState(() {});
+                              },
+                              value: alarmsList[index]['isActive'],
+                              activeColor: ColorConstants.accent50,
+                              inactiveThumbColor: ColorConstants.accent50,
                             ),
+                          ],
+                        ),
+                        Text(
+                          TimeOfDay(
+                            hour: alarmsList[index]['hour'].toInt(),
+                            minute: alarmsList[index]['min'].toInt(),
+                          ).format(context),
+                          style: GoogleFonts.montserrat(
+                            color: ColorConstants.accent50,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
                             Text(
-                              alarmsList[index].description,
+                              formatDaysOfTheWeek(List<bool>.from(
+                                  alarmsList[index]['daysOfTheWeek'])),
                               style: GoogleFonts.montserrat(
                                 color: ColorConstants.accent50,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 21,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 18,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.settings,
+                                color: ColorConstants.accent50,
                               ),
                             ),
                           ],
                         ),
-                        Switch(
-                          onChanged: (bool value) {
-                            setState(() {});
-                          },
-                          value: alarmsList[index].isActive,
-                          activeColor: ColorConstants.accent50,
-                          inactiveThumbColor: ColorConstants.accent50,
-                        ),
                       ],
                     ),
-                    Text(
-                      TimeOfDay(
-                              hour: alarmsList[index].hour,
-                              minute: alarmsList[index].min)
-                          .format(context),
-                      style: GoogleFonts.montserrat(
-                        color: ColorConstants.accent50,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          formatDaysOfTheWeek(alarmsList[index].daysOfTheWeek),
-                          style: GoogleFonts.montserrat(
-                            color: ColorConstants.accent50,
-                            fontWeight: FontWeight.w300,
-                            fontSize: 18,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.settings,
-                            color: ColorConstants.accent50,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+                  );
+                },
+              ),
+            );
+          },
         ),
         SubButtonLeft(onPressed: () => leftSubButton()),
         SubButtonCenter(onPressed: () => centerSubButton()),

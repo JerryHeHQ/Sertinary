@@ -5,7 +5,7 @@ class UserTemplate {
   String username;
   String email;
   String? password;
-
+  late int nextAlarmID;
   List<AlarmTemplate> alarmsList;
 
   UserTemplate({
@@ -22,6 +22,7 @@ class UserTemplate {
       'uid': uid,
       'username': username,
       'email': email,
+      'nextAlarmID': 0,
       'alarms': alarmsList,
     };
   }
