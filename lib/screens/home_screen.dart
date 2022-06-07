@@ -210,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen>
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           //Extend Past BottomNavigationBar
           extendBody: true,
           //Background Color
@@ -333,9 +334,7 @@ class _HomeScreenState extends State<HomeScreen>
             notchMargin: 36,
             //Color Of BottomAppBar
             color: ColorConstants.mono05,
-            //Safe Area
             child: SafeArea(
-              //Padding
               child: Padding(
                 //Gives Vertical Padding Between GNavs And BottomAppBar
                 padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
@@ -343,22 +342,17 @@ class _HomeScreenState extends State<HomeScreen>
                 child: Stack(
                   //Aligns Sized Box (Creates Gap Between GNavs) To Center Of Bottom App Bar
                   alignment: Alignment.center,
-                  //GNavs And Sized Box
                   children: [
                     //Left GNav Holder
                     Positioned(
                       //Distance Left GNav Extends Beyond The Screen
                       left: -gapWidth,
-                      //Size Constraints For Left GNav
                       child: SizedBox(
                         //GNavWidth Is Actual GNav Size
                         //2 * GapWidth Is Extendable Padding
                         width: gNavWidth + 2 * gapWidth,
-                        //Row Container For Left GNav
                         child: Row(
-                          //Centers Left GNav In Row
                           mainAxisAlignment: MainAxisAlignment.center,
-                          //Left GNav Holder
                           children: [
                             //Left GNav
                             GNav(
@@ -460,11 +454,8 @@ class _HomeScreenState extends State<HomeScreen>
                         //GNavWidth Is Actual GNav Size
                         //2 * GapWidth Is Extendable Padding
                         width: gNavWidth + 2 * gapWidth,
-                        //Row Container For Right GNav
                         child: Row(
-                          //Centers Right GNav In Row
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          //Right GNav Holder
                           children: [
                             //Right GNav
                             GNav(
