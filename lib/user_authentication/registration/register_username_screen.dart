@@ -52,7 +52,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             'Hey there!\nLet\'s get you started!',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                fontSize: 33,
+                fontSize: 30,
                 color: ColorConstants.mono05,
                 fontWeight: FontWeight.w700,
               ),

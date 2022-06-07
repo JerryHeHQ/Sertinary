@@ -68,7 +68,7 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
             '\nSecurity Time!',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                fontSize: 33,
+                fontSize: 30,
                 color: ColorConstants.mono05,
                 fontWeight: FontWeight.w700,
               ),
@@ -407,11 +407,12 @@ class _RegisterPasswordScreenState extends State<RegisterPasswordScreen> {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
-    UserTemplate userTemplate = UserTemplate();
-
-    userTemplate.uid = user!.uid;
-    userTemplate.username = widget.username;
-    userTemplate.email = user.email;
+    UserTemplate userTemplate = UserTemplate(
+      uid: user!.uid,
+      username: widget.username,
+      email: user.email!,
+      alarmsList: [],
+    );
 
     await firebaseFirestore
         .collection('users')

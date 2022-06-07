@@ -55,7 +55,7 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
             '\nJust one last step!',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                fontSize: 33,
+                fontSize: 30,
                 color: ColorConstants.mono05,
                 fontWeight: FontWeight.w700,
               ),

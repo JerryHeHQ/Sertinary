@@ -23,13 +23,15 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
   Widget build(BuildContext context) {
     List<AlarmTemplate> alarmsList = [
       AlarmTemplate(
-        TimeOfDay.now(),
+        hour: 15,
+        min: 39,
         description: 'Wake Up',
         isActive: true,
         daysOfTheWeek: [true, true, true, true, true, true, true],
       ),
       AlarmTemplate(
-        TimeOfDay.now(),
+        hour: 15,
+        min: 39,
         description: 'Get Ready',
         isActive: true,
         daysOfTheWeek: [true, true, true, true, true, true, true],
@@ -113,7 +115,10 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
                       ],
                     ),
                     Text(
-                      alarmsList[index].alarmTimeOfDay.format(context),
+                      TimeOfDay(
+                              hour: alarmsList[index].hour,
+                              minute: alarmsList[index].min)
+                          .format(context),
                       style: GoogleFonts.montserrat(
                         color: ColorConstants.accent50,
                         fontWeight: FontWeight.w700,

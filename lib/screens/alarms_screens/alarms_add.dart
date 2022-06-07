@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/screens/alarms_screens/alarm_template.dart';
 import 'package:sertinary/screens/alarms_screens/list_wheel_elements/am_pm_elements.dart';
 import 'package:sertinary/screens/alarms_screens/list_wheel_elements/hour_elements.dart';
 import 'package:sertinary/screens/alarms_screens/list_wheel_elements/minute_elements%20copy.dart';
@@ -15,9 +18,6 @@ class AlarmsAdd extends StatefulWidget {
 }
 
 class _AlarmsAddState extends State<AlarmsAdd> {
-  //Form Key
-  final _formKey = GlobalKey<FormState>();
-
   //Text Editing Controller
   final TextEditingController _descriptionController = TextEditingController();
 
@@ -35,6 +35,20 @@ class _AlarmsAddState extends State<AlarmsAdd> {
   bool sat = false;
   bool sun = false;
 
+  //List Wheel Time Selector Controllers
+  late FixedExtentScrollController _hourController;
+  late FixedExtentScrollController _minuteController;
+  late FixedExtentScrollController _ampmController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _hourController = FixedExtentScrollController();
+    _minuteController = FixedExtentScrollController();
+    _ampmController = FixedExtentScrollController();
+  }
+
   @override
   Widget build(BuildContext context) {
     selectedColorDOTWB = ColorConstants.accent50;
@@ -42,7 +56,7 @@ class _AlarmsAddState extends State<AlarmsAdd> {
 
     final glassBox = GlassBox(
       width: MediaQuery.of(context).size.width - 2 * 12,
-      height: 420,
+      height: 429,
       blur: 3,
       borderRadius: 18,
       borderColor: Colors.black.withOpacity(0.09),
@@ -245,6 +259,7 @@ class _AlarmsAddState extends State<AlarmsAdd> {
               SizedBox(
                 width: 66,
                 child: ListWheelScrollView.useDelegate(
+                  controller: _hourController,
                   itemExtent: 51,
                   perspective: 0.006,
                   diameterRatio: 1.2,
@@ -263,6 +278,7 @@ class _AlarmsAddState extends State<AlarmsAdd> {
               SizedBox(
                 width: 66,
                 child: ListWheelScrollView.useDelegate(
+                  controller: _minuteController,
                   itemExtent: 51,
                   perspective: 0.006,
                   diameterRatio: 1.2,
@@ -281,6 +297,7 @@ class _AlarmsAddState extends State<AlarmsAdd> {
               SizedBox(
                 width: 66,
                 child: ListWheelScrollView.useDelegate(
+                  controller: _ampmController,
                   itemExtent: 51,
                   perspective: 0.006,
                   diameterRatio: 1.2,
@@ -378,6 +395,57 @@ class _AlarmsAddState extends State<AlarmsAdd> {
       ),
     );
 
+    final addButton = Container(
+      alignment: Alignment.centerRight,
+      child: Material(
+        elevation: 6,
+        borderRadius: BorderRadius.circular(18),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: const [0.0, 0.5, 1.0],
+              colors: [
+                ColorConstants.accent30,
+                ColorConstants.accent50,
+                ColorConstants.accent30,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: MaterialButton(
+            height: 54,
+            onPressed: () {
+              addAlarm();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(width: 15),
+                Text(
+                  'Add Alarm',
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                      color: ColorConstants.mono05,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.double_arrow_rounded,
+                  color: ColorConstants.mono05,
+                ),
+                const SizedBox(width: 15),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -404,14 +472,82 @@ class _AlarmsAddState extends State<AlarmsAdd> {
           ),
           //Glass Box
           Positioned(top: 120, child: glassBox),
+          //Time Selector
+          Positioned(top: 267, child: timeSelectorBackground),
+          Positioned(top: 138, child: timeSelector),
           //Days Of The Week Selector
           Positioned(top: 126, child: daysOfTheWeekSelector),
-          Positioned(top: 267, child: timeSelectorBackground),
-          //Time Selector
-          Positioned(top: 138, child: timeSelector),
           //Description Field
           Positioned(top: 408, child: descriptionField),
+          //Add Alarm Button
+          Positioned(top: 480, right: 24, child: addButton),
         ],
+      ),
+    );
+  }
+
+  addAlarm() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = FirebaseAuth.instance.currentUser;
+
+    int hour = _hourController.selectedItem % 12 + 1;
+    int min = _minuteController.selectedItem % 60;
+    bool am = _ampmController.selectedItem == 0;
+
+    if (!am) {
+      hour += 12;
+    }
+
+    List<bool> daysOfTheWeek = [mon, tue, wed, thu, fri, sat, sun];
+
+    AlarmTemplate alarm = AlarmTemplate(
+      hour: hour,
+      min: min,
+      description: _descriptionController.text,
+      isActive: true,
+      daysOfTheWeek: daysOfTheWeek,
+    );
+
+    bool errorOccurred = false;
+
+    firebaseFirestore.collection('users').doc(user!.uid.toString()).update({
+      "alarms": FieldValue.arrayUnion([alarm.toMap()])
+    }).onError((error, stackTrace) => errorOccurred = true);
+
+    showResult(errorOccurred);
+  }
+
+  showResult(bool errorOccurred) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorConstants.mono10,
+        behavior: SnackBarBehavior.floating,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              errorOccurred
+                  ? Icons.error_outline_rounded
+                  : Icons.add_alarm_outlined,
+              color:
+                  errorOccurred ? ColorConstants.fail : ColorConstants.success,
+            ),
+            Text(
+              errorOccurred
+                  ? ' An Error Occured When Adding The Alarm'
+                  : ' Alarm Has Been Successfully Added',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  fontSize: 13,
+                  color: errorOccurred
+                      ? ColorConstants.fail
+                      : ColorConstants.success,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

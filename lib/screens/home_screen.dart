@@ -114,8 +114,6 @@ class _HomeScreenState extends State<HomeScreen>
 
   CommonFunctions commonFunctions = CommonFunctions();
 
-  late Timer timer;
-
   @override
   void initState() {
     super.initState();
@@ -174,20 +172,6 @@ class _HomeScreenState extends State<HomeScreen>
 
     //Initializes To 0 To Display Starting Screen
     _selectedIndex = 0;
-
-    //ONLY PLACE THAT CAN CHANGE subButtonsActive VALUE
-    timer = Timer.periodic(
-      const Duration(milliseconds: 60),
-      (timer) {
-        //Sub Buttons Are Active Only WHen Animations Are Finished
-        if (subButtonAnimationController.isCompleted &&
-            fabIconAnimationController.isEnd()) {
-          subButtonsActive.value = true;
-        } else {
-          subButtonsActive.value = false;
-        }
-      },
-    );
   }
 
   @override
@@ -318,6 +302,7 @@ class _HomeScreenState extends State<HomeScreen>
                       color: Colors.transparent,
                       icon: blankIcon,
                       onClick: () {
+                        subButtonsActive.value = false;
                         animateSubButtons(true);
                       },
                     ),
@@ -415,6 +400,7 @@ class _HomeScreenState extends State<HomeScreen>
                               //Function When A Different GButton (Tab) Is Selected
                               onTabChange: (index) {
                                 setState(() {
+                                  subButtonsActive.value = false;
                                   //Updates The Class Variable For Use In Other Parts Of The Class
                                   _selectedIndex = index;
                                   //Tells TabsRouter To Change Screen To Corresponding Tab
@@ -518,6 +504,7 @@ class _HomeScreenState extends State<HomeScreen>
                               //Function When A Different GButton (Tab) Is Selected
                               onTabChange: (index) {
                                 setState(() {
+                                  subButtonsActive.value = false;
                                   //Updates The Class Variable For Use In Other Parts Of The Class
                                   _selectedIndex = index;
                                   //Tells TabsRouter To Change Screen To Corresponding Tab
@@ -587,8 +574,13 @@ class _HomeScreenState extends State<HomeScreen>
     //After An Animation, You Can No Longer Animate For A Cooldown Period
     canAnimateAgain = false;
     Future.delayed(
-      const Duration(milliseconds: 390),
+      const Duration(milliseconds: 510),
       () {
+        if (subButtonAnimationController.isCompleted) {
+          subButtonsActive.value = true;
+        } else {
+          subButtonsActive.value = false;
+        }
         canAnimateAgain = true;
       },
     );

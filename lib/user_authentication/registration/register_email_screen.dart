@@ -60,7 +60,7 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
             'Nice to meet you\n${widget.username}!',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                fontSize: 33,
+                fontSize: 30,
                 color: ColorConstants.mono05,
                 fontWeight: FontWeight.w700,
               ),
