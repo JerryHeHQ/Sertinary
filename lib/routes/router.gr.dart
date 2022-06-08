@@ -11,25 +11,26 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i26;
+import 'package:flutter/material.dart' as _i27;
 
 import '../screens/alarms_screens/alarms_add.dart' as _i12;
 import '../screens/alarms_screens/alarms_calculator.dart' as _i11;
 import '../screens/alarms_screens/alarms_change_theme.dart' as _i13;
+import '../screens/alarms_screens/alarms_edit.dart' as _i14;
 import '../screens/alarms_screens/alarms_screen.dart' as _i10;
 import '../screens/home_screen.dart' as _i4;
-import '../screens/planner_screens/planner_add.dart' as _i24;
-import '../screens/planner_screens/planner_change_date.dart' as _i25;
-import '../screens/planner_screens/planner_screen.dart' as _i22;
-import '../screens/planner_screens/planner_work_rythmn.dart' as _i23;
-import '../screens/social_screens/social_add.dart' as _i16;
-import '../screens/social_screens/social_profile.dart' as _i17;
-import '../screens/social_screens/social_saved.dart' as _i15;
-import '../screens/social_screens/social_screen.dart' as _i14;
-import '../screens/tracker_screens/tracker_add.dart' as _i20;
-import '../screens/tracker_screens/tracker_change_date.dart' as _i21;
-import '../screens/tracker_screens/tracker_overview.dart' as _i19;
-import '../screens/tracker_screens/tracker_screen.dart' as _i18;
+import '../screens/planner_screens/planner_add.dart' as _i25;
+import '../screens/planner_screens/planner_change_date.dart' as _i26;
+import '../screens/planner_screens/planner_screen.dart' as _i23;
+import '../screens/planner_screens/planner_work_rythmn.dart' as _i24;
+import '../screens/social_screens/social_add.dart' as _i17;
+import '../screens/social_screens/social_profile.dart' as _i18;
+import '../screens/social_screens/social_saved.dart' as _i16;
+import '../screens/social_screens/social_screen.dart' as _i15;
+import '../screens/tracker_screens/tracker_add.dart' as _i21;
+import '../screens/tracker_screens/tracker_change_date.dart' as _i22;
+import '../screens/tracker_screens/tracker_overview.dart' as _i20;
+import '../screens/tracker_screens/tracker_screen.dart' as _i19;
 import '../screens/welcome_screens/welcome_screen.dart' as _i9;
 import '../user_authentication/forgot_password/forgot_password_screen.dart'
     as _i3;
@@ -42,7 +43,7 @@ import '../user_authentication/registration/register_username_screen.dart'
 import '../user_authentication/registration/register_verify_screen.dart' as _i8;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i26.GlobalKey<_i26.NavigatorState>? navigatorKey])
+  AppRouter([_i27.GlobalKey<_i27.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -121,53 +122,59 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i13.AlarmsChangeTheme());
     },
+    AlarmsEditRouter.name: (routeData) {
+      final args = routeData.argsAs<AlarmsEditRouterArgs>();
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i14.AlarmsEdit(key: args.key, alarmID: args.alarmID));
+    },
     SocialScreenRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i14.SocialScreen());
+          routeData: routeData, child: const _i15.SocialScreen());
     },
     SocialSavedRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i15.SocialSaved());
+          routeData: routeData, child: const _i16.SocialSaved());
     },
     SocialAddRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i16.SocialAdd());
+          routeData: routeData, child: const _i17.SocialAdd());
     },
     SocialProfileRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i17.SocialProfile());
+          routeData: routeData, child: const _i18.SocialProfile());
     },
     TrackerScreenRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i18.TrackerScreen());
+          routeData: routeData, child: const _i19.TrackerScreen());
     },
     TrackerOverviewRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i19.TrackerOverview());
+          routeData: routeData, child: const _i20.TrackerOverview());
     },
     TrackerAddRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i20.TrackerAdd());
+          routeData: routeData, child: const _i21.TrackerAdd());
     },
     TrackerChangeDateRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i21.TrackerChangeDate());
+          routeData: routeData, child: const _i22.TrackerChangeDate());
     },
     PlannerScreenRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i22.PlannerScreen());
+          routeData: routeData, child: const _i23.PlannerScreen());
     },
     PlannerWorkRythmnRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i23.PlannerWorkRythmn());
+          routeData: routeData, child: const _i24.PlannerWorkRythmn());
     },
     PlannerAddRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i24.PlannerAdd());
+          routeData: routeData, child: const _i25.PlannerAdd());
     },
     PlannerChangeDateRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i25.PlannerChangeDate());
+          routeData: routeData, child: const _i26.PlannerChangeDate());
     }
   };
 
@@ -211,7 +218,9 @@ class AppRouter extends _i2.RootStackRouter {
                 _i2.RouteConfig(AlarmsAddRouter.name,
                     path: 'alarms_add', parent: AlarmsRouter.name),
                 _i2.RouteConfig(AlarmsChangeThemeRouter.name,
-                    path: 'alarms_change_theme', parent: AlarmsRouter.name)
+                    path: 'alarms_change_theme', parent: AlarmsRouter.name),
+                _i2.RouteConfig(AlarmsEditRouter.name,
+                    path: 'alarms_edit', parent: AlarmsRouter.name)
               ]),
           _i2.RouteConfig(SocialRouter.name,
               path: 'social',
@@ -318,7 +327,7 @@ class RegisterUsernameRoute extends _i2.PageRouteInfo<void> {
 /// generated route for
 /// [_i6.RegisterEmailScreen]
 class RegisterEmailRoute extends _i2.PageRouteInfo<RegisterEmailRouteArgs> {
-  RegisterEmailRoute({_i26.Key? key, required String username})
+  RegisterEmailRoute({_i27.Key? key, required String username})
       : super(RegisterEmailRoute.name,
             path: 'register_email',
             args: RegisterEmailRouteArgs(key: key, username: username));
@@ -329,7 +338,7 @@ class RegisterEmailRoute extends _i2.PageRouteInfo<RegisterEmailRouteArgs> {
 class RegisterEmailRouteArgs {
   const RegisterEmailRouteArgs({this.key, required this.username});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   final String username;
 
@@ -344,7 +353,7 @@ class RegisterEmailRouteArgs {
 class RegisterPasswordRoute
     extends _i2.PageRouteInfo<RegisterPasswordRouteArgs> {
   RegisterPasswordRoute(
-      {_i26.Key? key, required String username, required String email})
+      {_i27.Key? key, required String username, required String email})
       : super(RegisterPasswordRoute.name,
             path: 'register_password',
             args: RegisterPasswordRouteArgs(
@@ -357,7 +366,7 @@ class RegisterPasswordRouteArgs {
   const RegisterPasswordRouteArgs(
       {this.key, required this.username, required this.email});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   final String username;
 
@@ -458,7 +467,31 @@ class AlarmsChangeThemeRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.SocialScreen]
+/// [_i14.AlarmsEdit]
+class AlarmsEditRouter extends _i2.PageRouteInfo<AlarmsEditRouterArgs> {
+  AlarmsEditRouter({_i27.Key? key, required double alarmID})
+      : super(AlarmsEditRouter.name,
+            path: 'alarms_edit',
+            args: AlarmsEditRouterArgs(key: key, alarmID: alarmID));
+
+  static const String name = 'AlarmsEditRouter';
+}
+
+class AlarmsEditRouterArgs {
+  const AlarmsEditRouterArgs({this.key, required this.alarmID});
+
+  final _i27.Key? key;
+
+  final double alarmID;
+
+  @override
+  String toString() {
+    return 'AlarmsEditRouterArgs{key: $key, alarmID: $alarmID}';
+  }
+}
+
+/// generated route for
+/// [_i15.SocialScreen]
 class SocialScreenRouter extends _i2.PageRouteInfo<void> {
   const SocialScreenRouter()
       : super(SocialScreenRouter.name, path: 'social_screen');
@@ -467,7 +500,7 @@ class SocialScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.SocialSaved]
+/// [_i16.SocialSaved]
 class SocialSavedRouter extends _i2.PageRouteInfo<void> {
   const SocialSavedRouter()
       : super(SocialSavedRouter.name, path: 'social_saved');
@@ -476,7 +509,7 @@ class SocialSavedRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.SocialAdd]
+/// [_i17.SocialAdd]
 class SocialAddRouter extends _i2.PageRouteInfo<void> {
   const SocialAddRouter() : super(SocialAddRouter.name, path: 'social_add');
 
@@ -484,7 +517,7 @@ class SocialAddRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.SocialProfile]
+/// [_i18.SocialProfile]
 class SocialProfileRouter extends _i2.PageRouteInfo<void> {
   const SocialProfileRouter()
       : super(SocialProfileRouter.name, path: 'social_profile');
@@ -493,7 +526,7 @@ class SocialProfileRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.TrackerScreen]
+/// [_i19.TrackerScreen]
 class TrackerScreenRouter extends _i2.PageRouteInfo<void> {
   const TrackerScreenRouter()
       : super(TrackerScreenRouter.name, path: 'tracker_screen');
@@ -502,7 +535,7 @@ class TrackerScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i19.TrackerOverview]
+/// [_i20.TrackerOverview]
 class TrackerOverviewRouter extends _i2.PageRouteInfo<void> {
   const TrackerOverviewRouter()
       : super(TrackerOverviewRouter.name, path: 'tracker_overview');
@@ -511,7 +544,7 @@ class TrackerOverviewRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.TrackerAdd]
+/// [_i21.TrackerAdd]
 class TrackerAddRouter extends _i2.PageRouteInfo<void> {
   const TrackerAddRouter() : super(TrackerAddRouter.name, path: 'tracker_add');
 
@@ -519,7 +552,7 @@ class TrackerAddRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.TrackerChangeDate]
+/// [_i22.TrackerChangeDate]
 class TrackerChangeDateRouter extends _i2.PageRouteInfo<void> {
   const TrackerChangeDateRouter()
       : super(TrackerChangeDateRouter.name, path: 'tracker_change_date');
@@ -528,7 +561,7 @@ class TrackerChangeDateRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.PlannerScreen]
+/// [_i23.PlannerScreen]
 class PlannerScreenRouter extends _i2.PageRouteInfo<void> {
   const PlannerScreenRouter()
       : super(PlannerScreenRouter.name, path: 'planner_screen');
@@ -537,7 +570,7 @@ class PlannerScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.PlannerWorkRythmn]
+/// [_i24.PlannerWorkRythmn]
 class PlannerWorkRythmnRouter extends _i2.PageRouteInfo<void> {
   const PlannerWorkRythmnRouter()
       : super(PlannerWorkRythmnRouter.name, path: 'planner_work_rythmn');
@@ -546,7 +579,7 @@ class PlannerWorkRythmnRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i24.PlannerAdd]
+/// [_i25.PlannerAdd]
 class PlannerAddRouter extends _i2.PageRouteInfo<void> {
   const PlannerAddRouter() : super(PlannerAddRouter.name, path: 'planner_add');
 
@@ -554,7 +587,7 @@ class PlannerAddRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i25.PlannerChangeDate]
+/// [_i26.PlannerChangeDate]
 class PlannerChangeDateRouter extends _i2.PageRouteInfo<void> {
   const PlannerChangeDateRouter()
       : super(PlannerChangeDateRouter.name, path: 'planner_change_date');

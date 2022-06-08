@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:sertinary/screens/alarms_screens/alarms_add.dart';
 import 'package:sertinary/screens/alarms_screens/alarms_calculator.dart';
 import 'package:sertinary/screens/alarms_screens/alarms_change_theme.dart';
+import 'package:sertinary/screens/alarms_screens/alarms_edit.dart';
 import 'package:sertinary/screens/alarms_screens/alarms_screen.dart';
 import 'package:sertinary/screens/home_screen.dart';
 import 'package:sertinary/screens/planner_screens/planner_add.dart';
@@ -107,6 +108,11 @@ import 'package:sertinary/user_authentication/registration/register_verify_scree
               path: 'alarms_change_theme',
               name: 'AlarmsChangeThemeRouter',
               page: AlarmsChangeTheme,
+            ),
+            AutoRoute(
+              path: 'alarms_edit',
+              name: 'AlarmsEditRouter',
+              page: AlarmsEdit,
             ),
           ],
         ),

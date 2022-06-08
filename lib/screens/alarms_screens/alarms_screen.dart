@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +22,7 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
 
-  late var docRef;
+  late DocumentReference docRef;
 
   @override
   void initState() {
@@ -32,8 +30,9 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
     docRef = firebaseFirestore.collection('users').doc(user?.uid.toString());
   }
 
-  void reload() {
+  void reload(bool showResult) {
     setState(() {});
+    (showResult) => showResult();
   }
 
   @override
@@ -57,15 +56,12 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
           }),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
-              log('hi 1');
               return Container();
             }
             if (!snapshot.hasData) {
-              log('hi 2');
               return Container();
             }
             final alarmsList = snapshot.data;
-            log('hi 3');
             return Container(
               padding: const EdgeInsets.fromLTRB(12, 15, 12, 0),
               child: ListView.separated(
@@ -79,90 +75,93 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
                 ),
                 itemCount: alarmsList.length,
                 itemBuilder: (context, index) {
-                  return GlassBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 150,
-                    blur: 3,
-                    borderRadius: 18,
-                    borderColor: Colors.black.withOpacity(0.09),
-                    borderWidth: 1.5,
-                    gradientColors: [
-                      Colors.black.withOpacity(0.42),
-                      Colors.black.withOpacity(0.27),
-                    ],
-                    gradientBegin: Alignment.topRight,
-                    gradientEnd: Alignment.bottomLeft,
-                    padding: const EdgeInsets.fromLTRB(12, 0, 6, 0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.label,
-                                  color: ColorConstants.accent50,
-                                  size: 24,
-                                ),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                Text(
-                                  alarmsList[index]['description'],
-                                  style: GoogleFonts.montserrat(
-                                    color: ColorConstants.accent50,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 21,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Switch(
-                              onChanged: (bool value) {
-                                setState(() {});
-                              },
-                              value: alarmsList[index]['isActive'],
-                              activeColor: ColorConstants.accent50,
-                              inactiveThumbColor: ColorConstants.accent50,
-                            ),
-                          ],
-                        ),
-                        Text(
-                          TimeOfDay(
-                            hour: alarmsList[index]['hour'].toInt(),
-                            minute: alarmsList[index]['min'].toInt(),
-                          ).format(context),
-                          style: GoogleFonts.montserrat(
-                            color: ColorConstants.accent50,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 24,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              formatDaysOfTheWeek(List<bool>.from(
-                                  alarmsList[index]['daysOfTheWeek'])),
-                              style: GoogleFonts.montserrat(
-                                color: ColorConstants.accent50,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 18,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.settings,
-                                color: ColorConstants.accent50,
-                              ),
-                            ),
-                          ],
-                        ),
+                  return GestureDetector(
+                    onDoubleTap: () => editAlarm(alarmsList[index]['id']),
+                    child: GlassBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 150,
+                      blur: 3,
+                      borderRadius: 18,
+                      borderColor: Colors.black.withOpacity(0.09),
+                      borderWidth: 1.5,
+                      gradientColors: [
+                        Colors.black.withOpacity(0.42),
+                        Colors.black.withOpacity(0.27),
                       ],
+                      gradientBegin: Alignment.topRight,
+                      gradientEnd: Alignment.bottomLeft,
+                      padding: const EdgeInsets.fromLTRB(12, 0, 6, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.label,
+                                    color: ColorConstants.accent50,
+                                    size: 24,
+                                  ),
+                                  const SizedBox(
+                                    width: 6,
+                                  ),
+                                  Text(
+                                    alarmsList[index]['description'],
+                                    style: GoogleFonts.montserrat(
+                                      color: ColorConstants.accent50,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 21,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Switch(
+                                onChanged: (bool value) {
+                                  setState(() {});
+                                },
+                                value: alarmsList[index]['isActive'],
+                                activeColor: ColorConstants.accent50,
+                                inactiveThumbColor: ColorConstants.accent50,
+                              ),
+                            ],
+                          ),
+                          Text(
+                            TimeOfDay(
+                              hour: alarmsList[index]['hour'].toInt(),
+                              minute: alarmsList[index]['min'].toInt(),
+                            ).format(context),
+                            style: GoogleFonts.montserrat(
+                              color: ColorConstants.accent50,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 24,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                formatDaysOfTheWeek(List<bool>.from(
+                                    alarmsList[index]['daysOfTheWeek'])),
+                                style: GoogleFonts.montserrat(
+                                  color: ColorConstants.accent50,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.settings,
+                                  color: ColorConstants.accent50,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -182,7 +181,16 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
   }
 
   void centerSubButton() {
-    AutoRouter.of(context).push(const AlarmsAddRouter());
+    AutoRouter.of(context)
+        .push(const AlarmsAddRouter())
+        .then((value) => reload(false));
+  }
+
+  void editAlarm(double id) {
+    bool isTrue = true;
+    AutoRouter.of(context)
+        .push(AlarmsEditRouter(alarmID: id))
+        .then((value) => reload(value = isTrue));
   }
 
   void rightSubButton() {
@@ -258,5 +266,33 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
     }
 
     return holder;
+  }
+
+  showResult() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorConstants.mono10,
+        behavior: SnackBarBehavior.floating,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.check_box_outlined,
+              color: ColorConstants.success,
+            ),
+            Text(
+              ' Alarms Have Been Successfully Updated',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  fontSize: 13,
+                  color: ColorConstants.success,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

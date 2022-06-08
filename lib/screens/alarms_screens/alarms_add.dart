@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,6 +42,8 @@ class _AlarmsAddState extends State<AlarmsAdd> {
 
   late FirebaseFirestore firebaseFirestore;
   User? user;
+  late var data;
+  late List<dynamic> alarmsList;
 
   @override
   void initState() {
@@ -425,7 +425,7 @@ class _AlarmsAddState extends State<AlarmsAdd> {
           child: MaterialButton(
             height: 54,
             onPressed: () {
-              addAlarm();
+              getData();
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -499,15 +499,15 @@ class _AlarmsAddState extends State<AlarmsAdd> {
         firebaseFirestore.collection('users').doc(user?.uid.toString());
     docRef.get().then(
       (DocumentSnapshot doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        return data['nextAlarmID'];
+        data = doc.data() as Map<String, dynamic>;
+        alarmsList = data['alarms'] ?? [];
+        addAlarm();
       },
-      onError: (e) => log('Error getting document: $e'),
     );
   }
 
   addAlarm() async {
-    double hour = _hourController.selectedItem % 12 + 1;
+    double hour = (_hourController.selectedItem + 1) % 12;
     double min = _minuteController.selectedItem % 60;
     bool am = _ampmController.selectedItem == 0;
 
@@ -517,7 +517,7 @@ class _AlarmsAddState extends State<AlarmsAdd> {
 
     List<bool> daysOfTheWeek = [mon, tue, wed, thu, fri, sat, sun];
 
-    double nextAlarmID = await getData();
+    double nextAlarmID = data['nextAlarmID'].toDouble();
 
     AlarmTemplate alarm = AlarmTemplate(
       id: nextAlarmID,
@@ -528,20 +528,38 @@ class _AlarmsAddState extends State<AlarmsAdd> {
       daysOfTheWeek: daysOfTheWeek,
     );
 
-    bool errorOccurred = false;
+    alarmsList.add(alarm.toMap());
 
+    for (int i = 0; i < alarmsList.length - 1; i++) {
+      int minIndex = i;
+      for (int j = i + 1; j < alarmsList.length; j++) {
+        if (alarmsList[j]['weight'] < alarmsList[minIndex]['weight']) {
+          minIndex = j;
+        }
+      }
+
+      Map<String, dynamic> temp = alarmsList[minIndex];
+      alarmsList[minIndex] = alarmsList[i];
+      alarmsList[i] = temp;
+    }
+
+    updateFirebase();
+  }
+
+  updateFirebase() {
     firebaseFirestore.collection('users').doc(user!.uid.toString()).update({
-      'alarms': FieldValue.arrayUnion([alarm.toMap()])
-    }).onError((error, stackTrace) => errorOccurred = true);
-
-    if (!errorOccurred) {
+      'alarms': FieldValue.delete(),
+    }).then((value) {
+      firebaseFirestore
+          .collection('users')
+          .doc(user?.uid.toString())
+          .set({'alarms': alarmsList}, SetOptions(merge: true));
+    }).then((value) {
       firebaseFirestore
           .collection('users')
           .doc(user?.uid.toString())
           .update({'nextAlarmID': FieldValue.increment(1)});
-    }
-
-    showResult(errorOccurred);
+    }).onError((error, stackTrace) => showResult(true));
   }
 
   showResult(bool errorOccurred) {
