@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import 'package:sertinary/screens/alarms_screens/alarm_template.dart';
-import 'package:sertinary/screens/alarms_screens/list_wheel_elements/am_pm_elements.dart';
-import 'package:sertinary/screens/alarms_screens/list_wheel_elements/hour_elements.dart';
-import 'package:sertinary/screens/alarms_screens/list_wheel_elements/minute_elements%20copy.dart';
+import 'package:sertinary/screens/alarms_screens/widgets/am_pm_elements.dart';
+import 'package:sertinary/screens/alarms_screens/widgets/hour_elements.dart';
+import 'package:sertinary/screens/alarms_screens/widgets/minute_elements.dart';
 import 'package:sertinary/widgets/glass_box.dart';
 
 class AlarmsAdd extends StatefulWidget {
@@ -75,7 +75,7 @@ class _AlarmsAddState extends State<AlarmsAdd> {
       ],
       gradientBegin: Alignment.topRight,
       gradientEnd: Alignment.bottomLeft,
-      padding: const EdgeInsets.fromLTRB(12, 0, 6, 0),
+      padding: const EdgeInsets.all(0),
       child: Container(),
     );
 
@@ -479,16 +479,16 @@ class _AlarmsAddState extends State<AlarmsAdd> {
             ),
           ),
           //Glass Box
-          Positioned(top: 120, child: glassBox),
+          Positioned(top: 90, child: glassBox),
           //Time Selector
-          Positioned(top: 267, child: timeSelectorBackground),
-          Positioned(top: 138, child: timeSelector),
+          Positioned(top: 237, child: timeSelectorBackground),
+          Positioned(top: 108, child: timeSelector),
           //Days Of The Week Selector
-          Positioned(top: 126, child: daysOfTheWeekSelector),
+          Positioned(top: 96, child: daysOfTheWeekSelector),
           //Description Field
-          Positioned(top: 408, child: descriptionField),
+          Positioned(top: 378, child: descriptionField),
           //Add Alarm Button
-          Positioned(top: 480, right: 24, child: addButton),
+          Positioned(top: 450, right: 24, child: addButton),
         ],
       ),
     );

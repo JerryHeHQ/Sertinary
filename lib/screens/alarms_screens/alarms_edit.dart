@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import 'package:sertinary/screens/alarms_screens/alarm_template.dart';
-import 'package:sertinary/screens/alarms_screens/list_wheel_elements/am_pm_elements.dart';
-import 'package:sertinary/screens/alarms_screens/list_wheel_elements/hour_elements.dart';
-import 'package:sertinary/screens/alarms_screens/list_wheel_elements/minute_elements%20copy.dart';
+import 'package:sertinary/screens/alarms_screens/widgets/am_pm_elements.dart';
+import 'package:sertinary/screens/alarms_screens/widgets/hour_elements.dart';
+import 'package:sertinary/screens/alarms_screens/widgets/minute_elements.dart';
 import 'package:sertinary/widgets/glass_box.dart';
 
 class AlarmsEdit extends StatefulWidget {
@@ -162,7 +162,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
               ),
               //Glass Box
               Positioned(
-                top: 120,
+                top: 90,
                 child: GlassBox(
                   width: MediaQuery.of(context).size.width - 2 * 12,
                   height: 429,
@@ -176,13 +176,13 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                   ],
                   gradientBegin: Alignment.topRight,
                   gradientEnd: Alignment.bottomLeft,
-                  padding: const EdgeInsets.fromLTRB(12, 0, 6, 0),
+                  padding: const EdgeInsets.all(0),
                   child: Container(),
                 ),
               ),
               //Time Selector
               Positioned(
-                top: 267,
+                top: 237,
                 child: Container(
                   height: 48,
                   width: MediaQuery.of(context).size.width - 2 * 36,
@@ -195,7 +195,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                 ),
               ),
               Positioned(
-                top: 138,
+                top: 108,
                 child: SizedBox(
                   height: 300,
                   child: Stack(
@@ -279,7 +279,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
               ),
               //Days Of The Week Selector
               Positioned(
-                top: 126,
+                top: 96,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 2 * 24,
                   child: Row(
@@ -445,7 +445,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
               ),
               //Description Field
               Positioned(
-                top: 408,
+                top: 378,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 2 * 24,
                   child: Container(
@@ -529,7 +529,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
               ),
               //Delete Button
               Positioned(
-                top: 480,
+                top: 450,
                 left: 24,
                 child: TextButton(
                   onPressed: () {
@@ -550,7 +550,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
               ),
               //Save Alarm Button
               Positioned(
-                top: 480,
+                top: 450,
                 right: 24,
                 child: Container(
                   alignment: Alignment.centerRight,
