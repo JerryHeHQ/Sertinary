@@ -547,6 +547,7 @@ class _AlarmsAddState extends State<AlarmsAdd> {
   }
 
   updateFirebase() {
+    bool errorOccurred = false;
     firebaseFirestore.collection('users').doc(user!.uid.toString()).update({
       'alarms': FieldValue.delete(),
     }).then((value) {
@@ -559,7 +560,11 @@ class _AlarmsAddState extends State<AlarmsAdd> {
           .collection('users')
           .doc(user?.uid.toString())
           .update({'nextAlarmID': FieldValue.increment(1)});
-    }).onError((error, stackTrace) => showResult(true));
+    }).onError((error, stackTrace) {
+      errorOccurred = true;
+    }).then((value) {
+      showResult(errorOccurred);
+    });
   }
 
   showResult(bool errorOccurred) {
