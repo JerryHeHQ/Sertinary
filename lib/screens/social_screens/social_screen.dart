@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/constants/color_constants.dart';
 import 'package:sertinary/routes/router.gr.dart';
-import 'package:sertinary/widgets/bottom_navigation_bar/sub_buttons.dart';
+import 'package:sertinary/widgets/sub_buttons/sub_buttons.dart';
 
 class SocialScreen extends StatefulWidget {
   const SocialScreen({Key? key}) : super(key: key);

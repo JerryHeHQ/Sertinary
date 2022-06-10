@@ -29,11 +29,11 @@ class SleepRecommendedBox extends StatelessWidget {
       borderColor: Colors.black.withOpacity(0.09),
       borderWidth: 1.5,
       gradientColors: [
-        Colors.black.withOpacity(0.42),
-        Colors.black.withOpacity(0.27),
+        Colors.black.withOpacity(0.9),
+        Colors.black.withOpacity(0.6),
       ],
-      gradientBegin: Alignment.topRight,
-      gradientEnd: Alignment.bottomLeft,
+      gradientBegin: Alignment.topLeft,
+      gradientEnd: Alignment.bottomRight,
       padding: const EdgeInsets.fromLTRB(6, 6, 6, 6),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -1,60 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/constants/gradient_constants.dart';
 
-class DayOfTheWeekButton extends StatefulWidget {
-  final Color selectedColor;
-  final Color unselectedColor;
-  final bool selected;
+class DOTWButton extends StatelessWidget {
+  final bool on;
   final String day;
-  final void Function()? onPressed;
+  final void Function()? onTap;
 
-  const DayOfTheWeekButton({
+  const DOTWButton({
     Key? key,
-    required this.selectedColor,
-    required this.unselectedColor,
-    required this.selected,
+    required this.on,
     required this.day,
-    required this.onPressed,
+    this.onTap,
   }) : super(key: key);
 
   @override
-  State<DayOfTheWeekButton> createState() => _DayOfTheWeekButtonState();
-}
-
-class _DayOfTheWeekButtonState extends State<DayOfTheWeekButton> {
-  late Color _selectedColor;
-  late Color _unselectedColor;
-  late bool _selected;
-  late String _day;
-  late void Function()? _onPressed;
-
-  @override
   Widget build(BuildContext context) {
-    _selectedColor = widget.selectedColor;
-    _unselectedColor = widget.unselectedColor;
-    _selected = widget.selected;
-    _day = widget.day;
-    _onPressed = widget.onPressed;
-    return SizedBox(
-      width: 51,
-      child: ElevatedButton(
-        onPressed: () {
-          _onPressed;
-        },
-        style: ElevatedButton.styleFrom(
-          primary: _selected ? _selectedColor : _unselectedColor,
-          padding: const EdgeInsets.all(0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
-          textStyle: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: ColorConstants.monoAA,
-          ),
+    final enabledGradient = GradientConstants.gradient1;
+
+    final disabledGradient = LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        ColorConstants.mono10,
+        ColorConstants.mono10,
+      ],
+    );
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 9),
+        height: 39,
+        width: 42,
+        decoration: BoxDecoration(
+          gradient: on ? enabledGradient : disabledGradient,
+          borderRadius: BorderRadius.circular(6),
         ),
         child: Text(
-          _day,
+          day,
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: ColorConstants.monoAA,
+            ),
+          ),
+          textAlign: TextAlign.center,
         ),
       ),
     );

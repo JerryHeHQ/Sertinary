@@ -33,15 +33,15 @@ class ColorConstants {
   static Color mono95 = hexToColor('#F2F2F2');
   static Color monoAA = hexToColor('#FFFFFF');
 
-  static Color accent10 = hexToColor('#332600');
-  static Color accent20 = hexToColor('#664C00');
+  static Color accent10 = hexToColor('#332600'); //#332600
+  static Color accent20 = hexToColor('#664C00'); //#664C00
   static Color accent30 = hexToColor('#997200'); //#997200 #E31CCC
-  static Color accent40 = hexToColor('#CC9800');
+  static Color accent40 = hexToColor('#CC9800'); //#CC9800
   static Color accent50 = hexToColor('#FFBE00'); //#FFBE00 #E31C79
-  static Color accent60 = hexToColor('#FFCB33');
-  static Color accent70 = hexToColor('#FFD866');
-  static Color accent80 = hexToColor('#FFE599');
-  static Color accent90 = hexToColor('#FFF2CC');
+  static Color accent60 = hexToColor('#FFCB33'); //#FFCB33
+  static Color accent70 = hexToColor('#FFD866'); //#FFD866
+  static Color accent80 = hexToColor('#FFE599'); //#FFE599
+  static Color accent90 = hexToColor('#FFF2CC'); //#FFF2CC
 
   static Color fail = hexToColor('#B00020');
   static Color success = hexToColor('#00B020');

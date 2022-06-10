@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/constants/gradient_constants.dart';
 import 'package:sertinary/routes/router.gr.dart';
 
 class RegisterVerifyScreen extends StatefulWidget {
@@ -104,20 +105,19 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
       alignment: Alignment.centerRight,
       child: Material(
         elevation: 6,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(6),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              stops: const [0.0, 0.5, 1.0],
-              colors: [
-                ColorConstants.accent30,
-                ColorConstants.accent50,
-                ColorConstants.accent30,
-              ],
-            ),
-            borderRadius: BorderRadius.circular(18),
+            gradient: GradientConstants.gradient1,
+            borderRadius: BorderRadius.circular(6),
+            boxShadow: [
+              BoxShadow(
+                color: ColorConstants.mono00,
+                spreadRadius: 3,
+                blurRadius: 6,
+                offset: const Offset(3, 3),
+              ),
+            ],
           ),
           child: MaterialButton(
             height: 54,
@@ -156,18 +156,20 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
     );
 
     return Scaffold(
-      backgroundColor: ColorConstants.mono05,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        leading: const AutoLeadingButton(),
+        foregroundColor: ColorConstants.mono00,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.0, 0.6],
-            colors: [
-              ColorConstants.accent50,
-              ColorConstants.accent30,
-            ],
-          ),
+          gradient: GradientConstants.gradient1,
         ),
         alignment: Alignment.bottomCenter,
         child: SingleChildScrollView(
@@ -188,8 +190,8 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                     height: 450.0,
                     margin: const EdgeInsets.only(top: 6.0),
                     decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(30.0)),
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(24)),
                       color: ColorConstants.mono05,
                       boxShadow: const [
                         BoxShadow(

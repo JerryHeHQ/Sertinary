@@ -2,8 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/constants/gradient_constants.dart';
 import 'package:sertinary/routes/router.gr.dart';
+import 'package:sertinary/widgets/gradient_widget.dart';
 
 bool _passwordVisible = false;
 
@@ -23,7 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
 
   //Form Key
-  final _formKey = GlobalKey<FormState>();
+  final _emailFormKey = GlobalKey<FormState>();
+  final _passwordFormKey = GlobalKey<FormState>();
 
   //Scaffold Key
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -51,158 +55,183 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     //Email Form Field
-    final emailField = Focus(
-      onFocusChange: (hasFocus) {
-        setState(() => _emailLabelColor =
-            hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
-      },
-      child: TextFormField(
-        autofocus: false,
-        controller: _emailController,
-        keyboardType: TextInputType.emailAddress,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return ('Please Enter Your Email');
-          }
-          //RegExp To Check If Email Is Valid
-          if (!RegExp(
-                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-              .hasMatch(value)) {
-            return ('Please Enter A Valid Email');
-          }
-          return null;
+    final emailField = Form(
+      key: _emailFormKey,
+      onChanged: () => setState(
+        () => _enableLoginButton = _emailFormKey.currentState!.validate(),
+      ),
+      child: Focus(
+        onFocusChange: (hasFocus) {
+          setState(() => _emailLabelColor =
+              hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
         },
-        onSaved: (value) {
-          _emailController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        cursorColor: ColorConstants.accent50,
-        cursorHeight: 18,
-        style: TextStyle(
-          fontSize: 16,
-          color: ColorConstants.mono95,
-          fontWeight: FontWeight.w400,
-        ),
-        decoration: InputDecoration(
-          fillColor: ColorConstants.mono10,
-          filled: true,
-          prefixIcon: Icon(
-            Icons.mail,
-            color: ColorConstants.accent50,
+        child: TextFormField(
+          autofocus: false,
+          controller: _emailController,
+          keyboardType: TextInputType.emailAddress,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return ('Please Enter Your Email');
+            }
+            //RegExp To Check If Email Is Valid
+            if (!RegExp(
+                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                .hasMatch(value)) {
+              return ('Please Enter A Valid Email');
+            }
+            return null;
+          },
+          onSaved: (value) {
+            _emailController.text = value!;
+          },
+          textInputAction: TextInputAction.next,
+          cursorColor: ColorConstants.accent50,
+          cursorHeight: 18,
+          style: TextStyle(
+            fontSize: 16,
+            color: ColorConstants.mono95,
+            fontWeight: FontWeight.w400,
           ),
-          suffixIcon: IconButton(
-            icon: Icon(
-              Icons.clear_rounded,
-              color: ColorConstants.accent50,
+          decoration: InputDecoration(
+            fillColor: ColorConstants.mono10,
+            filled: true,
+            prefixIcon: GradientWidget(
+                gradient: GradientConstants.gradient1,
+                child: Icon(
+                  Icons.mail,
+                  color: ColorConstants.accent50,
+                )),
+            suffixIcon: IconButton(
+              icon: GradientWidget(
+                gradient: GradientConstants.gradient1,
+                child: Icon(
+                  Icons.clear_rounded,
+                  color: ColorConstants.accent50,
+                ),
+              ),
+              onPressed: () {
+                setState(
+                  () {
+                    _emailController.clear();
+                  },
+                );
+              },
             ),
-            onPressed: () {
-              setState(
-                () {
-                  _emailController.clear();
-                },
-              );
-            },
-          ),
-          contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: 'Email',
-          labelStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              fontSize: 16,
-              color: _emailLabelColor,
-              fontWeight: FontWeight.w400,
+            contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
+            labelText: 'Email',
+            labelStyle: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 16,
+                color: _emailLabelColor,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            focusedBorder: GradientOutlineInputBorder(
+              width: 2.1,
+              gradient: GradientConstants.gradient1,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+              borderRadius: BorderRadius.circular(6),
+            ),
           ),
         ),
       ),
     );
 
     //Password Form Field
-    final passwordField = Focus(
-      onFocusChange: (hasFocus) {
-        setState(() => _passwordLabelColor =
-            hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
-      },
-      child: TextFormField(
-        autofocus: false,
-        controller: _passwordController,
-        obscureText: !_passwordVisible,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return ('Please Enter A Valid Password');
-          }
-          return null;
+    final passwordField = Form(
+      key: _passwordFormKey,
+      onChanged: () => setState(
+        () => _enableLoginButton = _passwordFormKey.currentState!.validate(),
+      ),
+      child: Focus(
+        onFocusChange: (hasFocus) {
+          setState(() => _passwordLabelColor =
+              hasFocus ? ColorConstants.accent50 : ColorConstants.mono75);
         },
-        onSaved: (value) {
-          _passwordController.text = value!;
-        },
-        textInputAction: TextInputAction.done,
-        cursorColor: ColorConstants.accent50,
-        cursorHeight: 18,
-        style: TextStyle(
-          fontSize: 16,
-          color: ColorConstants.mono95,
-          fontWeight: FontWeight.w400,
-        ),
-        decoration: InputDecoration(
-          fillColor: ColorConstants.mono10,
-          filled: true,
-          prefixIcon: Icon(
-            Icons.vpn_key,
-            color: ColorConstants.accent50,
+        child: TextFormField(
+          autofocus: false,
+          controller: _passwordController,
+          obscureText: !_passwordVisible,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return ('Please Enter A Valid Password');
+            }
+            return null;
+          },
+          onSaved: (value) {
+            _passwordController.text = value!;
+          },
+          textInputAction: TextInputAction.done,
+          cursorColor: ColorConstants.accent50,
+          cursorHeight: 18,
+          style: TextStyle(
+            fontSize: 16,
+            color: ColorConstants.mono95,
+            fontWeight: FontWeight.w400,
           ),
-          suffixIcon: IconButton(
-            icon: Icon(
-              _passwordVisible ? Icons.visibility_off : Icons.visibility,
-              color: ColorConstants.accent50,
+          decoration: InputDecoration(
+            fillColor: ColorConstants.mono10,
+            filled: true,
+            prefixIcon: GradientWidget(
+              gradient: GradientConstants.gradient1,
+              child: Icon(
+                Icons.vpn_key,
+                color: ColorConstants.accent50,
+              ),
             ),
-            onPressed: () {
-              setState(
-                () {
-                  _passwordVisible = !_passwordVisible;
+            suffixIcon: GradientWidget(
+              gradient: GradientConstants.gradient1,
+              child: IconButton(
+                icon: Icon(
+                  _passwordVisible ? Icons.visibility_off : Icons.visibility,
+                  color: ColorConstants.accent50,
+                ),
+                onPressed: () {
+                  setState(
+                    () {
+                      _passwordVisible = !_passwordVisible;
+                    },
+                  );
                 },
-              );
-            },
-          ),
-          contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
-          labelText: 'Password',
-          labelStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              fontSize: 16,
-              color: _passwordLabelColor,
-              fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
+            contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
+            labelText: 'Password',
+            labelStyle: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 16,
+                color: _passwordLabelColor,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            focusedBorder: GradientOutlineInputBorder(
+              width: 2.1,
+              gradient: GradientConstants.gradient1,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
+              borderRadius: BorderRadius.circular(6),
+            ),
           ),
         ),
       ),
@@ -234,37 +263,27 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     //Button Enabled Linear Gradient
-    final enabledGradient = LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      stops: const [0.0, 0.5, 1.0],
-      colors: [
-        ColorConstants.accent30,
-        ColorConstants.accent50,
-        ColorConstants.accent30,
-      ],
-    );
+    final enabledGradient = GradientConstants.gradient1;
 
     //Button Disabled Linear Gradient
-    final disabledGradient = LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      stops: const [0.0, 0.5, 1.0],
-      colors: [
-        ColorConstants.mono30,
-        ColorConstants.mono50,
-        ColorConstants.mono30,
-      ],
-    );
+    final disabledGradient = GradientConstants.gradient2;
 
     //Login Button
     final loginButton = Material(
       elevation: 6,
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(6),
       child: Container(
         decoration: BoxDecoration(
           gradient: _enableLoginButton ? enabledGradient : disabledGradient,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(6),
+          boxShadow: [
+            BoxShadow(
+              color: ColorConstants.mono00,
+              spreadRadius: 3,
+              blurRadius: 6,
+              offset: const Offset(3, 3),
+            ),
+          ],
         ),
         child: MaterialButton(
           height: 54,
@@ -311,14 +330,17 @@ class _LoginScreenState extends State<LoginScreen> {
               const RegisterRoute(),
             );
           },
-          child: Text(
-            'Sign Up',
-            style: GoogleFonts.montserrat(
-              textStyle: TextStyle(
-                fontSize: 13,
-                color: ColorConstants.accent50,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
+          child: GradientWidget(
+            gradient: GradientConstants.gradient1,
+            child: Text(
+              'Sign Up',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  fontSize: 13,
+                  color: ColorConstants.accent50,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
           ),
@@ -335,29 +357,23 @@ class _LoginScreenState extends State<LoginScreen> {
             color: ColorConstants.mono05,
             child: Padding(
               padding: const EdgeInsets.all(21),
-              child: Form(
-                key: _formKey,
-                onChanged: () => setState(
-                  () => _enableLoginButton = _formKey.currentState!.validate(),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    sertinaryLogo,
-                    const SizedBox(height: 60),
-                    emailField,
-                    const SizedBox(height: 15),
-                    passwordField,
-                    const SizedBox(height: 3),
-                    forgotPasswordButton,
-                    const SizedBox(height: 30),
-                    loginButton,
-                    const SizedBox(height: 12),
-                    signUpButton,
-                    const SizedBox(height: 30),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  sertinaryLogo,
+                  const SizedBox(height: 60),
+                  emailField,
+                  const SizedBox(height: 15),
+                  passwordField,
+                  const SizedBox(height: 3),
+                  forgotPasswordButton,
+                  const SizedBox(height: 30),
+                  loginButton,
+                  const SizedBox(height: 12),
+                  signUpButton,
+                  const SizedBox(height: 30),
+                ],
               ),
             ),
           ),
@@ -368,17 +384,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   //Login Function
   void _login(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
+    if (_emailFormKey.currentState!.validate() &&
+        _passwordFormKey.currentState!.validate()) {
       try {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then(
-              (uid) => {
-                AutoRouter.of(context).push(
-                  const HomeRoute(),
-                ),
-              },
+          (uid) {
+            _passwordController.clear();
+            AutoRouter.of(context).push(
+              const HomeRoute(),
             );
+          },
+        );
       } on FirebaseAuthException catch (error) {
         String errorMessage = '';
         switch (error.code) {

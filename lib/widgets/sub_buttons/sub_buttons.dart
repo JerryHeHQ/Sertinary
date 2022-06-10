@@ -29,7 +29,7 @@ class _SubButtonLeftState extends State<SubButtonLeft> {
               math.cos(commonFunctions.degreesToRadians(30)) * 60,
           child: MaterialButton(
             enableFeedback: subButtonsActive.value,
-            color: Colors.red,
+            color: Colors.transparent,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             elevation: 0,
@@ -66,7 +66,7 @@ class _SubButtonCenterState extends State<SubButtonCenter> {
           bottom: 33 + math.sin(commonFunctions.degreesToRadians(90)) * 60,
           child: MaterialButton(
             enableFeedback: subButtonsActive.value,
-            color: Colors.red,
+            color: Colors.transparent,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             elevation: 0,
@@ -106,7 +106,7 @@ class _SubButtonRightState extends State<SubButtonRight> {
               math.cos(commonFunctions.degreesToRadians(30)) * 60,
           child: MaterialButton(
             enableFeedback: subButtonsActive.value,
-            color: Colors.red,
+            color: Colors.transparent,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             elevation: 0,

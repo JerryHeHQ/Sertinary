@@ -4,12 +4,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/constants/gradient_constants.dart';
 import 'package:sertinary/screens/alarms_screens/widgets/am_pm_elements.dart';
 import 'package:sertinary/screens/alarms_screens/widgets/hour_elements.dart';
 import 'package:sertinary/screens/alarms_screens/widgets/minute_elements.dart';
 import 'package:sertinary/screens/alarms_screens/widgets/sleep_rec_box.dart';
 import 'package:sertinary/widgets/glass_box.dart';
+import 'package:sertinary/widgets/gradient_widget.dart';
 
 class AlarmsCalculator extends StatefulWidget {
   const AlarmsCalculator({Key? key}) : super(key: key);
@@ -64,11 +67,11 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
       borderColor: Colors.black.withOpacity(0.09),
       borderWidth: 1.5,
       gradientColors: [
-        Colors.black.withOpacity(0.42),
-        Colors.black.withOpacity(0.27),
+        Colors.black.withOpacity(0.9),
+        Colors.black.withOpacity(0.6),
       ],
-      gradientBegin: Alignment.topRight,
-      gradientEnd: Alignment.bottomLeft,
+      gradientBegin: Alignment.topLeft,
+      gradientEnd: Alignment.bottomRight,
       padding: const EdgeInsets.all(0),
       child: Container(),
     );
@@ -211,22 +214,28 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
           decoration: InputDecoration(
             fillColor: ColorConstants.mono10,
             filled: true,
-            prefixIcon: Icon(
-              Icons.more_time_outlined,
-              color: ColorConstants.accent50,
-            ),
-            suffixIcon: IconButton(
-              icon: Icon(
-                Icons.clear_rounded,
+            prefixIcon: GradientWidget(
+              gradient: GradientConstants.gradient1,
+              child: Icon(
+                Icons.more_time_outlined,
                 color: ColorConstants.accent50,
               ),
-              onPressed: () {
-                setState(
-                  () {
-                    fallAsleepController.clear();
-                  },
-                );
-              },
+            ),
+            suffixIcon: GradientWidget(
+              gradient: GradientConstants.gradient1,
+              child: IconButton(
+                icon: Icon(
+                  Icons.clear_rounded,
+                  color: ColorConstants.accent50,
+                ),
+                onPressed: () {
+                  setState(
+                    () {
+                      fallAsleepController.clear();
+                    },
+                  );
+                },
+              ),
             ),
             contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
             labelText: 'Time To Fall Asleep',
@@ -241,10 +250,10 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
               borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
               borderRadius: BorderRadius.circular(18),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: ColorConstants.accent50, width: 2.1),
-              borderRadius: BorderRadius.circular(18),
+            focusedBorder: GradientOutlineInputBorder(
+              width: 2.1,
+              gradient: GradientConstants.gradient1,
+              borderRadius: BorderRadius.circular(6),
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
@@ -289,22 +298,28 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
           decoration: InputDecoration(
             fillColor: ColorConstants.mono10,
             filled: true,
-            prefixIcon: Icon(
-              Icons.bed_outlined,
-              color: ColorConstants.accent50,
-            ),
-            suffixIcon: IconButton(
-              icon: Icon(
-                Icons.clear_rounded,
+            prefixIcon: GradientWidget(
+              gradient: GradientConstants.gradient1,
+              child: Icon(
+                Icons.bed_outlined,
                 color: ColorConstants.accent50,
               ),
-              onPressed: () {
-                setState(
-                  () {
-                    sleepCycleController.clear();
-                  },
-                );
-              },
+            ),
+            suffixIcon: GradientWidget(
+              gradient: GradientConstants.gradient1,
+              child: IconButton(
+                icon: Icon(
+                  Icons.clear_rounded,
+                  color: ColorConstants.accent50,
+                ),
+                onPressed: () {
+                  setState(
+                    () {
+                      sleepCycleController.clear();
+                    },
+                  );
+                },
+              ),
             ),
             contentPadding: const EdgeInsets.fromLTRB(18, 21, 18, 21),
             labelText: 'Time Per Sleep Cycle',
@@ -319,10 +334,10 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
               borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
               borderRadius: BorderRadius.circular(18),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: ColorConstants.accent50, width: 2.1),
-              borderRadius: BorderRadius.circular(18),
+            focusedBorder: GradientOutlineInputBorder(
+              width: 2.1,
+              gradient: GradientConstants.gradient1,
+              borderRadius: BorderRadius.circular(6),
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
@@ -391,7 +406,7 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/TempBackground.png'),
+            image: AssetImage('assets/images/TempBackground.jpg'),
             fit: BoxFit.cover,
           ),
         ),

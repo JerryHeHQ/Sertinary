@@ -4,7 +4,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/constants/gradient_constants.dart';
+import 'package:sertinary/widgets/gradient_widget.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -31,22 +34,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //Back Button
-    final backButton = Container(
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
-      child: IconButton(
-        icon: const Icon(
-          Icons.arrow_back_rounded,
-          size: 45,
-        ),
-        color: ColorConstants.mono05,
-        onPressed: () {
-          AutoRouter.of(context).pop();
-        },
-      ),
-    );
-
     //Title Message
     final titleMessage = Padding(
       padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
@@ -57,7 +44,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             'No worries.\nWe got you covered.',
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                fontSize: 33,
+                fontSize: 30,
                 color: ColorConstants.mono05,
                 fontWeight: FontWeight.w700,
               ),
@@ -120,14 +107,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         decoration: InputDecoration(
           fillColor: ColorConstants.mono10,
           filled: true,
-          prefixIcon: Icon(
-            Icons.mail,
-            color: ColorConstants.accent50,
+          prefixIcon: GradientWidget(
+            gradient: GradientConstants.gradient1,
+            child: Icon(
+              Icons.mail,
+              color: ColorConstants.accent50,
+            ),
           ),
           suffixIcon: IconButton(
-            icon: Icon(
-              Icons.clear_rounded,
-              color: ColorConstants.accent50,
+            icon: GradientWidget(
+              gradient: GradientConstants.gradient1,
+              child: Icon(
+                Icons.clear_rounded,
+                color: ColorConstants.accent50,
+              ),
             ),
             onPressed: () {
               setState(
@@ -148,58 +141,49 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(6),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.accent50, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
+          focusedBorder: GradientOutlineInputBorder(
+            width: 2.1,
+            gradient: GradientConstants.gradient1,
+            borderRadius: BorderRadius.circular(6),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(6),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(6),
           ),
         ),
       ),
     );
 
     //Button Enabled Linear Gradient
-    final enabledGradient = LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      stops: const [0.0, 0.5, 1.0],
-      colors: [
-        ColorConstants.accent30,
-        ColorConstants.accent50,
-        ColorConstants.accent30,
-      ],
-    );
+    final enabledGradient = GradientConstants.gradient1;
 
     //Button Disabled Linear Gradient
-    final disabledGradient = LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      stops: const [0.0, 0.5, 1.0],
-      colors: [
-        ColorConstants.mono30,
-        ColorConstants.mono50,
-        ColorConstants.mono30,
-      ],
-    );
+    final disabledGradient = GradientConstants.gradient2;
 
     //Next Button
     final nextButton = Container(
       alignment: Alignment.centerRight,
       child: Material(
         elevation: 6,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(6),
         child: Container(
           decoration: BoxDecoration(
             gradient: _enableNextButton ? enabledGradient : disabledGradient,
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(6),
+            boxShadow: [
+              BoxShadow(
+                color: ColorConstants.mono00,
+                spreadRadius: 3,
+                blurRadius: 6,
+                offset: const Offset(3, 3),
+              ),
+            ],
           ),
           child: MaterialButton(
             height: 54,
@@ -234,18 +218,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
 
     return Scaffold(
-      backgroundColor: ColorConstants.mono05,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        leading: const AutoLeadingButton(),
+        foregroundColor: ColorConstants.mono00,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.0, 0.6],
-            colors: [
-              ColorConstants.accent50,
-              ColorConstants.accent30,
-            ],
-          ),
+          gradient: GradientConstants.gradient1,
         ),
         alignment: Alignment.bottomCenter,
         child: SingleChildScrollView(
@@ -260,9 +246,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const SizedBox(height: 50),
-                  backButton,
-                  const SizedBox(height: 90),
+                  const SizedBox(height: 150),
                   titleMessage,
                   const SizedBox(height: 36),
                   //Bottom Section
@@ -271,8 +255,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                     margin: const EdgeInsets.only(top: 6.0),
                     decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(30.0)),
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(24)),
                       color: ColorConstants.mono05,
                       boxShadow: const [
                         BoxShadow(

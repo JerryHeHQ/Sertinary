@@ -5,12 +5,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/constants/gradient_constants.dart';
 import 'package:sertinary/screens/alarms_screens/alarm_template.dart';
 import 'package:sertinary/screens/alarms_screens/widgets/am_pm_elements.dart';
+import 'package:sertinary/screens/alarms_screens/widgets/day_of_the_week_button.dart';
 import 'package:sertinary/screens/alarms_screens/widgets/hour_elements.dart';
 import 'package:sertinary/screens/alarms_screens/widgets/minute_elements.dart';
 import 'package:sertinary/widgets/glass_box.dart';
+import 'package:sertinary/widgets/gradient_widget.dart';
 
 class AlarmsEdit extends StatefulWidget {
   const AlarmsEdit({Key? key, required this.alarmID}) : super(key: key);
@@ -28,16 +32,21 @@ class _AlarmsEditState extends State<AlarmsEdit> {
   //Dynamically Changes TextFormField Label Color
   Color _descriptionLabelColor = ColorConstants.mono75;
 
-  //For DayOfTheWeekButtons
-  late Color selectedColorDOTWB;
-  late Color unselectedColorDOTWB;
-  late bool mon;
-  late bool tue;
-  late bool wed;
-  late bool thu;
-  late bool fri;
-  late bool sat;
-  late bool sun;
+  //DayOfTheWeekButtons
+  List<bool> theDOTW = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
+
+  updateDOTWB(int day) {
+    theDOTW[day] = !theDOTW[day];
+    setState(() {});
+  }
 
   //List Wheel Time Selector Controllers
   late FixedExtentScrollController _hourController;
@@ -78,21 +87,22 @@ class _AlarmsEditState extends State<AlarmsEdit> {
       }
     }
 
-    mon = alarm['daysOfTheWeek'][0];
-    tue = alarm['daysOfTheWeek'][1];
-    wed = alarm['daysOfTheWeek'][2];
-    thu = alarm['daysOfTheWeek'][3];
-    fri = alarm['daysOfTheWeek'][4];
-    sat = alarm['daysOfTheWeek'][5];
-    sun = alarm['daysOfTheWeek'][6];
+    theDOTW[0] = alarm['daysOfTheWeek'][0];
+    theDOTW[1] = alarm['daysOfTheWeek'][1];
+    theDOTW[2] = alarm['daysOfTheWeek'][2];
+    theDOTW[3] = alarm['daysOfTheWeek'][3];
+    theDOTW[4] = alarm['daysOfTheWeek'][4];
+    theDOTW[5] = alarm['daysOfTheWeek'][5];
+    theDOTW[6] = alarm['daysOfTheWeek'][6];
 
     double hour = alarm['hour'].toDouble();
     double min = alarm['min'].toDouble();
 
     bool hasPM = false;
-    if (hour == 12) {
+    if (hour >= 12) {
       hasPM = true;
     }
+
     if (hour > 12) {
       hour - 12;
     }
@@ -106,9 +116,6 @@ class _AlarmsEditState extends State<AlarmsEdit> {
 
     _descriptionController =
         TextEditingController(text: alarm['description'].toString());
-
-    selectedColorDOTWB = ColorConstants.accent50;
-    unselectedColorDOTWB = ColorConstants.mono10;
 
     log('finished initialization');
 
@@ -141,7 +148,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
             return Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/TempBackground.png'),
+                  image: AssetImage('assets/images/TempBackground.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -155,7 +162,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
               Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/TempBackground.png'),
+                    image: AssetImage('assets/images/TempBackground.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -167,15 +174,15 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                   width: MediaQuery.of(context).size.width - 2 * 12,
                   height: 429,
                   blur: 3,
-                  borderRadius: 18,
+                  borderRadius: 6,
                   borderColor: Colors.black.withOpacity(0.09),
                   borderWidth: 1.5,
                   gradientColors: [
-                    Colors.black.withOpacity(0.42),
-                    Colors.black.withOpacity(0.27),
+                    Colors.black.withOpacity(0.9),
+                    Colors.black.withOpacity(0.6),
                   ],
-                  gradientBegin: Alignment.topRight,
-                  gradientEnd: Alignment.bottomLeft,
+                  gradientBegin: Alignment.topLeft,
+                  gradientEnd: Alignment.bottomRight,
                   padding: const EdgeInsets.all(0),
                   child: Container(),
                 ),
@@ -183,13 +190,16 @@ class _AlarmsEditState extends State<AlarmsEdit> {
               //Time Selector
               Positioned(
                 top: 237,
-                child: Container(
-                  height: 48,
-                  width: MediaQuery.of(context).size.width - 2 * 36,
-                  decoration: BoxDecoration(
-                    color: ColorConstants.mono10,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(18),
+                child: GradientWidget(
+                  gradient: GradientConstants.gradient1,
+                  child: Container(
+                    height: 48,
+                    width: MediaQuery.of(context).size.width - 2 * 36,
+                    decoration: BoxDecoration(
+                      color: ColorConstants.mono10,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(6),
+                      ),
                     ),
                   ),
                 ),
@@ -207,7 +217,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                           decoration: BoxDecoration(
                             color: ColorConstants.mono20,
                             borderRadius: const BorderRadius.all(
-                              Radius.circular(18),
+                              Radius.circular(6),
                             ),
                           ),
                         ),
@@ -279,166 +289,40 @@ class _AlarmsEditState extends State<AlarmsEdit> {
               ),
               //Days Of The Week Selector
               Positioned(
-                top: 96,
+                top: 102,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 2 * 24,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      SizedBox(
-                        width: 42,
-                        child: ElevatedButton(
-                          onPressed: () => setState(() {
-                            mon = !mon;
-                          }),
-                          style: ElevatedButton.styleFrom(
-                            primary:
-                                mon ? selectedColorDOTWB : unselectedColorDOTWB,
-                            padding: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: ColorConstants.monoAA,
-                            ),
-                          ),
-                          child: const Text('Mon'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 42,
-                        child: ElevatedButton(
-                          onPressed: () => setState(() {
-                            tue = !tue;
-                          }),
-                          style: ElevatedButton.styleFrom(
-                            primary:
-                                tue ? selectedColorDOTWB : unselectedColorDOTWB,
-                            padding: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: ColorConstants.monoAA,
-                            ),
-                          ),
-                          child: const Text('Tue'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 42,
-                        child: ElevatedButton(
-                          onPressed: () => setState(() {
-                            wed = !wed;
-                          }),
-                          style: ElevatedButton.styleFrom(
-                            primary:
-                                wed ? selectedColorDOTWB : unselectedColorDOTWB,
-                            padding: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: ColorConstants.monoAA,
-                            ),
-                          ),
-                          child: const Text('Wed'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 42,
-                        child: ElevatedButton(
-                          onPressed: () => setState(() {
-                            thu = !thu;
-                          }),
-                          style: ElevatedButton.styleFrom(
-                            primary:
-                                thu ? selectedColorDOTWB : unselectedColorDOTWB,
-                            padding: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: ColorConstants.monoAA,
-                            ),
-                          ),
-                          child: const Text('Thu'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 42,
-                        child: ElevatedButton(
-                          onPressed: () => setState(() {
-                            fri = !fri;
-                          }),
-                          style: ElevatedButton.styleFrom(
-                            primary:
-                                fri ? selectedColorDOTWB : unselectedColorDOTWB,
-                            padding: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: ColorConstants.monoAA,
-                            ),
-                          ),
-                          child: const Text('Fri'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 42,
-                        child: ElevatedButton(
-                          onPressed: () => setState(() {
-                            sat = !sat;
-                          }),
-                          style: ElevatedButton.styleFrom(
-                            primary:
-                                sat ? selectedColorDOTWB : unselectedColorDOTWB,
-                            padding: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: ColorConstants.monoAA,
-                            ),
-                          ),
-                          child: const Text('Sat'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 42,
-                        child: ElevatedButton(
-                          onPressed: () => setState(() {
-                            sun = !sun;
-                          }),
-                          style: ElevatedButton.styleFrom(
-                            primary:
-                                sun ? selectedColorDOTWB : unselectedColorDOTWB,
-                            padding: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: ColorConstants.monoAA,
-                            ),
-                          ),
-                          child: const Text('Sun'),
-                        ),
-                      ),
+                      DOTWButton(
+                          on: theDOTW[0],
+                          day: 'Mon',
+                          onTap: () => updateDOTWB(0)),
+                      DOTWButton(
+                          on: theDOTW[1],
+                          day: 'Tue',
+                          onTap: () => updateDOTWB(1)),
+                      DOTWButton(
+                          on: theDOTW[2],
+                          day: 'Wed',
+                          onTap: () => updateDOTWB(2)),
+                      DOTWButton(
+                          on: theDOTW[3],
+                          day: 'Thu',
+                          onTap: () => updateDOTWB(3)),
+                      DOTWButton(
+                          on: theDOTW[4],
+                          day: 'Fri',
+                          onTap: () => updateDOTWB(4)),
+                      DOTWButton(
+                          on: theDOTW[5],
+                          day: 'Sat',
+                          onTap: () => updateDOTWB(5)),
+                      DOTWButton(
+                          on: theDOTW[6],
+                          day: 'Sun',
+                          onTap: () => updateDOTWB(6)),
                     ],
                   ),
                 ),
@@ -474,22 +358,28 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                         decoration: InputDecoration(
                           fillColor: ColorConstants.mono10,
                           filled: true,
-                          prefixIcon: Icon(
-                            Icons.text_snippet_outlined,
-                            color: ColorConstants.accent50,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              Icons.clear_rounded,
+                          prefixIcon: GradientWidget(
+                            gradient: GradientConstants.gradient1,
+                            child: Icon(
+                              Icons.text_snippet_outlined,
                               color: ColorConstants.accent50,
                             ),
-                            onPressed: () {
-                              setState(
-                                () {
-                                  _descriptionController.clear();
-                                },
-                              );
-                            },
+                          ),
+                          suffixIcon: GradientWidget(
+                            gradient: GradientConstants.gradient1,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.clear_rounded,
+                                color: ColorConstants.accent50,
+                              ),
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    _descriptionController.clear();
+                                  },
+                                );
+                              },
+                            ),
                           ),
                           contentPadding:
                               const EdgeInsets.fromLTRB(18, 21, 18, 21),
@@ -504,22 +394,22 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: ColorConstants.mono15, width: 1.8),
-                            borderRadius: BorderRadius.circular(18),
+                            borderRadius: BorderRadius.circular(6),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: ColorConstants.accent50, width: 2.1),
-                            borderRadius: BorderRadius.circular(18),
+                          focusedBorder: GradientOutlineInputBorder(
+                            width: 2.1,
+                            gradient: GradientConstants.gradient1,
+                            borderRadius: BorderRadius.circular(6),
                           ),
                           errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: ColorConstants.fail, width: 2.1),
-                            borderRadius: BorderRadius.circular(18),
+                            borderRadius: BorderRadius.circular(6),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: ColorConstants.fail, width: 2.1),
-                            borderRadius: BorderRadius.circular(18),
+                            borderRadius: BorderRadius.circular(6),
                           ),
                         ),
                       ),
@@ -556,20 +446,11 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                   alignment: Alignment.centerRight,
                   child: Material(
                     elevation: 6,
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(6),
                     child: Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          stops: const [0.0, 0.5, 1.0],
-                          colors: [
-                            ColorConstants.accent30,
-                            ColorConstants.accent50,
-                            ColorConstants.accent30,
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(18),
+                        gradient: GradientConstants.gradient1,
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: MaterialButton(
                         height: 54,
@@ -620,15 +501,13 @@ class _AlarmsEditState extends State<AlarmsEdit> {
       hour += 12;
     }
 
-    List<bool> daysOfTheWeek = [mon, tue, wed, thu, fri, sat, sun];
-
     AlarmTemplate alarm = AlarmTemplate(
       id: widget.alarmID,
       hour: hour,
       min: min,
       description: _descriptionController.text,
       isActive: true,
-      daysOfTheWeek: daysOfTheWeek,
+      daysOfTheWeek: theDOTW,
     );
 
     for (int i = 0; i < alarmsList.length; i++) {
