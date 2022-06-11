@@ -1,29 +1,29 @@
-import 'package:sertinary/screens/alarms_screens/alarm_template.dart';
-
 class UserTemplate {
   String uid;
-  String username;
   String email;
-  String? password;
-  late int nextAlarmID;
-  List<AlarmTemplate> alarmsList;
+  String username;
 
   UserTemplate({
     required this.uid,
-    required this.username,
     required this.email,
-    this.password,
-    required this.alarmsList,
+    required this.username,
   });
 
   //Send Data To Firebase Server
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
-      'username': username,
       'email': email,
+      'username': username,
+      'bio': '',
+      'numOfPosts': 0,
+      'numOfFollowers': 0,
+      'numOfLikes': 0,
       'nextAlarmID': 0,
-      'alarms': alarmsList,
+      'alarms': [],
+      'posts': [],
+      'saved': [],
+      'follows': [],
     };
   }
 }

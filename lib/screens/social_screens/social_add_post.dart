@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sertinary/constants/color_constants.dart';
 
-class SocialAdd extends StatefulWidget {
-  const SocialAdd({Key? key}) : super(key: key);
+class SocialAddPost extends StatefulWidget {
+  const SocialAddPost({Key? key}) : super(key: key);
 
   @override
-  State<SocialAdd> createState() => _SocialAddState();
+  State<SocialAddPost> createState() => _SocialAddState();
 }
 
-class _SocialAddState extends State<SocialAdd> {
+class _SocialAddState extends State<SocialAddPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

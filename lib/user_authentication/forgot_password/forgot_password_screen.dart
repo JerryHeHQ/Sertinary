@@ -102,7 +102,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         style: TextStyle(
           fontSize: 16,
           color: ColorConstants.mono95,
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w600,
         ),
         decoration: InputDecoration(
           fillColor: ColorConstants.mono10,
@@ -136,7 +136,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             textStyle: TextStyle(
               fontSize: 16,
               color: _emailLabelColor,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
             ),
           ),
           enabledBorder: OutlineInputBorder(

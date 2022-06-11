@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class CircularPicture extends StatelessWidget {
   final double height;
   final double width;
-  final ImageProvider<Object>? image;
+  final ImageProvider<Object> image;
   final void Function() onPressed;
 
   const CircularPicture({
     Key? key,
     required this.height,
     required this.width,
-    this.image,
+    required this.image,
     required this.onPressed,
   }) : super(key: key);
 
@@ -25,7 +25,7 @@ class CircularPicture extends StatelessWidget {
           shape: BoxShape.circle,
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: image ?? const AssetImage('assets/images/DefaultPFP.png'),
+            image: image,
           ),
         ),
       ),

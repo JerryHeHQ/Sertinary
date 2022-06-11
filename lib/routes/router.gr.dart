@@ -11,7 +11,7 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i27;
+import 'package:flutter/material.dart' as _i31;
 
 import '../screens/alarms_screens/alarms_add.dart' as _i12;
 import '../screens/alarms_screens/alarms_calculator.dart' as _i11;
@@ -19,18 +19,22 @@ import '../screens/alarms_screens/alarms_change_theme.dart' as _i13;
 import '../screens/alarms_screens/alarms_edit.dart' as _i14;
 import '../screens/alarms_screens/alarms_screen.dart' as _i10;
 import '../screens/home_screen.dart' as _i4;
-import '../screens/planner_screens/planner_add.dart' as _i25;
-import '../screens/planner_screens/planner_change_date.dart' as _i26;
-import '../screens/planner_screens/planner_screen.dart' as _i23;
-import '../screens/planner_screens/planner_work_rythmn.dart' as _i24;
-import '../screens/social_screens/social_add.dart' as _i17;
-import '../screens/social_screens/social_profile.dart' as _i18;
+import '../screens/planner_screens/planner_add.dart' as _i29;
+import '../screens/planner_screens/planner_change_date.dart' as _i30;
+import '../screens/planner_screens/planner_screen.dart' as _i27;
+import '../screens/planner_screens/planner_work_rythmn.dart' as _i28;
+import '../screens/social_screens/social_add_post.dart' as _i17;
+import '../screens/social_screens/social_edit_post.dart' as _i18;
+import '../screens/social_screens/social_edit_profile.dart' as _i22;
+import '../screens/social_screens/social_profile.dart' as _i21;
 import '../screens/social_screens/social_saved.dart' as _i16;
 import '../screens/social_screens/social_screen.dart' as _i15;
-import '../screens/tracker_screens/tracker_add.dart' as _i21;
-import '../screens/tracker_screens/tracker_change_date.dart' as _i22;
-import '../screens/tracker_screens/tracker_overview.dart' as _i20;
-import '../screens/tracker_screens/tracker_screen.dart' as _i19;
+import '../screens/social_screens/social_view_post.dart' as _i19;
+import '../screens/social_screens/social_view_user.dart' as _i20;
+import '../screens/tracker_screens/tracker_add.dart' as _i25;
+import '../screens/tracker_screens/tracker_change_date.dart' as _i26;
+import '../screens/tracker_screens/tracker_overview.dart' as _i24;
+import '../screens/tracker_screens/tracker_screen.dart' as _i23;
 import '../screens/welcome_screens/welcome_screen.dart' as _i9;
 import '../user_authentication/forgot_password/forgot_password_screen.dart'
     as _i3;
@@ -43,7 +47,7 @@ import '../user_authentication/registration/register_username_screen.dart'
 import '../user_authentication/registration/register_verify_screen.dart' as _i8;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i27.GlobalKey<_i27.NavigatorState>? navigatorKey])
+  AppRouter([_i31.GlobalKey<_i31.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -136,45 +140,67 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i16.SocialSaved());
     },
-    SocialAddRouter.name: (routeData) {
+    SocialAddPostRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i17.SocialAdd());
+          routeData: routeData, child: const _i17.SocialAddPost());
+    },
+    SocialEditPostRouter.name: (routeData) {
+      final args = routeData.argsAs<SocialEditPostRouterArgs>();
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i18.SocialEditPost(key: args.key, postID: args.postID));
+    },
+    SocialViewPostRouter.name: (routeData) {
+      final args = routeData.argsAs<SocialViewPostRouterArgs>();
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i19.SocialViewPost(key: args.key, postID: args.postID));
+    },
+    SocialViewUserRouter.name: (routeData) {
+      final args = routeData.argsAs<SocialViewUserRouterArgs>();
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i20.SocialViewUser(key: args.key, userID: args.userID));
     },
     SocialProfileRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i18.SocialProfile());
+          routeData: routeData, child: const _i21.SocialProfile());
+    },
+    SocialEditProfileRouter.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i22.SocialEditProfile());
     },
     TrackerScreenRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i19.TrackerScreen());
+          routeData: routeData, child: const _i23.TrackerScreen());
     },
     TrackerOverviewRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i20.TrackerOverview());
+          routeData: routeData, child: const _i24.TrackerOverview());
     },
     TrackerAddRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i21.TrackerAdd());
+          routeData: routeData, child: const _i25.TrackerAdd());
     },
     TrackerChangeDateRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i22.TrackerChangeDate());
+          routeData: routeData, child: const _i26.TrackerChangeDate());
     },
     PlannerScreenRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i23.PlannerScreen());
+          routeData: routeData, child: const _i27.PlannerScreen());
     },
     PlannerWorkRythmnRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i24.PlannerWorkRythmn());
+          routeData: routeData, child: const _i28.PlannerWorkRythmn());
     },
     PlannerAddRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i25.PlannerAdd());
+          routeData: routeData, child: const _i29.PlannerAdd());
     },
     PlannerChangeDateRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i26.PlannerChangeDate());
+          routeData: routeData, child: const _i30.PlannerChangeDate());
     }
   };
 
@@ -235,10 +261,18 @@ class AppRouter extends _i2.RootStackRouter {
                     path: 'social_screen', parent: SocialRouter.name),
                 _i2.RouteConfig(SocialSavedRouter.name,
                     path: 'social_saved', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialAddRouter.name,
-                    path: 'social_add', parent: SocialRouter.name),
+                _i2.RouteConfig(SocialAddPostRouter.name,
+                    path: 'social_add_post', parent: SocialRouter.name),
+                _i2.RouteConfig(SocialEditPostRouter.name,
+                    path: 'social_edit_post', parent: SocialRouter.name),
+                _i2.RouteConfig(SocialViewPostRouter.name,
+                    path: 'social_view_post', parent: SocialRouter.name),
+                _i2.RouteConfig(SocialViewUserRouter.name,
+                    path: 'social_view_user', parent: SocialRouter.name),
                 _i2.RouteConfig(SocialProfileRouter.name,
-                    path: 'social_profile', parent: SocialRouter.name)
+                    path: 'social_profile', parent: SocialRouter.name),
+                _i2.RouteConfig(SocialEditProfileRouter.name,
+                    path: 'social_edit_profile', parent: SocialRouter.name)
               ]),
           _i2.RouteConfig(TrackerRouter.name,
               path: 'tracker',
@@ -327,7 +361,7 @@ class RegisterUsernameRoute extends _i2.PageRouteInfo<void> {
 /// generated route for
 /// [_i6.RegisterEmailScreen]
 class RegisterEmailRoute extends _i2.PageRouteInfo<RegisterEmailRouteArgs> {
-  RegisterEmailRoute({_i27.Key? key, required String username})
+  RegisterEmailRoute({_i31.Key? key, required String username})
       : super(RegisterEmailRoute.name,
             path: 'register_email',
             args: RegisterEmailRouteArgs(key: key, username: username));
@@ -338,7 +372,7 @@ class RegisterEmailRoute extends _i2.PageRouteInfo<RegisterEmailRouteArgs> {
 class RegisterEmailRouteArgs {
   const RegisterEmailRouteArgs({this.key, required this.username});
 
-  final _i27.Key? key;
+  final _i31.Key? key;
 
   final String username;
 
@@ -353,7 +387,7 @@ class RegisterEmailRouteArgs {
 class RegisterPasswordRoute
     extends _i2.PageRouteInfo<RegisterPasswordRouteArgs> {
   RegisterPasswordRoute(
-      {_i27.Key? key, required String username, required String email})
+      {_i31.Key? key, required String username, required String email})
       : super(RegisterPasswordRoute.name,
             path: 'register_password',
             args: RegisterPasswordRouteArgs(
@@ -366,7 +400,7 @@ class RegisterPasswordRouteArgs {
   const RegisterPasswordRouteArgs(
       {this.key, required this.username, required this.email});
 
-  final _i27.Key? key;
+  final _i31.Key? key;
 
   final String username;
 
@@ -469,7 +503,7 @@ class AlarmsChangeThemeRouter extends _i2.PageRouteInfo<void> {
 /// generated route for
 /// [_i14.AlarmsEdit]
 class AlarmsEditRouter extends _i2.PageRouteInfo<AlarmsEditRouterArgs> {
-  AlarmsEditRouter({_i27.Key? key, required double alarmID})
+  AlarmsEditRouter({_i31.Key? key, required double alarmID})
       : super(AlarmsEditRouter.name,
             path: 'alarms_edit',
             args: AlarmsEditRouterArgs(key: key, alarmID: alarmID));
@@ -480,7 +514,7 @@ class AlarmsEditRouter extends _i2.PageRouteInfo<AlarmsEditRouterArgs> {
 class AlarmsEditRouterArgs {
   const AlarmsEditRouterArgs({this.key, required this.alarmID});
 
-  final _i27.Key? key;
+  final _i31.Key? key;
 
   final double alarmID;
 
@@ -509,15 +543,88 @@ class SocialSavedRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.SocialAdd]
-class SocialAddRouter extends _i2.PageRouteInfo<void> {
-  const SocialAddRouter() : super(SocialAddRouter.name, path: 'social_add');
+/// [_i17.SocialAddPost]
+class SocialAddPostRouter extends _i2.PageRouteInfo<void> {
+  const SocialAddPostRouter()
+      : super(SocialAddPostRouter.name, path: 'social_add_post');
 
-  static const String name = 'SocialAddRouter';
+  static const String name = 'SocialAddPostRouter';
 }
 
 /// generated route for
-/// [_i18.SocialProfile]
+/// [_i18.SocialEditPost]
+class SocialEditPostRouter extends _i2.PageRouteInfo<SocialEditPostRouterArgs> {
+  SocialEditPostRouter({_i31.Key? key, required int postID})
+      : super(SocialEditPostRouter.name,
+            path: 'social_edit_post',
+            args: SocialEditPostRouterArgs(key: key, postID: postID));
+
+  static const String name = 'SocialEditPostRouter';
+}
+
+class SocialEditPostRouterArgs {
+  const SocialEditPostRouterArgs({this.key, required this.postID});
+
+  final _i31.Key? key;
+
+  final int postID;
+
+  @override
+  String toString() {
+    return 'SocialEditPostRouterArgs{key: $key, postID: $postID}';
+  }
+}
+
+/// generated route for
+/// [_i19.SocialViewPost]
+class SocialViewPostRouter extends _i2.PageRouteInfo<SocialViewPostRouterArgs> {
+  SocialViewPostRouter({_i31.Key? key, required int postID})
+      : super(SocialViewPostRouter.name,
+            path: 'social_view_post',
+            args: SocialViewPostRouterArgs(key: key, postID: postID));
+
+  static const String name = 'SocialViewPostRouter';
+}
+
+class SocialViewPostRouterArgs {
+  const SocialViewPostRouterArgs({this.key, required this.postID});
+
+  final _i31.Key? key;
+
+  final int postID;
+
+  @override
+  String toString() {
+    return 'SocialViewPostRouterArgs{key: $key, postID: $postID}';
+  }
+}
+
+/// generated route for
+/// [_i20.SocialViewUser]
+class SocialViewUserRouter extends _i2.PageRouteInfo<SocialViewUserRouterArgs> {
+  SocialViewUserRouter({_i31.Key? key, required int userID})
+      : super(SocialViewUserRouter.name,
+            path: 'social_view_user',
+            args: SocialViewUserRouterArgs(key: key, userID: userID));
+
+  static const String name = 'SocialViewUserRouter';
+}
+
+class SocialViewUserRouterArgs {
+  const SocialViewUserRouterArgs({this.key, required this.userID});
+
+  final _i31.Key? key;
+
+  final int userID;
+
+  @override
+  String toString() {
+    return 'SocialViewUserRouterArgs{key: $key, userID: $userID}';
+  }
+}
+
+/// generated route for
+/// [_i21.SocialProfile]
 class SocialProfileRouter extends _i2.PageRouteInfo<void> {
   const SocialProfileRouter()
       : super(SocialProfileRouter.name, path: 'social_profile');
@@ -526,7 +633,16 @@ class SocialProfileRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i19.TrackerScreen]
+/// [_i22.SocialEditProfile]
+class SocialEditProfileRouter extends _i2.PageRouteInfo<void> {
+  const SocialEditProfileRouter()
+      : super(SocialEditProfileRouter.name, path: 'social_edit_profile');
+
+  static const String name = 'SocialEditProfileRouter';
+}
+
+/// generated route for
+/// [_i23.TrackerScreen]
 class TrackerScreenRouter extends _i2.PageRouteInfo<void> {
   const TrackerScreenRouter()
       : super(TrackerScreenRouter.name, path: 'tracker_screen');
@@ -535,7 +651,7 @@ class TrackerScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.TrackerOverview]
+/// [_i24.TrackerOverview]
 class TrackerOverviewRouter extends _i2.PageRouteInfo<void> {
   const TrackerOverviewRouter()
       : super(TrackerOverviewRouter.name, path: 'tracker_overview');
@@ -544,7 +660,7 @@ class TrackerOverviewRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.TrackerAdd]
+/// [_i25.TrackerAdd]
 class TrackerAddRouter extends _i2.PageRouteInfo<void> {
   const TrackerAddRouter() : super(TrackerAddRouter.name, path: 'tracker_add');
 
@@ -552,7 +668,7 @@ class TrackerAddRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.TrackerChangeDate]
+/// [_i26.TrackerChangeDate]
 class TrackerChangeDateRouter extends _i2.PageRouteInfo<void> {
   const TrackerChangeDateRouter()
       : super(TrackerChangeDateRouter.name, path: 'tracker_change_date');
@@ -561,7 +677,7 @@ class TrackerChangeDateRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.PlannerScreen]
+/// [_i27.PlannerScreen]
 class PlannerScreenRouter extends _i2.PageRouteInfo<void> {
   const PlannerScreenRouter()
       : super(PlannerScreenRouter.name, path: 'planner_screen');
@@ -570,7 +686,7 @@ class PlannerScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i24.PlannerWorkRythmn]
+/// [_i28.PlannerWorkRythmn]
 class PlannerWorkRythmnRouter extends _i2.PageRouteInfo<void> {
   const PlannerWorkRythmnRouter()
       : super(PlannerWorkRythmnRouter.name, path: 'planner_work_rythmn');
@@ -579,7 +695,7 @@ class PlannerWorkRythmnRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i25.PlannerAdd]
+/// [_i29.PlannerAdd]
 class PlannerAddRouter extends _i2.PageRouteInfo<void> {
   const PlannerAddRouter() : super(PlannerAddRouter.name, path: 'planner_add');
 
@@ -587,7 +703,7 @@ class PlannerAddRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i26.PlannerChangeDate]
+/// [_i30.PlannerChangeDate]
 class PlannerChangeDateRouter extends _i2.PageRouteInfo<void> {
   const PlannerChangeDateRouter()
       : super(PlannerChangeDateRouter.name, path: 'planner_change_date');

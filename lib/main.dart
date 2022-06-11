@@ -1,20 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sertinary/routes/router.gr.dart';
 import 'package:flutter/services.dart';
+import 'package:sertinary/routes/router.gr.dart';
 
 //Global Variable So All Home Page Screens Can Properly React To Sub Button Presses
 ValueNotifier<bool> subButtonsActive = ValueNotifier<bool>(false);
 
 void main() async {
-  //Removed Dark Area Around Status Bar
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    ),
-  );
-
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+
   await Firebase.initializeApp();
   runApp(MyApp());
 }

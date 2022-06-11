@@ -55,9 +55,9 @@ class _AlarmsEditState extends State<AlarmsEdit> {
 
   late FirebaseFirestore firebaseFirestore;
   User? user;
-  late var data;
+  late Map<String, dynamic> data;
   late List<dynamic> alarmsList;
-  late var alarm;
+  late Map<String, dynamic> alarm;
   late Future<bool> startBuild;
   bool hasBeenInitialized = false;
 
@@ -353,7 +353,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                         style: TextStyle(
                           fontSize: 16,
                           color: ColorConstants.mono95,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w600,
                         ),
                         decoration: InputDecoration(
                           fillColor: ColorConstants.mono10,
@@ -388,7 +388,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
                             textStyle: TextStyle(
                               fontSize: 16,
                               color: _descriptionLabelColor,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -543,7 +543,7 @@ class _AlarmsEditState extends State<AlarmsEdit> {
       }
     }
 
-    firebaseFirestore.collection('users').doc(user!.uid.toString()).update({
+    firebaseFirestore.collection('users').doc(user!.uid).update({
       'alarms': FieldValue.delete(),
     }).then((value) {
       firebaseFirestore

@@ -63,7 +63,7 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
       width: MediaQuery.of(context).size.width - 2 * 12,
       height: 420,
       blur: 3,
-      borderRadius: 18,
+      borderRadius: 6,
       borderColor: Colors.black.withOpacity(0.09),
       borderWidth: 1.5,
       gradientColors: [
@@ -89,13 +89,16 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
     );
 
     //Background For List Wheel Time Selector
-    final timeSelectorBackground = Container(
-      height: 48,
-      width: MediaQuery.of(context).size.width - 2 * 36,
-      decoration: BoxDecoration(
-        color: ColorConstants.mono10,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(18),
+    final timeSelectorBackground = GradientWidget(
+      gradient: GradientConstants.gradient1,
+      child: Container(
+        height: 48,
+        width: MediaQuery.of(context).size.width - 2 * 36,
+        decoration: BoxDecoration(
+          color: ColorConstants.mono10,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(6),
+          ),
         ),
       ),
     );
@@ -111,7 +114,7 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
               decoration: BoxDecoration(
                 color: ColorConstants.mono20,
                 borderRadius: const BorderRadius.all(
-                  Radius.circular(18),
+                  Radius.circular(6),
                 ),
               ),
             ),
@@ -209,7 +212,7 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
           style: TextStyle(
             fontSize: 16,
             color: ColorConstants.mono95,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
             fillColor: ColorConstants.mono10,
@@ -248,7 +251,7 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(6),
             ),
             focusedBorder: GradientOutlineInputBorder(
               width: 2.1,
@@ -257,11 +260,11 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(6),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(6),
             ),
           ),
         ),
@@ -293,7 +296,7 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
           style: TextStyle(
             fontSize: 16,
             color: ColorConstants.mono95,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
             fillColor: ColorConstants.mono10,
@@ -332,7 +335,7 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(6),
             ),
             focusedBorder: GradientOutlineInputBorder(
               width: 2.1,
@@ -341,11 +344,11 @@ class _AlarmsCalculatorState extends State<AlarmsCalculator> {
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(6),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(6),
             ),
           ),
         ),

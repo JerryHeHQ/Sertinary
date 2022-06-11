@@ -192,12 +192,13 @@ class _RegisterVerifyScreenState extends State<RegisterVerifyScreen> {
                     decoration: BoxDecoration(
                       borderRadius:
                           const BorderRadius.vertical(top: Radius.circular(24)),
-                      color: ColorConstants.mono05,
-                      boxShadow: const [
+                      color: ColorConstants.mono10,
+                      boxShadow: [
                         BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0.0, 1.0), //(x,y)
-                          blurRadius: 5.0,
+                          color: ColorConstants.mono00,
+                          spreadRadius: 0,
+                          blurRadius: 3,
+                          offset: const Offset(1.5, -1.5),
                         ),
                       ],
                     ),

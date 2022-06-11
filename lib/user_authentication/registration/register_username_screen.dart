@@ -99,7 +99,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           style: TextStyle(
             fontSize: 16,
             color: ColorConstants.mono95,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
             fillColor: ColorConstants.mono10,
@@ -133,7 +133,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
               textStyle: TextStyle(
                 fontSize: 16,
                 color: _usernameLabelColor,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
               ),
             ),
             enabledBorder: OutlineInputBorder(
@@ -291,12 +291,13 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                     decoration: BoxDecoration(
                       borderRadius:
                           const BorderRadius.vertical(top: Radius.circular(24)),
-                      color: ColorConstants.mono05,
-                      boxShadow: const [
+                      color: ColorConstants.mono10,
+                      boxShadow: [
                         BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0.0, 1.0), //(x,y)
-                          blurRadius: 5.0,
+                          color: ColorConstants.mono00,
+                          spreadRadius: 0,
+                          blurRadius: 3,
+                          offset: const Offset(1.5, -1.5),
                         ),
                       ],
                     ),

@@ -14,8 +14,6 @@ class SubButtonLeft extends StatefulWidget {
 }
 
 class _SubButtonLeftState extends State<SubButtonLeft> {
-  CommonFunctions commonFunctions = CommonFunctions();
-
   @override
   Widget build(BuildContext context) {
     void Function()? onPressed = widget.onPressed;
@@ -23,10 +21,10 @@ class _SubButtonLeftState extends State<SubButtonLeft> {
       valueListenable: subButtonsActive,
       builder: (context, value, widget) {
         return Positioned(
-          bottom: 33 + math.sin(commonFunctions.degreesToRadians(30)) * 60,
+          bottom: 33 + math.sin(CommonFunctions.degreesToRadians(30)) * 60,
           left: (MediaQuery.of(context).size.width / 2) -
               24 -
-              math.cos(commonFunctions.degreesToRadians(30)) * 60,
+              math.cos(CommonFunctions.degreesToRadians(30)) * 60,
           child: MaterialButton(
             enableFeedback: subButtonsActive.value,
             color: Colors.transparent,
@@ -54,8 +52,6 @@ class SubButtonCenter extends StatefulWidget {
 }
 
 class _SubButtonCenterState extends State<SubButtonCenter> {
-  CommonFunctions commonFunctions = CommonFunctions();
-
   @override
   Widget build(BuildContext context) {
     void Function()? onPressed = widget.onPressed;
@@ -63,7 +59,7 @@ class _SubButtonCenterState extends State<SubButtonCenter> {
       valueListenable: subButtonsActive,
       builder: (context, value, widget) {
         return Positioned(
-          bottom: 33 + math.sin(commonFunctions.degreesToRadians(90)) * 60,
+          bottom: 33 + math.sin(CommonFunctions.degreesToRadians(90)) * 60,
           child: MaterialButton(
             enableFeedback: subButtonsActive.value,
             color: Colors.transparent,
@@ -91,8 +87,6 @@ class SubButtonRight extends StatefulWidget {
 }
 
 class _SubButtonRightState extends State<SubButtonRight> {
-  CommonFunctions commonFunctions = CommonFunctions();
-
   @override
   Widget build(BuildContext context) {
     void Function()? onPressed = widget.onPressed;
@@ -100,10 +94,10 @@ class _SubButtonRightState extends State<SubButtonRight> {
       valueListenable: subButtonsActive,
       builder: (context, value, widget) {
         return Positioned(
-          bottom: 33 + math.sin(commonFunctions.degreesToRadians(30)) * 60,
+          bottom: 33 + math.sin(CommonFunctions.degreesToRadians(30)) * 60,
           left: (MediaQuery.of(context).size.width / 2) -
               24 +
-              math.cos(commonFunctions.degreesToRadians(30)) * 60,
+              math.cos(CommonFunctions.degreesToRadians(30)) * 60,
           child: MaterialButton(
             enableFeedback: subButtonsActive.value,
             color: Colors.transparent,

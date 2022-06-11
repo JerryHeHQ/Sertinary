@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   //Firebase
   final _auth = FirebaseAuth.instance;
 
-  //Form Key
+  //Form Keys
   final _emailFormKey = GlobalKey<FormState>();
   final _passwordFormKey = GlobalKey<FormState>();
 
@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
           style: TextStyle(
             fontSize: 16,
             color: ColorConstants.mono95,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
             fillColor: ColorConstants.mono10,
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
               textStyle: TextStyle(
                 fontSize: 16,
                 color: _emailLabelColor,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
               ),
             ),
             enabledBorder: OutlineInputBorder(
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
           style: TextStyle(
             fontSize: 16,
             color: ColorConstants.mono95,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
             fillColor: ColorConstants.mono10,
@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
               textStyle: TextStyle(
                 fontSize: 16,
                 color: _passwordLabelColor,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
               ),
             ),
             enabledBorder: OutlineInputBorder(
@@ -348,32 +348,36 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: ColorConstants.mono05,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: ColorConstants.mono05,
-            child: Padding(
-              padding: const EdgeInsets.all(21),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  sertinaryLogo,
-                  const SizedBox(height: 60),
-                  emailField,
-                  const SizedBox(height: 15),
-                  passwordField,
-                  const SizedBox(height: 3),
-                  forgotPasswordButton,
-                  const SizedBox(height: 30),
-                  loginButton,
-                  const SizedBox(height: 12),
-                  signUpButton,
-                  const SizedBox(height: 30),
-                ],
+    return WillPopScope(
+      //Disables Andriod Bottom Bar Back Button
+      onWillPop: () async => false,
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: ColorConstants.mono05,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              color: ColorConstants.mono05,
+              child: Padding(
+                padding: const EdgeInsets.all(21),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    sertinaryLogo,
+                    const SizedBox(height: 60),
+                    emailField,
+                    const SizedBox(height: 15),
+                    passwordField,
+                    const SizedBox(height: 3),
+                    forgotPasswordButton,
+                    const SizedBox(height: 30),
+                    loginButton,
+                    const SizedBox(height: 12),
+                    signUpButton,
+                    const SizedBox(height: 30),
+                  ],
+                ),
               ),
             ),
           ),
@@ -392,9 +396,7 @@ class _LoginScreenState extends State<LoginScreen> {
             .then(
           (uid) {
             _passwordController.clear();
-            AutoRouter.of(context).push(
-              const HomeRoute(),
-            );
+            AutoRouter.of(context).replaceAll([const HomeRoute()]);
           },
         );
       } on FirebaseAuthException catch (error) {

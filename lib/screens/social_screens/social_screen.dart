@@ -46,7 +46,7 @@ class _SocialScreenState extends State<SocialScreen> {
   }
 
   void centerSubButton() {
-    AutoRouter.of(context).push(const SocialAddRouter());
+    AutoRouter.of(context).push(const SocialAddPostRouter());
   }
 
   void rightSubButton() {

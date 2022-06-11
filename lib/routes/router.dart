@@ -9,10 +9,14 @@ import 'package:sertinary/screens/planner_screens/planner_add.dart';
 import 'package:sertinary/screens/planner_screens/planner_change_date.dart';
 import 'package:sertinary/screens/planner_screens/planner_screen.dart';
 import 'package:sertinary/screens/planner_screens/planner_work_rythmn.dart';
-import 'package:sertinary/screens/social_screens/social_add.dart';
+import 'package:sertinary/screens/social_screens/social_add_post.dart';
+import 'package:sertinary/screens/social_screens/social_edit_post.dart';
+import 'package:sertinary/screens/social_screens/social_edit_profile.dart';
 import 'package:sertinary/screens/social_screens/social_profile.dart';
 import 'package:sertinary/screens/social_screens/social_saved.dart';
 import 'package:sertinary/screens/social_screens/social_screen.dart';
+import 'package:sertinary/screens/social_screens/social_view_post.dart';
+import 'package:sertinary/screens/social_screens/social_view_user.dart';
 import 'package:sertinary/screens/tracker_screens/tracker_add.dart';
 import 'package:sertinary/screens/tracker_screens/tracker_change_date.dart';
 import 'package:sertinary/screens/tracker_screens/tracker_overview.dart';
@@ -134,14 +138,34 @@ import 'package:sertinary/user_authentication/registration/register_verify_scree
               page: SocialSaved,
             ),
             AutoRoute(
-              path: 'social_add',
-              name: 'SocialAddRouter',
-              page: SocialAdd,
+              path: 'social_add_post',
+              name: 'SocialAddPostRouter',
+              page: SocialAddPost,
+            ),
+            AutoRoute(
+              path: 'social_edit_post',
+              name: 'SocialEditPostRouter',
+              page: SocialEditPost,
+            ),
+            AutoRoute(
+              path: 'social_view_post',
+              name: 'SocialViewPostRouter',
+              page: SocialViewPost,
+            ),
+            AutoRoute(
+              path: 'social_view_user',
+              name: 'SocialViewUserRouter',
+              page: SocialViewUser,
             ),
             AutoRoute(
               path: 'social_profile',
               name: 'SocialProfileRouter',
               page: SocialProfile,
+            ),
+            AutoRoute(
+              path: 'social_edit_profile',
+              name: 'SocialEditProfileRouter',
+              page: SocialEditProfile,
             ),
           ],
         ),

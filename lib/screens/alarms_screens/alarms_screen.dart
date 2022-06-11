@@ -80,7 +80,7 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
             }
             final alarmsList = snapshot.data;
             return Container(
-              padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
               child: ListView.separated(
                 separatorBuilder: (BuildContext context, int index) {
                   return const SizedBox(

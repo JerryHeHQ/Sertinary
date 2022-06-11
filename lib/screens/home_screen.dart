@@ -48,8 +48,6 @@ class _HomeScreenState extends State<HomeScreen>
   late Icon subButtonTwoIcon;
   late Icon subButtonThreeIcon;
 
-  CommonFunctions commonFunctions = CommonFunctions();
-
   @override
   void initState() {
     super.initState();
@@ -129,347 +127,357 @@ class _HomeScreenState extends State<HomeScreen>
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          //Extend Past BottomNavigationBar
-          extendBody: true,
-          //Background Color
-          backgroundColor: ColorConstants.monoAA,
-          //Screens & FloatingActionButton & SubButtons
-          body: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              //Screens
-              child,
-              //'Floating Action Button' (Same Function But Not Same Widget) & SubButtons
-              Positioned(
-                bottom: 27,
-                child: Stack(
-                  //Allows Overflow To Be Rendered
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    //SubButtonOne (Only Used For Animation)
-                    Transform.translate(
-                      offset: Offset.fromDirection(
-                          commonFunctions.degreesToRadians(210),
-                          subButtonOneAnimation.value * 60),
-                      child: Transform(
-                        transform: Matrix4.rotationZ(commonFunctions
-                            .degreesToRadians(subButtonRotationAnimation.value))
-                          ..scale(subButtonOneAnimation.value),
-                        alignment: Alignment.center,
-                        child: CircularButton(
-                          width: 40,
-                          height: 40,
-                          icon: subButtonOneIcon,
-                          onClick: () {},
+        return WillPopScope(
+          //Disables Andriod Bottom Bar Back Button
+          onWillPop: () async => false,
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            //Extend Past BottomNavigationBar
+            extendBody: true,
+            //Background Color
+            backgroundColor: ColorConstants.monoAA,
+            //Screens & FloatingActionButton & SubButtons
+            body: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                //Screens
+                child,
+                //'Floating Action Button' (Same Function But Not Same Widget) & SubButtons
+                Positioned(
+                  bottom: 27,
+                  child: Stack(
+                    //Allows Overflow To Be Rendered
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      //SubButtonOne (Only Used For Animation)
+                      Transform.translate(
+                        offset: Offset.fromDirection(
+                            CommonFunctions.degreesToRadians(210),
+                            subButtonOneAnimation.value * 60),
+                        child: Transform(
+                          transform: Matrix4.rotationZ(
+                              CommonFunctions.degreesToRadians(
+                                  subButtonRotationAnimation.value))
+                            ..scale(subButtonOneAnimation.value),
+                          alignment: Alignment.center,
+                          child: CircularButton(
+                            width: 40,
+                            height: 40,
+                            icon: subButtonOneIcon,
+                            onClick: () {},
+                          ),
                         ),
                       ),
-                    ),
-                    //SubButtonTwo (Only Used For Animation)
-                    Transform.translate(
-                      offset: Offset.fromDirection(
-                          commonFunctions.degreesToRadians(270),
-                          subButtonTwoAnimation.value * 60),
-                      child: Transform(
-                        transform: Matrix4.rotationZ(commonFunctions
-                            .degreesToRadians(subButtonRotationAnimation.value))
-                          ..scale(subButtonTwoAnimation.value),
-                        alignment: Alignment.center,
-                        child: CircularButton(
-                          width: 40,
-                          height: 40,
-                          icon: subButtonTwoIcon,
-                          onClick: () {},
+                      //SubButtonTwo (Only Used For Animation)
+                      Transform.translate(
+                        offset: Offset.fromDirection(
+                            CommonFunctions.degreesToRadians(270),
+                            subButtonTwoAnimation.value * 60),
+                        child: Transform(
+                          transform: Matrix4.rotationZ(
+                              CommonFunctions.degreesToRadians(
+                                  subButtonRotationAnimation.value))
+                            ..scale(subButtonTwoAnimation.value),
+                          alignment: Alignment.center,
+                          child: CircularButton(
+                            width: 40,
+                            height: 40,
+                            icon: subButtonTwoIcon,
+                            onClick: () {},
+                          ),
                         ),
                       ),
-                    ),
-                    //SubButtonThree (Only Used For Animation)
-                    Transform.translate(
-                      offset: Offset.fromDirection(
-                          commonFunctions.degreesToRadians(330),
-                          subButtonThreeAnimation.value * 60),
-                      child: Transform(
-                        transform: Matrix4.rotationZ(commonFunctions
-                            .degreesToRadians(subButtonRotationAnimation.value))
-                          ..scale(subButtonThreeAnimation.value),
-                        alignment: Alignment.center,
-                        child: CircularButton(
-                          width: 40,
-                          height: 40,
-                          icon: subButtonThreeIcon,
-                          onClick: () {},
+                      //SubButtonThree (Only Used For Animation)
+                      Transform.translate(
+                        offset: Offset.fromDirection(
+                            CommonFunctions.degreesToRadians(330),
+                            subButtonThreeAnimation.value * 60),
+                        child: Transform(
+                          transform: Matrix4.rotationZ(
+                              CommonFunctions.degreesToRadians(
+                                  subButtonRotationAnimation.value))
+                            ..scale(subButtonThreeAnimation.value),
+                          alignment: Alignment.center,
+                          child: CircularButton(
+                            width: 40,
+                            height: 40,
+                            icon: subButtonThreeIcon,
+                            onClick: () {},
+                          ),
                         ),
                       ),
-                    ),
-                    //Floating Action Button Background (Only Used For Visuals)
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: GradientConstants.gradient1,
+                      //Floating Action Button Background (Only Used For Visuals)
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: GradientConstants.gradient1,
+                        ),
+                        width: 60,
+                        height: 60,
+                        child: IconButton(
+                            icon: SubButtonIcons.blankIcon,
+                            enableFeedback: true,
+                            onPressed: () {}),
                       ),
-                      width: 60,
-                      height: 60,
-                      child: IconButton(
+                      //FLoating Action Button Animation (Only Used For Visuals)
+                      AnimateIcons(
+                        startIcon: Icons.keyboard_arrow_up_outlined,
+                        endIcon: Icons.keyboard_arrow_down_outlined,
+                        controller: fabIconAnimationController,
+                        size: 30,
+                        onStartIconPress: () {
+                          return false;
+                        },
+                        onEndIconPress: () {
+                          return false;
+                        },
+                        duration: const Duration(milliseconds: 250),
+                        startIconColor: ColorConstants.mono05,
+                        endIconColor: ColorConstants.mono05,
+                        clockwise: true,
+                      ),
+                      //Floating Action Button Interaction Surface (Needed So Overlapping Widgets Do Not Interfere With Interaction Area)
+                      Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        width: 60,
+                        height: 60,
+                        child: IconButton(
                           icon: SubButtonIcons.blankIcon,
                           enableFeedback: true,
-                          onPressed: () {}),
-                    ),
-                    //FLoating Action Button Animation (Only Used For Visuals)
-                    AnimateIcons(
-                      startIcon: Icons.keyboard_arrow_up_outlined,
-                      endIcon: Icons.keyboard_arrow_down_outlined,
-                      controller: fabIconAnimationController,
-                      size: 30,
-                      onStartIconPress: () {
-                        return false;
-                      },
-                      onEndIconPress: () {
-                        return false;
-                      },
-                      duration: const Duration(milliseconds: 250),
-                      startIconColor: ColorConstants.mono05,
-                      endIconColor: ColorConstants.mono05,
-                      clockwise: true,
-                    ),
-                    //Floating Action Button Interaction Surface (Needed So Overlapping Widgets Do Not Interfere With Interaction Area)
-                    Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
+                          onPressed: () {
+                            subButtonsActive.value = false;
+                            animateSubButtons(true);
+                          },
+                        ),
                       ),
-                      width: 60,
-                      height: 60,
-                      child: IconButton(
-                        icon: SubButtonIcons.blankIcon,
-                        enableFeedback: true,
-                        onPressed: () {
-                          subButtonsActive.value = false;
-                          animateSubButtons(true);
-                        },
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          //Bottom Navigation Bar
-          bottomNavigationBar: BottomAppBar(
-            //Makes Notch Shape
-            shape: const CircularNotchedRectangle(),
-            //Size Of Notch
-            notchMargin: 36,
-            //Color Of BottomAppBar
-            color: ColorConstants.mono05,
-            child: SafeArea(
-              child: Padding(
-                //Gives Vertical Padding Between GNavs And BottomAppBar
-                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
-                //Stack To Hold GNavs
-                child: Stack(
-                  //Aligns Sized Box (Creates Gap Between GNavs) To Center Of Bottom App Bar
-                  alignment: Alignment.center,
-                  children: [
-                    //Left GNav Holder
-                    Positioned(
-                      //Distance Left GNav Extends Beyond The Screen
-                      left: -gapWidth,
-                      child: SizedBox(
-                        //GNavWidth Is Actual GNav Size
-                        //2 * GapWidth Is Extendable Padding
-                        width: gNavWidth + 2 * gapWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            //Left GNav
-                            GradientWidget(
-                              gradient: GradientConstants.gradient1,
-                              child: GNav(
-                                //Index The First GButton (Tab) Relative To Screens
-                                minIndex: 1,
-                                //Boolean For Whether Any GButton (Tab) In The Right GNav Is Active
-                                isActive: (_selectedIndex == 1 ||
-                                    _selectedIndex == 2),
-                                //Gap Between GButton Icon And GButton Text
-                                gap: 6,
-                                //Distance Between GButtons When None Are Active
-                                tabMargin: const EdgeInsets.symmetric(
-                                  vertical: 0,
-                                  horizontal: 12,
-                                ),
-                                //Distance Between GButtons When One Is Active
-                                activeTabMargin: const EdgeInsets.symmetric(
-                                  vertical: 0,
-                                  horizontal: 0,
-                                ),
-                                //Text Style Of GButton Text (Overrides Active Color)
-                                textStyle: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: -0.6),
-                                ),
-                                rippleColor: Colors.red,
-                                //Size Of GButton Icons
-                                iconSize: 24,
-                                //Duration Of GButton Animation
-                                duration: const Duration(milliseconds: 180),
-                                //Padding Between GButton And Its Background
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 9, vertical: 12),
-                                //GButton Background Corner Radius
-                                tabBorderRadius: 9,
-                                //List Of GButtons
-                                tabs: const [
-                                  GButton(
-                                    icon: Icons.alarm_outlined,
-                                    text: 'Alarms',
+              ],
+            ),
+            //Bottom Navigation Bar
+            bottomNavigationBar: BottomAppBar(
+              //Makes Notch Shape
+              shape: const CircularNotchedRectangle(),
+              //Size Of Notch
+              notchMargin: 36,
+              //Color Of BottomAppBar
+              color: ColorConstants.mono05,
+              child: SafeArea(
+                child: Padding(
+                  //Gives Vertical Padding Between GNavs And BottomAppBar
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
+                  //Stack To Hold GNavs
+                  child: Stack(
+                    //Aligns Sized Box (Creates Gap Between GNavs) To Center Of Bottom App Bar
+                    alignment: Alignment.center,
+                    children: [
+                      //Left GNav Holder
+                      Positioned(
+                        //Distance Left GNav Extends Beyond The Screen
+                        left: -gapWidth,
+                        child: SizedBox(
+                          //GNavWidth Is Actual GNav Size
+                          //2 * GapWidth Is Extendable Padding
+                          width: gNavWidth + 2 * gapWidth,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              //Left GNav
+                              GradientWidget(
+                                gradient: GradientConstants.gradient1,
+                                child: GNav(
+                                  //Index The First GButton (Tab) Relative To Screens
+                                  minIndex: 1,
+                                  //Boolean For Whether Any GButton (Tab) In The Right GNav Is Active
+                                  isActive: (_selectedIndex == 1 ||
+                                      _selectedIndex == 2),
+                                  //Gap Between GButton Icon And GButton Text
+                                  gap: 6,
+                                  //Distance Between GButtons When None Are Active
+                                  tabMargin: const EdgeInsets.symmetric(
+                                    vertical: 0,
+                                    horizontal: 12,
                                   ),
-                                  GButton(
-                                    icon: Icons.person_pin_outlined,
-                                    text: 'Social',
+                                  //Distance Between GButtons When One Is Active
+                                  activeTabMargin: const EdgeInsets.symmetric(
+                                    vertical: 0,
+                                    horizontal: 0,
                                   ),
-                                ],
-                                //Gives GNav The SelectedIndex
-                                selectedIndex: _selectedIndex,
-                                //Function When A Different GButton (Tab) Is Selected
-                                onTabChange: (index) {
-                                  setState(() {
-                                    subButtonsActive.value = false;
-                                    //Updates The Class Variable For Use In Other Parts Of The Class
-                                    _selectedIndex = index;
-                                    //Tells TabsRouter To Change Screen To Corresponding Tab
-                                    tabsRouter.setActiveIndex(_selectedIndex);
-                                    //Changes Sub Buttons To Blank During Transition
-                                    updateSubButtonIcons(0);
-                                    //A Call To Close The FloatingActionButton's Sub-Buttons Only If They Are Opened
-                                    animateSubButtons(false);
-                                    //After Sub Button Animation Is Done, Each Sub Button Icon Will Have The Icons Corresponding To The Current Screen
-                                    Future.delayed(
-                                        const Duration(milliseconds: 360), () {
-                                      updateSubButtonIcons(_selectedIndex);
+                                  //Text Style Of GButton Text (Overrides Active Color)
+                                  textStyle: GoogleFonts.montserrat(
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: -0.6),
+                                  ),
+                                  rippleColor: Colors.red,
+                                  //Size Of GButton Icons
+                                  iconSize: 24,
+                                  //Duration Of GButton Animation
+                                  duration: const Duration(milliseconds: 180),
+                                  //Padding Between GButton And Its Background
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 9, vertical: 12),
+                                  //GButton Background Corner Radius
+                                  tabBorderRadius: 9,
+                                  //List Of GButtons
+                                  tabs: const [
+                                    GButton(
+                                      icon: Icons.alarm_outlined,
+                                      text: 'Alarms',
+                                    ),
+                                    GButton(
+                                      icon: Icons.person_pin_outlined,
+                                      text: 'Social',
+                                    ),
+                                  ],
+                                  //Gives GNav The SelectedIndex
+                                  selectedIndex: _selectedIndex,
+                                  //Function When A Different GButton (Tab) Is Selected
+                                  onTabChange: (index) {
+                                    setState(() {
+                                      subButtonsActive.value = false;
+                                      //Updates The Class Variable For Use In Other Parts Of The Class
+                                      _selectedIndex = index;
+                                      //Tells TabsRouter To Change Screen To Corresponding Tab
+                                      tabsRouter.setActiveIndex(_selectedIndex);
+                                      //Changes Sub Buttons To Blank During Transition
+                                      updateSubButtonIcons(0);
+                                      //A Call To Close The FloatingActionButton's Sub-Buttons Only If They Are Opened
+                                      animateSubButtons(false);
+                                      //After Sub Button Animation Is Done, Each Sub Button Icon Will Have The Icons Corresponding To The Current Screen
+                                      Future.delayed(
+                                          const Duration(milliseconds: 360),
+                                          () {
+                                        updateSubButtonIcons(_selectedIndex);
+                                      });
                                     });
-                                  });
-                                },
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    //Sized Box Holder (Empty Gap Between GNavs)
-                    Positioned(
-                      //Bottom App Bar Formatting
-                      child: SizedBox(
-                        //Height Of Bottom App Bar
-                        height: botAppBarHeight,
-                        //Width Of Gap Between GNavs
-                        width: gapWidth,
-                      ),
-                    ),
-                    //Right GNav Holder
-                    Positioned(
-                      //Distance Right GNav Extends Beyond The Screen
-                      right: -gapWidth,
-                      //Size Constraints For Right GNav
-                      child: SizedBox(
-                        //GNavWidth Is Actual GNav Size
-                        //2 * GapWidth Is Extendable Padding
-                        width: gNavWidth + 2 * gapWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            //Right GNav
-                            GradientWidget(
-                              gradient: GradientConstants.gradient1,
-                              child: GNav(
-                                //Index The First GButton (Tab) Relative To Screens
-                                minIndex: 3,
-                                //Boolean For Whether Any GButton (Tab) In The Right GNav Is Active
-                                isActive: (_selectedIndex == 3 ||
-                                    _selectedIndex == 4),
-                                //Gap Between GButton Icon And GButton Text
-                                gap: 6,
-                                //Distance Between GButtons When None Are Active
-                                tabMargin: const EdgeInsets.symmetric(
-                                  vertical: 0,
-                                  horizontal: 12,
-                                ),
-                                //Distance Between GButtons When One Is Active
-                                activeTabMargin: const EdgeInsets.symmetric(
-                                  vertical: 0,
-                                  horizontal: 0,
-                                ),
-                                //Text Style Of GButton Text (Overrides Active Color)
-                                textStyle: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: -0.6),
-                                ),
-                                rippleColor: Colors.red,
-                                //Size Of GButton Icons
-                                iconSize: 24,
-                                //Duration Of GButton Animation
-                                duration: const Duration(milliseconds: 180),
-                                //Padding Between GButton And Its Background
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 9, vertical: 12),
-                                //GButton Background Corner Radius
-                                tabBorderRadius: 9,
-                                //List Of GButtons
-                                tabs: const [
-                                  GButton(
-                                    icon: Icons.food_bank_outlined,
-                                    text: 'Tracker',
-                                  ),
-                                  GButton(
-                                    icon: Icons.list_alt_outlined,
-                                    text: 'Planner',
-                                  ),
-                                ],
-                                //Gives GNav The SelectedIndex
-                                selectedIndex: _selectedIndex,
-                                //Function When A Different GButton (Tab) Is Selected
-                                onTabChange: (index) {
-                                  setState(() {
-                                    subButtonsActive.value = false;
-                                    //Updates The Class Variable For Use In Other Parts Of The Class
-                                    _selectedIndex = index;
-                                    //Tells TabsRouter To Change Screen To Corresponding Tab
-                                    tabsRouter.setActiveIndex(_selectedIndex);
-                                    //Changes Sub Buttons To Blank During Transition
-                                    updateSubButtonIcons(0);
-                                    //A Call To Close The FloatingActionButton's Sub-Buttons Only If They Are Opened
-                                    animateSubButtons(false);
-                                    //After Sub Button Animation Is Done, Each Sub Button Icon Will Have The Icons Corresponding To The Current Screen
-                                    Future.delayed(
-                                        const Duration(milliseconds: 360), () {
-                                      updateSubButtonIcons(_selectedIndex);
-                                    });
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
+                      //Sized Box Holder (Empty Gap Between GNavs)
+                      Positioned(
+                        //Bottom App Bar Formatting
+                        child: SizedBox(
+                          //Height Of Bottom App Bar
+                          height: botAppBarHeight,
+                          //Width Of Gap Between GNavs
+                          width: gapWidth,
                         ),
                       ),
-                    ),
-                  ],
+                      //Right GNav Holder
+                      Positioned(
+                        //Distance Right GNav Extends Beyond The Screen
+                        right: -gapWidth,
+                        //Size Constraints For Right GNav
+                        child: SizedBox(
+                          //GNavWidth Is Actual GNav Size
+                          //2 * GapWidth Is Extendable Padding
+                          width: gNavWidth + 2 * gapWidth,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              //Right GNav
+                              GradientWidget(
+                                gradient: GradientConstants.gradient1,
+                                child: GNav(
+                                  //Index The First GButton (Tab) Relative To Screens
+                                  minIndex: 3,
+                                  //Boolean For Whether Any GButton (Tab) In The Right GNav Is Active
+                                  isActive: (_selectedIndex == 3 ||
+                                      _selectedIndex == 4),
+                                  //Gap Between GButton Icon And GButton Text
+                                  gap: 6,
+                                  //Distance Between GButtons When None Are Active
+                                  tabMargin: const EdgeInsets.symmetric(
+                                    vertical: 0,
+                                    horizontal: 12,
+                                  ),
+                                  //Distance Between GButtons When One Is Active
+                                  activeTabMargin: const EdgeInsets.symmetric(
+                                    vertical: 0,
+                                    horizontal: 0,
+                                  ),
+                                  //Text Style Of GButton Text (Overrides Active Color)
+                                  textStyle: GoogleFonts.montserrat(
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: -0.6),
+                                  ),
+                                  rippleColor: Colors.red,
+                                  //Size Of GButton Icons
+                                  iconSize: 24,
+                                  //Duration Of GButton Animation
+                                  duration: const Duration(milliseconds: 180),
+                                  //Padding Between GButton And Its Background
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 9, vertical: 12),
+                                  //GButton Background Corner Radius
+                                  tabBorderRadius: 9,
+                                  //List Of GButtons
+                                  tabs: const [
+                                    GButton(
+                                      icon: Icons.food_bank_outlined,
+                                      text: 'Tracker',
+                                    ),
+                                    GButton(
+                                      icon: Icons.list_alt_outlined,
+                                      text: 'Planner',
+                                    ),
+                                  ],
+                                  //Gives GNav The SelectedIndex
+                                  selectedIndex: _selectedIndex,
+                                  //Function When A Different GButton (Tab) Is Selected
+                                  onTabChange: (index) {
+                                    setState(() {
+                                      subButtonsActive.value = false;
+                                      //Updates The Class Variable For Use In Other Parts Of The Class
+                                      _selectedIndex = index;
+                                      //Tells TabsRouter To Change Screen To Corresponding Tab
+                                      tabsRouter.setActiveIndex(_selectedIndex);
+                                      //Changes Sub Buttons To Blank During Transition
+                                      updateSubButtonIcons(0);
+                                      //A Call To Close The FloatingActionButton's Sub-Buttons Only If They Are Opened
+                                      animateSubButtons(false);
+                                      //After Sub Button Animation Is Done, Each Sub Button Icon Will Have The Icons Corresponding To The Current Screen
+                                      Future.delayed(
+                                          const Duration(milliseconds: 360),
+                                          () {
+                                        updateSubButtonIcons(_selectedIndex);
+                                      });
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          //Invisible & Non-Interactable FloatingActionButton (Only Needed To Create App Bar Notch)
-          floatingActionButton: SizedBox(
-            width: 0,
-            height: 0,
-            child: FloatingActionButton(
-              onPressed: () {},
+            //Invisible & Non-Interactable FloatingActionButton (Only Needed To Create App Bar Notch)
+            floatingActionButton: SizedBox(
+              width: 0,
+              height: 0,
+              child: FloatingActionButton(
+                onPressed: () {},
+              ),
             ),
+            //Location Of Floating Action Button (Center Of Screen Just Above Bottom Navigation Bar)
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
           ),
-          //Location Of Floating Action Button (Center Of Screen Just Above Bottom Navigation Bar)
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
         );
       },
     );
