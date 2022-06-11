@@ -4,8 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import 'package:sertinary/constants/color_constants.dart';
+import 'package:sertinary/constants/form_field_constants.dart';
 import 'package:sertinary/constants/gradient_constants.dart';
 import 'package:sertinary/widgets/gradient_widget.dart';
 
@@ -139,23 +139,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.mono15, width: 1.8),
-            borderRadius: BorderRadius.circular(6),
-          ),
-          focusedBorder: GradientOutlineInputBorder(
-            width: 2.1,
-            gradient: GradientConstants.gradient1,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-            borderRadius: BorderRadius.circular(6),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.fail, width: 2.1),
-            borderRadius: BorderRadius.circular(6),
-          ),
+          enabledBorder: FormFieldConstants.enabledBorder,
+          focusedBorder: FormFieldConstants.focusedBorder,
+          errorBorder: FormFieldConstants.errorBorder,
+          focusedErrorBorder: FormFieldConstants.focusedErrorBorder,
         ),
       ),
     );
