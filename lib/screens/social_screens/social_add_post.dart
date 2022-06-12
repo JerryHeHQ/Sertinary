@@ -275,6 +275,17 @@ class _SocialAddState extends State<SocialAddPost> {
 
     bool errorOccurred = false;
 
+    String username = '';
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      Map userData = value.data() as Map;
+      username = userData['username'];
+    });
+
     try {
       PostTemplate post = PostTemplate(
         uid: user!.uid,
@@ -285,6 +296,7 @@ class _SocialAddState extends State<SocialAddPost> {
         fats: int.parse(_fatsController.text),
         ingredients: _ingredientsController.text,
         instructions: _instructionsController.text,
+        username: username,
       );
 
       DocumentReference docRef = await FirebaseFirestore.instance
@@ -302,6 +314,11 @@ class _SocialAddState extends State<SocialAddPost> {
       await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
         'posts': FieldValue.arrayUnion([postID])
       }, SetOptions(merge: true));
+
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(user!.uid)
+          .update({'numOfPosts': FieldValue.increment(1)});
     } on FirebaseException {
       errorOccurred = true;
     }

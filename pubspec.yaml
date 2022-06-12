@@ -25,6 +25,7 @@ dependencies:
   firebase_storage: ^10.2.17
   gradient_borders: ^0.2.0
   image_picker: ^0.8.5+3
+  like_button: ^2.0.4
 
 dev_dependencies:
   flutter_test:

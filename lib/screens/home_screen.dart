@@ -134,8 +134,9 @@ class _HomeScreenState extends State<HomeScreen>
             resizeToAvoidBottomInset: false,
             //Extend Past BottomNavigationBar
             extendBody: true,
+            extendBodyBehindAppBar: true,
             //Background Color
-            backgroundColor: ColorConstants.monoAA,
+            backgroundColor: Colors.transparent,
             //Screens & FloatingActionButton & SubButtons
             body: Stack(
               alignment: Alignment.center,

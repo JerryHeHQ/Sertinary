@@ -12,8 +12,8 @@ import 'package:sertinary/screens/planner_screens/planner_work_rythmn.dart';
 import 'package:sertinary/screens/social_screens/social_add_post.dart';
 import 'package:sertinary/screens/social_screens/social_edit_post.dart';
 import 'package:sertinary/screens/social_screens/social_edit_profile.dart';
+import 'package:sertinary/screens/social_screens/social_my_posts.dart';
 import 'package:sertinary/screens/social_screens/social_profile.dart';
-import 'package:sertinary/screens/social_screens/social_saved.dart';
 import 'package:sertinary/screens/social_screens/social_screen.dart';
 import 'package:sertinary/screens/social_screens/social_view_post.dart';
 import 'package:sertinary/screens/social_screens/social_view_user.dart';
@@ -133,9 +133,9 @@ import 'package:sertinary/user_authentication/registration/register_verify_scree
               initial: true,
             ),
             AutoRoute(
-              path: 'social_saved',
-              name: 'SocialSavedRouter',
-              page: SocialSaved,
+              path: 'social_my_posts',
+              name: 'SocialMyPostsRouter',
+              page: SocialMyPosts,
             ),
             AutoRoute(
               path: 'social_add_post',
@@ -195,6 +195,16 @@ import 'package:sertinary/user_authentication/registration/register_verify_scree
               path: 'tracker_change_date',
               name: 'TrackerChangeDateRouter',
               page: TrackerChangeDate,
+            ),
+            AutoRoute(
+              path: 'social_view_post',
+              name: 'SocialViewPostRouter',
+              page: SocialViewPost,
+            ),
+            AutoRoute(
+              path: 'social_view_user',
+              name: 'SocialViewUserRouter',
+              page: SocialViewUser,
             ),
           ],
         ),

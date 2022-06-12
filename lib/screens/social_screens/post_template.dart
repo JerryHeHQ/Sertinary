@@ -7,6 +7,7 @@ class PostTemplate {
   int fats;
   String ingredients;
   String instructions;
+  String username;
 
   PostTemplate({
     required this.uid,
@@ -17,6 +18,7 @@ class PostTemplate {
     required this.fats,
     required this.ingredients,
     required this.instructions,
+    required this.username,
   });
 
   //Send Data To Firebase Server
@@ -30,6 +32,7 @@ class PostTemplate {
       'fats': fats,
       'ingredients': ingredients,
       'instructions': instructions,
+      'username': username,
       'likes': 0,
     };
   }

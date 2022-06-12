@@ -24,7 +24,7 @@ class SubButtonIcons {
   );
   //Social Saved
   static Icon socialSubButtonOneIcon = Icon(
-    Icons.favorite_border_outlined,
+    Icons.filter_outlined,
     color: ColorConstants.mono00,
   );
   //Social Add

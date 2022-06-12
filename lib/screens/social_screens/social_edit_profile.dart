@@ -591,7 +591,7 @@ class _SocialEditProfileState extends State<SocialEditProfile> {
             ),
             Text(
               errorOccurred
-                  ? ' An Error Occured When Updating Your Profile'
+                  ? ' An Error Occured When Updating Profile'
                   : ' Your Profile Has Been Successfully Updated',
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(

@@ -13,7 +13,7 @@ class GlassBox extends StatefulWidget {
   final AlignmentGeometry gradientBegin;
   final AlignmentGeometry gradientEnd;
   final EdgeInsetsGeometry padding;
-  final Widget child;
+  final Widget? child;
 
   const GlassBox({
     Key? key,
@@ -27,7 +27,7 @@ class GlassBox extends StatefulWidget {
     required this.gradientBegin,
     required this.gradientEnd,
     required this.padding,
-    required this.child,
+    this.child,
   }) : super(key: key);
 
   @override

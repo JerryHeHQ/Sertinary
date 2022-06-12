@@ -19,4 +19,40 @@ class GradientConstants {
       ColorConstants.mono15,
     ],
   );
+
+  static Gradient gradient3 = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      ColorConstants.mono00,
+      ColorConstants.mono15,
+    ],
+  );
+
+  static Gradient gradient4 = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      ColorConstants.mono15,
+      ColorConstants.mono00,
+    ],
+  );
+
+  static Gradient gradient5 = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      ColorConstants.mono30,
+      ColorConstants.mono30,
+    ],
+  );
+
+  static Gradient gradient6 = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      ColorConstants.fail,
+      ColorConstants.fail,
+    ],
+  );
 }

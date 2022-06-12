@@ -26,8 +26,8 @@ import '../screens/planner_screens/planner_work_rythmn.dart' as _i28;
 import '../screens/social_screens/social_add_post.dart' as _i17;
 import '../screens/social_screens/social_edit_post.dart' as _i18;
 import '../screens/social_screens/social_edit_profile.dart' as _i22;
+import '../screens/social_screens/social_my_posts.dart' as _i16;
 import '../screens/social_screens/social_profile.dart' as _i21;
-import '../screens/social_screens/social_saved.dart' as _i16;
 import '../screens/social_screens/social_screen.dart' as _i15;
 import '../screens/social_screens/social_view_post.dart' as _i19;
 import '../screens/social_screens/social_view_user.dart' as _i20;
@@ -136,9 +136,9 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i15.SocialScreen());
     },
-    SocialSavedRouter.name: (routeData) {
+    SocialMyPostsRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i16.SocialSaved());
+          routeData: routeData, child: const _i16.SocialMyPosts());
     },
     SocialAddPostRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -259,8 +259,8 @@ class AppRouter extends _i2.RootStackRouter {
                     fullMatch: true),
                 _i2.RouteConfig(SocialScreenRouter.name,
                     path: 'social_screen', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialSavedRouter.name,
-                    path: 'social_saved', parent: SocialRouter.name),
+                _i2.RouteConfig(SocialMyPostsRouter.name,
+                    path: 'social_my_posts', parent: SocialRouter.name),
                 _i2.RouteConfig(SocialAddPostRouter.name,
                     path: 'social_add_post', parent: SocialRouter.name),
                 _i2.RouteConfig(SocialEditPostRouter.name,
@@ -290,7 +290,11 @@ class AppRouter extends _i2.RootStackRouter {
                 _i2.RouteConfig(TrackerAddRouter.name,
                     path: 'tracker_add', parent: TrackerRouter.name),
                 _i2.RouteConfig(TrackerChangeDateRouter.name,
-                    path: 'tracker_change_date', parent: TrackerRouter.name)
+                    path: 'tracker_change_date', parent: TrackerRouter.name),
+                _i2.RouteConfig(SocialViewPostRouter.name,
+                    path: 'social_view_post', parent: TrackerRouter.name),
+                _i2.RouteConfig(SocialViewUserRouter.name,
+                    path: 'social_view_user', parent: TrackerRouter.name)
               ]),
           _i2.RouteConfig(PlannerRouter.name,
               path: 'planner',
@@ -534,12 +538,12 @@ class SocialScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.SocialSaved]
-class SocialSavedRouter extends _i2.PageRouteInfo<void> {
-  const SocialSavedRouter()
-      : super(SocialSavedRouter.name, path: 'social_saved');
+/// [_i16.SocialMyPosts]
+class SocialMyPostsRouter extends _i2.PageRouteInfo<void> {
+  const SocialMyPostsRouter()
+      : super(SocialMyPostsRouter.name, path: 'social_my_posts');
 
-  static const String name = 'SocialSavedRouter';
+  static const String name = 'SocialMyPostsRouter';
 }
 
 /// generated route for
@@ -578,7 +582,7 @@ class SocialEditPostRouterArgs {
 /// generated route for
 /// [_i19.SocialViewPost]
 class SocialViewPostRouter extends _i2.PageRouteInfo<SocialViewPostRouterArgs> {
-  SocialViewPostRouter({_i31.Key? key, required int postID})
+  SocialViewPostRouter({_i31.Key? key, required String postID})
       : super(SocialViewPostRouter.name,
             path: 'social_view_post',
             args: SocialViewPostRouterArgs(key: key, postID: postID));
@@ -591,7 +595,7 @@ class SocialViewPostRouterArgs {
 
   final _i31.Key? key;
 
-  final int postID;
+  final String postID;
 
   @override
   String toString() {
@@ -602,7 +606,7 @@ class SocialViewPostRouterArgs {
 /// generated route for
 /// [_i20.SocialViewUser]
 class SocialViewUserRouter extends _i2.PageRouteInfo<SocialViewUserRouterArgs> {
-  SocialViewUserRouter({_i31.Key? key, required int userID})
+  SocialViewUserRouter({_i31.Key? key, required String userID})
       : super(SocialViewUserRouter.name,
             path: 'social_view_user',
             args: SocialViewUserRouterArgs(key: key, userID: userID));
@@ -615,7 +619,7 @@ class SocialViewUserRouterArgs {
 
   final _i31.Key? key;
 
-  final int userID;
+  final String userID;
 
   @override
   String toString() {
