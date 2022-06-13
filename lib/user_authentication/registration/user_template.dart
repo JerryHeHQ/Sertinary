@@ -24,6 +24,7 @@ class UserTemplate {
       'posts': [],
       'saved': [],
       'follows': [],
+      'food': [],
     };
   }
 }

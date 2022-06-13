@@ -392,6 +392,7 @@ class _SocialPostState extends State<SocialViewPost> {
                 ),
                 Positioned(
                   top: MediaQuery.of(context).size.width + 126,
+                  left: 24,
                   child: Text(
                     ingredients,
                     style: GoogleFonts.montserrat(
@@ -414,8 +415,9 @@ class _SocialPostState extends State<SocialViewPost> {
                 ),
                 Positioned(
                   top: MediaQuery.of(context).size.width + 162,
+                  left: 24,
                   child: Text(
-                    ingredients,
+                    instructions,
                     style: GoogleFonts.montserrat(
                       fontSize: 21,
                       color: ColorConstants.monoAA,
