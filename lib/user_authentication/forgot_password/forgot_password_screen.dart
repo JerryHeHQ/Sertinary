@@ -238,7 +238,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   const SizedBox(height: 36),
                   //Bottom Section
                   Container(
-                    height: 450.0,
+                    height: 510,
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                     margin: const EdgeInsets.only(top: 6.0),
                     decoration: BoxDecoration(

@@ -273,7 +273,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                   //Bottom Section
                   Container(
                     padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
-                    height: 450.0,
+                    height: 480,
                     margin: const EdgeInsets.only(top: 6.0),
                     decoration: BoxDecoration(
                       borderRadius:

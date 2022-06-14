@@ -430,9 +430,7 @@ class _TrackerScreenState extends State<TrackerScreen> {
 
   void centerSubButton() {
     AutoRouter.of(context).push(const TrackerAddRouter()).then((value) async {
-      log('init');
       await initialize();
-      log('setstate');
       setState(() {});
     });
   }
