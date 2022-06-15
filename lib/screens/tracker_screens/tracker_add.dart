@@ -91,6 +91,10 @@ class _TrackerAddState extends State<TrackerAdd> {
             uids.removeAt(i);
             usernames.removeAt(i);
             likes.removeAt(i);
+            calories.removeAt(i);
+            carbs.removeAt(i);
+            protein.removeAt(i);
+            fats.removeAt(i);
           }
         }
         break;

@@ -10,308 +10,308 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i31;
+import 'package:auto_route/auto_route.dart' as i2;
+import 'package:flutter/material.dart' as i31;
 
-import '../screens/alarms_screens/alarms_add.dart' as _i12;
-import '../screens/alarms_screens/alarms_calculator.dart' as _i11;
-import '../screens/alarms_screens/alarms_change_theme.dart' as _i13;
-import '../screens/alarms_screens/alarms_edit.dart' as _i14;
-import '../screens/alarms_screens/alarms_screen.dart' as _i10;
-import '../screens/home_screen.dart' as _i4;
-import '../screens/planner_screens/planner_add.dart' as _i29;
-import '../screens/planner_screens/planner_change_date.dart' as _i30;
-import '../screens/planner_screens/planner_screen.dart' as _i27;
-import '../screens/planner_screens/planner_work_rythmn.dart' as _i28;
-import '../screens/social_screens/social_add_post.dart' as _i17;
-import '../screens/social_screens/social_edit_post.dart' as _i18;
-import '../screens/social_screens/social_edit_profile.dart' as _i22;
-import '../screens/social_screens/social_my_posts.dart' as _i16;
-import '../screens/social_screens/social_profile.dart' as _i21;
-import '../screens/social_screens/social_screen.dart' as _i15;
-import '../screens/social_screens/social_view_post.dart' as _i19;
-import '../screens/social_screens/social_view_user.dart' as _i20;
-import '../screens/tracker_screens/tracker_add.dart' as _i25;
-import '../screens/tracker_screens/tracker_change_date.dart' as _i26;
-import '../screens/tracker_screens/tracker_overview.dart' as _i24;
-import '../screens/tracker_screens/tracker_screen.dart' as _i23;
-import '../screens/welcome_screens/welcome_screen.dart' as _i9;
+import '../screens/alarms_screens/alarms_add.dart' as i12;
+import '../screens/alarms_screens/alarms_calculator.dart' as i11;
+import '../screens/alarms_screens/alarms_change_theme.dart' as i13;
+import '../screens/alarms_screens/alarms_edit.dart' as i14;
+import '../screens/alarms_screens/alarms_screen.dart' as i10;
+import '../screens/home_screen.dart' as i4;
+import '../screens/planner_screens/planner_add.dart' as i29;
+import '../screens/planner_screens/planner_change_date.dart' as i30;
+import '../screens/planner_screens/planner_screen.dart' as i27;
+import '../screens/planner_screens/planner_work_rythmn.dart' as i28;
+import '../screens/social_screens/social_add_post.dart' as i17;
+import '../screens/social_screens/social_edit_post.dart' as i18;
+import '../screens/social_screens/social_edit_profile.dart' as i22;
+import '../screens/social_screens/social_my_posts.dart' as i16;
+import '../screens/social_screens/social_profile.dart' as i21;
+import '../screens/social_screens/social_screen.dart' as i15;
+import '../screens/social_screens/social_view_post.dart' as i19;
+import '../screens/social_screens/social_view_user.dart' as i20;
+import '../screens/tracker_screens/tracker_add.dart' as i25;
+import '../screens/tracker_screens/tracker_change_date.dart' as i26;
+import '../screens/tracker_screens/tracker_overview.dart' as i24;
+import '../screens/tracker_screens/tracker_screen.dart' as i23;
+import '../screens/welcome_screens/welcome_screen.dart' as i9;
 import '../user_authentication/forgot_password/forgot_password_screen.dart'
-    as _i3;
-import '../user_authentication/login/login_screen.dart' as _i1;
-import '../user_authentication/registration/register_email_screen.dart' as _i6;
+    as i3;
+import '../user_authentication/login/login_screen.dart' as i1;
+import '../user_authentication/registration/register_email_screen.dart' as i6;
 import '../user_authentication/registration/register_password_screen.dart'
-    as _i7;
+    as i7;
 import '../user_authentication/registration/register_username_screen.dart'
-    as _i5;
-import '../user_authentication/registration/register_verify_screen.dart' as _i8;
+    as i5;
+import '../user_authentication/registration/register_verify_screen.dart' as i8;
 
-class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i31.GlobalKey<_i31.NavigatorState>? navigatorKey])
+class AppRouter extends i2.RootStackRouter {
+  AppRouter([i31.GlobalKey<i31.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i2.PageFactory> pagesMap = {
+  final Map<String, i2.PageFactory> pagesMap = {
     LoginRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.LoginScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i1.LoginScreen());
     },
     RegisterRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i2.EmptyRouterPage());
     },
     ForgotPasswordRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i3.ForgotPasswordScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i3.ForgotPasswordScreen());
     },
     HomeRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i4.HomeScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i4.HomeScreen());
     },
     RegisterUsernameRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.RegisterUsernameScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i5.RegisterUsernameScreen());
     },
     RegisterEmailRoute.name: (routeData) {
       final args = routeData.argsAs<RegisterEmailRouteArgs>();
-      return _i2.MaterialPageX<dynamic>(
+      return i2.MaterialPageX<dynamic>(
           routeData: routeData,
           child:
-              _i6.RegisterEmailScreen(key: args.key, username: args.username));
+              i6.RegisterEmailScreen(key: args.key, username: args.username));
     },
     RegisterPasswordRoute.name: (routeData) {
       final args = routeData.argsAs<RegisterPasswordRouteArgs>();
-      return _i2.MaterialPageX<dynamic>(
+      return i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i7.RegisterPasswordScreen(
+          child: i7.RegisterPasswordScreen(
               key: args.key, username: args.username, email: args.email));
     },
     RegisterVerifyRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i8.RegisterVerifyScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i8.RegisterVerifyScreen());
     },
     WelcomeRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i9.WelcomeScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i9.WelcomeScreen());
     },
     AlarmsRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i2.EmptyRouterPage());
     },
     SocialRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i2.EmptyRouterPage());
     },
     TrackerRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i2.EmptyRouterPage());
     },
     PlannerRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i2.EmptyRouterPage());
     },
     AlarmsScreenRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i10.AlarmsScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i10.AlarmsScreen());
     },
     AlarmsCalculatorRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i11.AlarmsCalculator());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i11.AlarmsCalculator());
     },
     AlarmsAddRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i12.AlarmsAdd());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i12.AlarmsAdd());
     },
     AlarmsChangeThemeRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i13.AlarmsChangeTheme());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i13.AlarmsChangeTheme());
     },
     AlarmsEditRouter.name: (routeData) {
       final args = routeData.argsAs<AlarmsEditRouterArgs>();
-      return _i2.MaterialPageX<dynamic>(
+      return i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i14.AlarmsEdit(key: args.key, alarmID: args.alarmID));
+          child: i14.AlarmsEdit(key: args.key, alarmID: args.alarmID));
     },
     SocialScreenRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i15.SocialScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i15.SocialScreen());
     },
     SocialMyPostsRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i16.SocialMyPosts());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i16.SocialMyPosts());
     },
     SocialAddPostRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i17.SocialAddPost());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i17.SocialAddPost());
     },
     SocialEditPostRouter.name: (routeData) {
       final args = routeData.argsAs<SocialEditPostRouterArgs>();
-      return _i2.MaterialPageX<dynamic>(
+      return i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i18.SocialEditPost(key: args.key, postID: args.postID));
+          child: i18.SocialEditPost(key: args.key, postID: args.postID));
     },
     SocialViewPostRouter.name: (routeData) {
       final args = routeData.argsAs<SocialViewPostRouterArgs>();
-      return _i2.MaterialPageX<dynamic>(
+      return i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i19.SocialViewPost(key: args.key, postID: args.postID));
+          child: i19.SocialViewPost(key: args.key, postID: args.postID));
     },
     SocialViewUserRouter.name: (routeData) {
       final args = routeData.argsAs<SocialViewUserRouterArgs>();
-      return _i2.MaterialPageX<dynamic>(
+      return i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i20.SocialViewUser(key: args.key, userID: args.userID));
+          child: i20.SocialViewUser(key: args.key, userID: args.userID));
     },
     SocialProfileRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i21.SocialProfile());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i21.SocialProfile());
     },
     SocialEditProfileRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i22.SocialEditProfile());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i22.SocialEditProfile());
     },
     TrackerScreenRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i23.TrackerScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i23.TrackerScreen());
     },
     TrackerOverviewRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i24.TrackerOverview());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i24.TrackerOverview());
     },
     TrackerAddRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i25.TrackerAdd());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i25.TrackerAdd());
     },
     TrackerChangeDateRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i26.TrackerChangeDate());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i26.TrackerChangeDate());
     },
     PlannerScreenRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i27.PlannerScreen());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i27.PlannerScreen());
     },
     PlannerWorkRythmnRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i28.PlannerWorkRythmn());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i28.PlannerWorkRythmn());
     },
     PlannerAddRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i29.PlannerAdd());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i29.PlannerAdd());
     },
     PlannerChangeDateRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i30.PlannerChangeDate());
+      return i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const i30.PlannerChangeDate());
     }
   };
 
   @override
-  List<_i2.RouteConfig> get routes => [
-        _i2.RouteConfig('/#redirect',
+  List<i2.RouteConfig> get routes => [
+        i2.RouteConfig('/#redirect',
             path: '/', redirectTo: 'login', fullMatch: true),
-        _i2.RouteConfig(LoginRoute.name, path: 'login'),
-        _i2.RouteConfig(RegisterRoute.name, path: 'register', children: [
-          _i2.RouteConfig('#redirect',
+        i2.RouteConfig(LoginRoute.name, path: 'login'),
+        i2.RouteConfig(RegisterRoute.name, path: 'register', children: [
+          i2.RouteConfig('#redirect',
               path: '',
               parent: RegisterRoute.name,
               redirectTo: 'register_username',
               fullMatch: true),
-          _i2.RouteConfig(RegisterUsernameRoute.name,
+          i2.RouteConfig(RegisterUsernameRoute.name,
               path: 'register_username', parent: RegisterRoute.name),
-          _i2.RouteConfig(RegisterEmailRoute.name,
+          i2.RouteConfig(RegisterEmailRoute.name,
               path: 'register_email', parent: RegisterRoute.name),
-          _i2.RouteConfig(RegisterPasswordRoute.name,
+          i2.RouteConfig(RegisterPasswordRoute.name,
               path: 'register_password', parent: RegisterRoute.name),
-          _i2.RouteConfig(RegisterVerifyRoute.name,
+          i2.RouteConfig(RegisterVerifyRoute.name,
               path: 'register_verify', parent: RegisterRoute.name)
         ]),
-        _i2.RouteConfig(ForgotPasswordRoute.name, path: 'forgot_password'),
-        _i2.RouteConfig(HomeRoute.name, path: 'home', children: [
-          _i2.RouteConfig(WelcomeRouter.name,
+        i2.RouteConfig(ForgotPasswordRoute.name, path: 'forgot_password'),
+        i2.RouteConfig(HomeRoute.name, path: 'home', children: [
+          i2.RouteConfig(WelcomeRouter.name,
               path: 'welcome', parent: HomeRoute.name),
-          _i2.RouteConfig(AlarmsRouter.name,
+          i2.RouteConfig(AlarmsRouter.name,
               path: 'alarms',
               parent: HomeRoute.name,
               children: [
-                _i2.RouteConfig('#redirect',
+                i2.RouteConfig('#redirect',
                     path: '',
                     parent: AlarmsRouter.name,
                     redirectTo: 'alarms_screen',
                     fullMatch: true),
-                _i2.RouteConfig(AlarmsScreenRouter.name,
+                i2.RouteConfig(AlarmsScreenRouter.name,
                     path: 'alarms_screen', parent: AlarmsRouter.name),
-                _i2.RouteConfig(AlarmsCalculatorRouter.name,
+                i2.RouteConfig(AlarmsCalculatorRouter.name,
                     path: 'alarms_calculator', parent: AlarmsRouter.name),
-                _i2.RouteConfig(AlarmsAddRouter.name,
+                i2.RouteConfig(AlarmsAddRouter.name,
                     path: 'alarms_add', parent: AlarmsRouter.name),
-                _i2.RouteConfig(AlarmsChangeThemeRouter.name,
+                i2.RouteConfig(AlarmsChangeThemeRouter.name,
                     path: 'alarms_change_theme', parent: AlarmsRouter.name),
-                _i2.RouteConfig(AlarmsEditRouter.name,
+                i2.RouteConfig(AlarmsEditRouter.name,
                     path: 'alarms_edit', parent: AlarmsRouter.name)
               ]),
-          _i2.RouteConfig(SocialRouter.name,
+          i2.RouteConfig(SocialRouter.name,
               path: 'social',
               parent: HomeRoute.name,
               children: [
-                _i2.RouteConfig('#redirect',
+                i2.RouteConfig('#redirect',
                     path: '',
                     parent: SocialRouter.name,
                     redirectTo: 'social_screen',
                     fullMatch: true),
-                _i2.RouteConfig(SocialScreenRouter.name,
+                i2.RouteConfig(SocialScreenRouter.name,
                     path: 'social_screen', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialMyPostsRouter.name,
+                i2.RouteConfig(SocialMyPostsRouter.name,
                     path: 'social_my_posts', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialAddPostRouter.name,
+                i2.RouteConfig(SocialAddPostRouter.name,
                     path: 'social_add_post', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialEditPostRouter.name,
+                i2.RouteConfig(SocialEditPostRouter.name,
                     path: 'social_edit_post', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialViewPostRouter.name,
+                i2.RouteConfig(SocialViewPostRouter.name,
                     path: 'social_view_post', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialViewUserRouter.name,
+                i2.RouteConfig(SocialViewUserRouter.name,
                     path: 'social_view_user', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialProfileRouter.name,
+                i2.RouteConfig(SocialProfileRouter.name,
                     path: 'social_profile', parent: SocialRouter.name),
-                _i2.RouteConfig(SocialEditProfileRouter.name,
+                i2.RouteConfig(SocialEditProfileRouter.name,
                     path: 'social_edit_profile', parent: SocialRouter.name)
               ]),
-          _i2.RouteConfig(TrackerRouter.name,
+          i2.RouteConfig(TrackerRouter.name,
               path: 'tracker',
               parent: HomeRoute.name,
               children: [
-                _i2.RouteConfig('#redirect',
+                i2.RouteConfig('#redirect',
                     path: '',
                     parent: TrackerRouter.name,
                     redirectTo: 'tracker_screen',
                     fullMatch: true),
-                _i2.RouteConfig(TrackerScreenRouter.name,
+                i2.RouteConfig(TrackerScreenRouter.name,
                     path: 'tracker_screen', parent: TrackerRouter.name),
-                _i2.RouteConfig(TrackerOverviewRouter.name,
+                i2.RouteConfig(TrackerOverviewRouter.name,
                     path: 'tracker_overview', parent: TrackerRouter.name),
-                _i2.RouteConfig(TrackerAddRouter.name,
+                i2.RouteConfig(TrackerAddRouter.name,
                     path: 'tracker_add', parent: TrackerRouter.name),
-                _i2.RouteConfig(TrackerChangeDateRouter.name,
+                i2.RouteConfig(TrackerChangeDateRouter.name,
                     path: 'tracker_change_date', parent: TrackerRouter.name),
-                _i2.RouteConfig(SocialViewPostRouter.name,
+                i2.RouteConfig(SocialViewPostRouter.name,
                     path: 'social_view_post', parent: TrackerRouter.name),
-                _i2.RouteConfig(SocialViewUserRouter.name,
+                i2.RouteConfig(SocialViewUserRouter.name,
                     path: 'social_view_user', parent: TrackerRouter.name)
               ]),
-          _i2.RouteConfig(PlannerRouter.name,
+          i2.RouteConfig(PlannerRouter.name,
               path: 'planner',
               parent: HomeRoute.name,
               children: [
-                _i2.RouteConfig('#redirect',
+                i2.RouteConfig('#redirect',
                     path: '',
                     parent: PlannerRouter.name,
                     redirectTo: 'planner_screen',
                     fullMatch: true),
-                _i2.RouteConfig(PlannerScreenRouter.name,
+                i2.RouteConfig(PlannerScreenRouter.name,
                     path: 'planner_screen', parent: PlannerRouter.name),
-                _i2.RouteConfig(PlannerWorkRythmnRouter.name,
+                i2.RouteConfig(PlannerWorkRythmnRouter.name,
                     path: 'planner_work_rythmn', parent: PlannerRouter.name),
-                _i2.RouteConfig(PlannerAddRouter.name,
+                i2.RouteConfig(PlannerAddRouter.name,
                     path: 'planner_add', parent: PlannerRouter.name),
-                _i2.RouteConfig(PlannerChangeDateRouter.name,
+                i2.RouteConfig(PlannerChangeDateRouter.name,
                     path: 'planner_change_date', parent: PlannerRouter.name)
               ])
         ])
@@ -319,25 +319,25 @@ class AppRouter extends _i2.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.LoginScreen]
-class LoginRoute extends _i2.PageRouteInfo<void> {
+/// [i1.LoginScreen]
+class LoginRoute extends i2.PageRouteInfo<void> {
   const LoginRoute() : super(LoginRoute.name, path: 'login');
 
   static const String name = 'LoginRoute';
 }
 
 /// generated route for
-/// [_i2.EmptyRouterPage]
-class RegisterRoute extends _i2.PageRouteInfo<void> {
-  const RegisterRoute({List<_i2.PageRouteInfo>? children})
+/// [i2.EmptyRouterPage]
+class RegisterRoute extends i2.PageRouteInfo<void> {
+  const RegisterRoute({List<i2.PageRouteInfo>? children})
       : super(RegisterRoute.name, path: 'register', initialChildren: children);
 
   static const String name = 'RegisterRoute';
 }
 
 /// generated route for
-/// [_i3.ForgotPasswordScreen]
-class ForgotPasswordRoute extends _i2.PageRouteInfo<void> {
+/// [i3.ForgotPasswordScreen]
+class ForgotPasswordRoute extends i2.PageRouteInfo<void> {
   const ForgotPasswordRoute()
       : super(ForgotPasswordRoute.name, path: 'forgot_password');
 
@@ -345,17 +345,17 @@ class ForgotPasswordRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.HomeScreen]
-class HomeRoute extends _i2.PageRouteInfo<void> {
-  const HomeRoute({List<_i2.PageRouteInfo>? children})
+/// [i4.HomeScreen]
+class HomeRoute extends i2.PageRouteInfo<void> {
+  const HomeRoute({List<i2.PageRouteInfo>? children})
       : super(HomeRoute.name, path: 'home', initialChildren: children);
 
   static const String name = 'HomeRoute';
 }
 
 /// generated route for
-/// [_i5.RegisterUsernameScreen]
-class RegisterUsernameRoute extends _i2.PageRouteInfo<void> {
+/// [i5.RegisterUsernameScreen]
+class RegisterUsernameRoute extends i2.PageRouteInfo<void> {
   const RegisterUsernameRoute()
       : super(RegisterUsernameRoute.name, path: 'register_username');
 
@@ -363,9 +363,9 @@ class RegisterUsernameRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.RegisterEmailScreen]
-class RegisterEmailRoute extends _i2.PageRouteInfo<RegisterEmailRouteArgs> {
-  RegisterEmailRoute({_i31.Key? key, required String username})
+/// [i6.RegisterEmailScreen]
+class RegisterEmailRoute extends i2.PageRouteInfo<RegisterEmailRouteArgs> {
+  RegisterEmailRoute({i31.Key? key, required String username})
       : super(RegisterEmailRoute.name,
             path: 'register_email',
             args: RegisterEmailRouteArgs(key: key, username: username));
@@ -376,7 +376,7 @@ class RegisterEmailRoute extends _i2.PageRouteInfo<RegisterEmailRouteArgs> {
 class RegisterEmailRouteArgs {
   const RegisterEmailRouteArgs({this.key, required this.username});
 
-  final _i31.Key? key;
+  final i31.Key? key;
 
   final String username;
 
@@ -387,11 +387,11 @@ class RegisterEmailRouteArgs {
 }
 
 /// generated route for
-/// [_i7.RegisterPasswordScreen]
+/// [i7.RegisterPasswordScreen]
 class RegisterPasswordRoute
-    extends _i2.PageRouteInfo<RegisterPasswordRouteArgs> {
+    extends i2.PageRouteInfo<RegisterPasswordRouteArgs> {
   RegisterPasswordRoute(
-      {_i31.Key? key, required String username, required String email})
+      {i31.Key? key, required String username, required String email})
       : super(RegisterPasswordRoute.name,
             path: 'register_password',
             args: RegisterPasswordRouteArgs(
@@ -404,7 +404,7 @@ class RegisterPasswordRouteArgs {
   const RegisterPasswordRouteArgs(
       {this.key, required this.username, required this.email});
 
-  final _i31.Key? key;
+  final i31.Key? key;
 
   final String username;
 
@@ -417,8 +417,8 @@ class RegisterPasswordRouteArgs {
 }
 
 /// generated route for
-/// [_i8.RegisterVerifyScreen]
-class RegisterVerifyRoute extends _i2.PageRouteInfo<void> {
+/// [i8.RegisterVerifyScreen]
+class RegisterVerifyRoute extends i2.PageRouteInfo<void> {
   const RegisterVerifyRoute()
       : super(RegisterVerifyRoute.name, path: 'register_verify');
 
@@ -426,52 +426,52 @@ class RegisterVerifyRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.WelcomeScreen]
-class WelcomeRouter extends _i2.PageRouteInfo<void> {
+/// [i9.WelcomeScreen]
+class WelcomeRouter extends i2.PageRouteInfo<void> {
   const WelcomeRouter() : super(WelcomeRouter.name, path: 'welcome');
 
   static const String name = 'WelcomeRouter';
 }
 
 /// generated route for
-/// [_i2.EmptyRouterPage]
-class AlarmsRouter extends _i2.PageRouteInfo<void> {
-  const AlarmsRouter({List<_i2.PageRouteInfo>? children})
+/// [i2.EmptyRouterPage]
+class AlarmsRouter extends i2.PageRouteInfo<void> {
+  const AlarmsRouter({List<i2.PageRouteInfo>? children})
       : super(AlarmsRouter.name, path: 'alarms', initialChildren: children);
 
   static const String name = 'AlarmsRouter';
 }
 
 /// generated route for
-/// [_i2.EmptyRouterPage]
-class SocialRouter extends _i2.PageRouteInfo<void> {
-  const SocialRouter({List<_i2.PageRouteInfo>? children})
+/// [i2.EmptyRouterPage]
+class SocialRouter extends i2.PageRouteInfo<void> {
+  const SocialRouter({List<i2.PageRouteInfo>? children})
       : super(SocialRouter.name, path: 'social', initialChildren: children);
 
   static const String name = 'SocialRouter';
 }
 
 /// generated route for
-/// [_i2.EmptyRouterPage]
-class TrackerRouter extends _i2.PageRouteInfo<void> {
-  const TrackerRouter({List<_i2.PageRouteInfo>? children})
+/// [i2.EmptyRouterPage]
+class TrackerRouter extends i2.PageRouteInfo<void> {
+  const TrackerRouter({List<i2.PageRouteInfo>? children})
       : super(TrackerRouter.name, path: 'tracker', initialChildren: children);
 
   static const String name = 'TrackerRouter';
 }
 
 /// generated route for
-/// [_i2.EmptyRouterPage]
-class PlannerRouter extends _i2.PageRouteInfo<void> {
-  const PlannerRouter({List<_i2.PageRouteInfo>? children})
+/// [i2.EmptyRouterPage]
+class PlannerRouter extends i2.PageRouteInfo<void> {
+  const PlannerRouter({List<i2.PageRouteInfo>? children})
       : super(PlannerRouter.name, path: 'planner', initialChildren: children);
 
   static const String name = 'PlannerRouter';
 }
 
 /// generated route for
-/// [_i10.AlarmsScreen]
-class AlarmsScreenRouter extends _i2.PageRouteInfo<void> {
+/// [i10.AlarmsScreen]
+class AlarmsScreenRouter extends i2.PageRouteInfo<void> {
   const AlarmsScreenRouter()
       : super(AlarmsScreenRouter.name, path: 'alarms_screen');
 
@@ -479,8 +479,8 @@ class AlarmsScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.AlarmsCalculator]
-class AlarmsCalculatorRouter extends _i2.PageRouteInfo<void> {
+/// [i11.AlarmsCalculator]
+class AlarmsCalculatorRouter extends i2.PageRouteInfo<void> {
   const AlarmsCalculatorRouter()
       : super(AlarmsCalculatorRouter.name, path: 'alarms_calculator');
 
@@ -488,16 +488,16 @@ class AlarmsCalculatorRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.AlarmsAdd]
-class AlarmsAddRouter extends _i2.PageRouteInfo<void> {
+/// [i12.AlarmsAdd]
+class AlarmsAddRouter extends i2.PageRouteInfo<void> {
   const AlarmsAddRouter() : super(AlarmsAddRouter.name, path: 'alarms_add');
 
   static const String name = 'AlarmsAddRouter';
 }
 
 /// generated route for
-/// [_i13.AlarmsChangeTheme]
-class AlarmsChangeThemeRouter extends _i2.PageRouteInfo<void> {
+/// [i13.AlarmsChangeTheme]
+class AlarmsChangeThemeRouter extends i2.PageRouteInfo<void> {
   const AlarmsChangeThemeRouter()
       : super(AlarmsChangeThemeRouter.name, path: 'alarms_change_theme');
 
@@ -505,9 +505,9 @@ class AlarmsChangeThemeRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.AlarmsEdit]
-class AlarmsEditRouter extends _i2.PageRouteInfo<AlarmsEditRouterArgs> {
-  AlarmsEditRouter({_i31.Key? key, required double alarmID})
+/// [i14.AlarmsEdit]
+class AlarmsEditRouter extends i2.PageRouteInfo<AlarmsEditRouterArgs> {
+  AlarmsEditRouter({i31.Key? key, required double alarmID})
       : super(AlarmsEditRouter.name,
             path: 'alarms_edit',
             args: AlarmsEditRouterArgs(key: key, alarmID: alarmID));
@@ -518,7 +518,7 @@ class AlarmsEditRouter extends _i2.PageRouteInfo<AlarmsEditRouterArgs> {
 class AlarmsEditRouterArgs {
   const AlarmsEditRouterArgs({this.key, required this.alarmID});
 
-  final _i31.Key? key;
+  final i31.Key? key;
 
   final double alarmID;
 
@@ -529,8 +529,8 @@ class AlarmsEditRouterArgs {
 }
 
 /// generated route for
-/// [_i15.SocialScreen]
-class SocialScreenRouter extends _i2.PageRouteInfo<void> {
+/// [i15.SocialScreen]
+class SocialScreenRouter extends i2.PageRouteInfo<void> {
   const SocialScreenRouter()
       : super(SocialScreenRouter.name, path: 'social_screen');
 
@@ -538,8 +538,8 @@ class SocialScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.SocialMyPosts]
-class SocialMyPostsRouter extends _i2.PageRouteInfo<void> {
+/// [i16.SocialMyPosts]
+class SocialMyPostsRouter extends i2.PageRouteInfo<void> {
   const SocialMyPostsRouter()
       : super(SocialMyPostsRouter.name, path: 'social_my_posts');
 
@@ -547,8 +547,8 @@ class SocialMyPostsRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.SocialAddPost]
-class SocialAddPostRouter extends _i2.PageRouteInfo<void> {
+/// [i17.SocialAddPost]
+class SocialAddPostRouter extends i2.PageRouteInfo<void> {
   const SocialAddPostRouter()
       : super(SocialAddPostRouter.name, path: 'social_add_post');
 
@@ -556,9 +556,9 @@ class SocialAddPostRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.SocialEditPost]
-class SocialEditPostRouter extends _i2.PageRouteInfo<SocialEditPostRouterArgs> {
-  SocialEditPostRouter({_i31.Key? key, required int postID})
+/// [i18.SocialEditPost]
+class SocialEditPostRouter extends i2.PageRouteInfo<SocialEditPostRouterArgs> {
+  SocialEditPostRouter({i31.Key? key, required int postID})
       : super(SocialEditPostRouter.name,
             path: 'social_edit_post',
             args: SocialEditPostRouterArgs(key: key, postID: postID));
@@ -569,7 +569,7 @@ class SocialEditPostRouter extends _i2.PageRouteInfo<SocialEditPostRouterArgs> {
 class SocialEditPostRouterArgs {
   const SocialEditPostRouterArgs({this.key, required this.postID});
 
-  final _i31.Key? key;
+  final i31.Key? key;
 
   final int postID;
 
@@ -580,9 +580,9 @@ class SocialEditPostRouterArgs {
 }
 
 /// generated route for
-/// [_i19.SocialViewPost]
-class SocialViewPostRouter extends _i2.PageRouteInfo<SocialViewPostRouterArgs> {
-  SocialViewPostRouter({_i31.Key? key, required String postID})
+/// [i19.SocialViewPost]
+class SocialViewPostRouter extends i2.PageRouteInfo<SocialViewPostRouterArgs> {
+  SocialViewPostRouter({i31.Key? key, required String postID})
       : super(SocialViewPostRouter.name,
             path: 'social_view_post',
             args: SocialViewPostRouterArgs(key: key, postID: postID));
@@ -593,7 +593,7 @@ class SocialViewPostRouter extends _i2.PageRouteInfo<SocialViewPostRouterArgs> {
 class SocialViewPostRouterArgs {
   const SocialViewPostRouterArgs({this.key, required this.postID});
 
-  final _i31.Key? key;
+  final i31.Key? key;
 
   final String postID;
 
@@ -604,9 +604,9 @@ class SocialViewPostRouterArgs {
 }
 
 /// generated route for
-/// [_i20.SocialViewUser]
-class SocialViewUserRouter extends _i2.PageRouteInfo<SocialViewUserRouterArgs> {
-  SocialViewUserRouter({_i31.Key? key, required String userID})
+/// [i20.SocialViewUser]
+class SocialViewUserRouter extends i2.PageRouteInfo<SocialViewUserRouterArgs> {
+  SocialViewUserRouter({i31.Key? key, required String userID})
       : super(SocialViewUserRouter.name,
             path: 'social_view_user',
             args: SocialViewUserRouterArgs(key: key, userID: userID));
@@ -617,7 +617,7 @@ class SocialViewUserRouter extends _i2.PageRouteInfo<SocialViewUserRouterArgs> {
 class SocialViewUserRouterArgs {
   const SocialViewUserRouterArgs({this.key, required this.userID});
 
-  final _i31.Key? key;
+  final i31.Key? key;
 
   final String userID;
 
@@ -628,8 +628,8 @@ class SocialViewUserRouterArgs {
 }
 
 /// generated route for
-/// [_i21.SocialProfile]
-class SocialProfileRouter extends _i2.PageRouteInfo<void> {
+/// [i21.SocialProfile]
+class SocialProfileRouter extends i2.PageRouteInfo<void> {
   const SocialProfileRouter()
       : super(SocialProfileRouter.name, path: 'social_profile');
 
@@ -637,8 +637,8 @@ class SocialProfileRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.SocialEditProfile]
-class SocialEditProfileRouter extends _i2.PageRouteInfo<void> {
+/// [i22.SocialEditProfile]
+class SocialEditProfileRouter extends i2.PageRouteInfo<void> {
   const SocialEditProfileRouter()
       : super(SocialEditProfileRouter.name, path: 'social_edit_profile');
 
@@ -646,8 +646,8 @@ class SocialEditProfileRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.TrackerScreen]
-class TrackerScreenRouter extends _i2.PageRouteInfo<void> {
+/// [i23.TrackerScreen]
+class TrackerScreenRouter extends i2.PageRouteInfo<void> {
   const TrackerScreenRouter()
       : super(TrackerScreenRouter.name, path: 'tracker_screen');
 
@@ -655,8 +655,8 @@ class TrackerScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i24.TrackerOverview]
-class TrackerOverviewRouter extends _i2.PageRouteInfo<void> {
+/// [i24.TrackerOverview]
+class TrackerOverviewRouter extends i2.PageRouteInfo<void> {
   const TrackerOverviewRouter()
       : super(TrackerOverviewRouter.name, path: 'tracker_overview');
 
@@ -664,16 +664,16 @@ class TrackerOverviewRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i25.TrackerAdd]
-class TrackerAddRouter extends _i2.PageRouteInfo<void> {
+/// [i25.TrackerAdd]
+class TrackerAddRouter extends i2.PageRouteInfo<void> {
   const TrackerAddRouter() : super(TrackerAddRouter.name, path: 'tracker_add');
 
   static const String name = 'TrackerAddRouter';
 }
 
 /// generated route for
-/// [_i26.TrackerChangeDate]
-class TrackerChangeDateRouter extends _i2.PageRouteInfo<void> {
+/// [i26.TrackerChangeDate]
+class TrackerChangeDateRouter extends i2.PageRouteInfo<void> {
   const TrackerChangeDateRouter()
       : super(TrackerChangeDateRouter.name, path: 'tracker_change_date');
 
@@ -681,8 +681,8 @@ class TrackerChangeDateRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i27.PlannerScreen]
-class PlannerScreenRouter extends _i2.PageRouteInfo<void> {
+/// [i27.PlannerScreen]
+class PlannerScreenRouter extends i2.PageRouteInfo<void> {
   const PlannerScreenRouter()
       : super(PlannerScreenRouter.name, path: 'planner_screen');
 
@@ -690,8 +690,8 @@ class PlannerScreenRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i28.PlannerWorkRythmn]
-class PlannerWorkRythmnRouter extends _i2.PageRouteInfo<void> {
+/// [i28.PlannerWorkRythmn]
+class PlannerWorkRythmnRouter extends i2.PageRouteInfo<void> {
   const PlannerWorkRythmnRouter()
       : super(PlannerWorkRythmnRouter.name, path: 'planner_work_rythmn');
 
@@ -699,16 +699,16 @@ class PlannerWorkRythmnRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i29.PlannerAdd]
-class PlannerAddRouter extends _i2.PageRouteInfo<void> {
+/// [i29.PlannerAdd]
+class PlannerAddRouter extends i2.PageRouteInfo<void> {
   const PlannerAddRouter() : super(PlannerAddRouter.name, path: 'planner_add');
 
   static const String name = 'PlannerAddRouter';
 }
 
 /// generated route for
-/// [_i30.PlannerChangeDate]
-class PlannerChangeDateRouter extends _i2.PageRouteInfo<void> {
+/// [i30.PlannerChangeDate]
+class PlannerChangeDateRouter extends i2.PageRouteInfo<void> {
   const PlannerChangeDateRouter()
       : super(PlannerChangeDateRouter.name, path: 'planner_change_date');
 
